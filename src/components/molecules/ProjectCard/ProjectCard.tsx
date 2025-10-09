@@ -71,41 +71,43 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
       </CardContent>
 
-      <CardFooter className="gap-2 flex-wrap">
-        <Button variant="default" size="sm" asChild>
+      <CardFooter className="gap-2 justify-between flex-wrap">
+        <div className="flex gap-2 flex-wrap">
+          {githubUrl && (
+            <Button variant="outline" size="sm" asChild>
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Github className="h-4 w-4" />
+                GitHub
+              </a>
+            </Button>
+          )}
+
+          {projectUrl && (
+            <Button variant="outline" size="sm" asChild>
+              <a
+                href={projectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ExternalLink className="h-4 w-4" />
+                View
+              </a>
+            </Button>
+          )}
+        </div>
+
+        <Button variant="default" size="sm" asChild className="ml-auto">
           <Link to={`/works/${id}`}>
             詳細を見る
             <ArrowRight className="h-4 w-4" />
           </Link>
         </Button>
-
-        {githubUrl && (
-          <Button variant="outline" size="sm" asChild>
-            <a
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Github className="h-4 w-4" />
-              GitHub
-            </a>
-          </Button>
-        )}
-
-        {projectUrl && (
-          <Button variant="outline" size="sm" asChild>
-            <a
-              href={projectUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ExternalLink className="h-4 w-4" />
-              View
-            </a>
-          </Button>
-        )}
       </CardFooter>
     </Card>
   );

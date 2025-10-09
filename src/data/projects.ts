@@ -2,13 +2,13 @@ export interface Project {
   id: string;
   title: string;
   period: string;
-  description: string;
+  summary: string; // 一覧ページで表示する概要
   techStack: string[];
   icon?: string;
   githubUrl?: string;
   projectUrl?: string;
   // 詳細ページ専用の項目
-  detailedDescription?: string;
+  description?: string; // 詳細ページで表示する詳しい説明
   features?: string[];
   challenges?: string[];
   screenshots?: string[];
@@ -19,12 +19,12 @@ export const projects: Project[] = [
     id: 'portfolio-website',
     title: 'Portfolio Website',
     period: '2024年10月 - 現在',
-    description:
+    summary:
       'React + TypeScript + Viteで構築したモダンなポートフォリオサイト。Atomic Designの原則に基づき、再利用可能なコンポーネントで構成されています。shadcn/uiを使用してUIを実装し、Tailwind CSSでスタイリングしています。',
     techStack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'shadcn/ui'],
     githubUrl: 'https://github.com/yourusername/portfolio',
     projectUrl: 'https://portfolio-example.vercel.app',
-    detailedDescription: `
+    description: `
 このポートフォリオサイトは、モダンなWeb技術を活用して構築した個人サイトです。
 Atomic Designの原則に基づいたコンポーネント設計により、高い保守性と再利用性を実現しています。
 
@@ -48,11 +48,11 @@ shadcn/uiをベースにしたUIコンポーネントライブラリを構築し
     id: 'task-management-app',
     title: 'Task Management App',
     period: '2024年7月 - 2024年9月',
-    description:
+    summary:
       'チーム向けのタスク管理アプリケーション。Next.js App Routerを使用し、サーバーサイドレンダリングとクライアントサイドレンダリングを適切に使い分けています。Firebaseをバックエンドとしてリアルタイムなデータ同期を実現しました。',
     techStack: ['Next.js', 'TypeScript', 'Firebase', 'Zustand'],
     githubUrl: 'https://github.com/yourusername/task-app',
-    detailedDescription: `
+    description: `
 チームでのタスク管理を効率化するためのWebアプリケーションです。
 Next.js 14のApp Routerを活用し、高速なページ表示とSEO対策を実現しています。
 
@@ -76,11 +76,11 @@ Firebaseのリアルタイムデータベースを使用することで、複数
     id: 'weather-forecast-app',
     title: 'Weather Forecast App',
     period: '2024年4月 - 2024年6月',
-    description:
+    summary:
       'OpenWeather APIを使用した天気予報アプリ。Flutterで開発し、iOS/Android両方に対応しています。位置情報を取得して現在地の天気を表示する機能や、お気に入り地点の登録機能を実装しました。',
     techStack: ['Flutter', 'Dart', 'OpenWeather API'],
     githubUrl: 'https://github.com/yourusername/weather-app',
-    detailedDescription: `
+    description: `
 FlutterとDartを使用して開発したクロスプラットフォームの天気予報アプリです。
 OpenWeather APIを活用し、現在の天気情報と5日間の予報を表示します。
 
