@@ -1,0 +1,235 @@
+alwaysApply: true
+
+---
+
+# Portfolio Project - AIベース開発コーディングルール
+
+## 🎯 プロジェクトの設計思想
+
+このプロジェクトは以下の4つの原則に基づいて設計されています：
+
+- **シンプルさと表現力**: 少ない記述量で直感的に扱えるコード
+- **型安全性の徹底**: 実行時エラーを未然に防ぐ型システム
+- **アトミックデザイン**: 再利用可能で一貫したUIコンポーネント体系
+- **AI協調開発**: AIと開発者が効率的に協業できる構造
+
+## 🏗️ アーキテクチャ設計ルール
+
+### 1. アトミックデザインによるコンポーネント設計
+
+```
+src/
+├── components/
+│   ├── atoms/      # 最小単位のUI要素（Button, Input, Icon等）
+│   ├── molecules/  # atoms の組み合わせ（SearchBox, Card等）
+│   ├── organisms/  # molecules + atoms の複合体（Header, ProductList等）
+│   ├── templates/  # ページのレイアウト構造
+│   └── pages/      # 具体的なページコンポーネント
+├── hooks/          # カスタムフック
+├── services/       # API通信や外部サービス連携
+├── utils/          # 純粋関数とユーティリティ
+├── types/          # 型定義
+├── constants/      # 定数定義
+└── styles/         # グローバルスタイルとテーマ
+```
+
+### 2. コンポーネントの責務分離原則
+
+- **Atoms**: 単一の責務を持つ最小要素（プロパティの変更のみで見た目が変わる）
+- **Molecules**: 複数のAtomsを組み合わせた機能単位
+- **Organisms**: ビジネスロジックを含む複合コンポーネント
+- **Templates**: レイアウトのみを責務とする（データに依存しない）
+- **Pages**: 具体的なデータとテンプレートを組み合わせる
+
+### 3. 状態管理の階層化
+
+- **ローカル状態**: useState, useReducer
+- **コンポーネント間共有**: Context API
+- **グローバル状態**: Zustand（導入予定）
+- **サーバー状態**: TanStack Query（導入予定）
+
+## 🔒 型安全性ルール
+
+### 4. 型定義の厳格な管理
+
+- すべてのコンポーネントプロパティに型定義を必須化
+- `any`型の使用を禁止（unknown型を推奨）
+- オプショナルプロパティの明確な区別
+
+```typescript
+// Good
+interface ButtonProps {
+  variant: 'primary' | 'secondary' | 'outline';
+  size?: 'small' | 'medium' | 'large';
+  onClick: () => void;
+  children: React.ReactNode;
+}
+
+// Bad
+interface ButtonProps {
+  variant: any;
+  size: string;
+  onClick: Function;
+  children: any;
+}
+```
+
+### 5. 型推論の活用
+
+- Zodスキーマによる実行時型チェック（導入予定）
+- TypeScriptの厳格モードを有効化
+- Generic型の積極的な活用
+
+## 🎨 アトミックデザイン実装ルール
+
+### 6. Atoms設計原則
+
+- 単一の視覚的要素のみを担当
+- propsによる見た目の制御のみ
+- ビジネスロジックを含まない
+
+```typescript
+// Example: Button atom
+interface ButtonProps {
+  variant: 'primary' | 'secondary' | 'ghost';
+  size: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+  loading?: boolean;
+  children: React.ReactNode;
+  onClick?: () => void;
+}
+```
+
+### 7. Molecules設計原則
+
+- 2つ以上のAtomsを組み合わせ
+- 単一の機能を提供
+- 再利用可能な設計
+- props drilling を避ける構造
+
+### 8. Organisms設計原則
+
+- ビジネスロジックを含む
+- カスタムフックでロジックを分離
+- データフェッチングを担当
+- ページ固有の要素を避ける
+
+## 📝 コーディングスタイル
+
+### 9. ファイル命名規則
+
+- コンポーネント: PascalCase（`Button.tsx`, `SearchForm.tsx`）
+- フック: camelCase + useプレフィックス（`useLocalStorage.ts`）
+- ユーティリティ: camelCase（`formatDate.ts`）
+- 型定義: PascalCase + Typeサフィックス（`UserType.ts`）
+
+### 10. コンポーネント構造の統一
+
+```typescript
+// 推奨構造
+import React from 'react';
+import type { ComponentProps } from './ComponentName.types';
+import { useComponentLogic } from './ComponentName.hooks';
+import styles from './ComponentName.module.css';
+
+export const ComponentName: React.FC<ComponentProps> = ({ 
+  prop1, 
+  prop2, 
+  ...props 
+}) => {
+  const { state, handlers } = useComponentLogic({ prop1, prop2 });
+  
+  return (
+    <div className={styles.container} {...props}>
+      {/* JSX content */}
+    </div>
+  );
+};
+```
+
+### 11. Export/Import規則
+
+- Named exportを優先（default exportは最小限）
+- barrel export（index.ts）でモジュールを整理
+- 相対パスより絶対パスを優先（alias設定）
+
+## 🧪 テストとストーリー
+
+### 12. テスト戦略
+
+- **Atoms**: Props別の見た目テスト
+- **Molecules**: 相互作用テスト
+- **Organisms**: ビジネスロジックテスト
+- **Hooks**: ロジックの単体テスト
+
+
+## 🤖 AI協調開発ルール
+
+### 13. AIフレンドリーなコード構造
+
+- 明確で一貫した命名規則
+- 詳細なTypeScript型注釈
+- 自己説明的なコード構造
+- コメントによる意図の明確化
+
+### 14. プロンプト効率化
+
+- コンポーネントの種類を明確に指定
+- 期待する型定義を具体的に記述
+- 既存パターンとの一貫性を要求
+- テストケースの考慮を依頼
+
+## 🚀 パフォーマンス最適化
+
+### 15. React最適化
+
+- React.memoの適切な使用
+- useCallback, useMemoの戦略的活用
+- 適切なkey属性の設定
+- lazy loadingとSuspenseの活用
+
+### 16. バンドル最適化
+
+- 不要なライブラリの除去
+- Tree shakingの最大化
+- 動的importの活用
+- 画像の最適化
+
+## 🔄 開発フロー
+
+### 17. レビュー観点
+
+- アトミックデザイン原則の遵守
+- 型安全性の確認
+- 再利用可能性の検証
+- アクセシビリティの考慮
+
+## 📚 ドキュメント化
+
+### 18. コンポーネントドキュメント
+
+- 各コンポーネントの役割と使用例
+- propsの型定義と説明
+- 使用上の注意点とベストプラクティス
+- デザインシステムへの準拠状況
+
+### 19. アーキテクチャドキュメント
+
+- アトミックデザインの適用方針
+- 状態管理の戦略
+- パフォーマンス考慮事項
+- AI協調開発のベストプラクティス
+
+## ⚠️ 重要な注意事項
+
+- **段階的導入**: 一度にすべてを導入せず、必要に応じて段階的に技術を追加
+- **一貫性の維持**: 既存コードとの整合性を最優先
+- **パフォーマンス重視**: 機能追加時は必ずパフォーマンスへの影響を評価
+- **アクセシビリティ**: すべてのUIコンポーネントでWCAG準拠を目指す
+- **AI協調**: AIの提案を鵜呑みにせず、プロジェクトの文脈で適切か判断する
+
+---
+
+## 🎯 このルールの目的
+
+このコーディングルールは、AIと開発者が協力して高品質なポートフォリオサイトを構築するための指針です。アトミックデザインによる体系的なUI構築と、TypeScriptによる型安全性を軸に、保守性と拡張性を両立したコードベースの実現を目指します。
