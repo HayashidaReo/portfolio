@@ -6,14 +6,11 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-  CardFooter,
 } from '@/components/atoms/Card';
-import { Badge } from '@/components/atoms/Badge';
 import { Avatar } from '@/components/atoms/Avatar';
-import { Button } from '@/components/atoms/Button';
 import { TechStackList } from '@/components/molecules/TechStackList';
 import { cn } from '@/lib/utils';
-import { ExternalLink, Github, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface ProjectCardProps {
   id: string;
@@ -22,8 +19,6 @@ interface ProjectCardProps {
   description: string;
   techStack: string[];
   icon?: string;
-  githubUrl?: string;
-  projectUrl?: string;
   className?: string;
 }
 
@@ -34,76 +29,50 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
   techStack,
   icon,
-  githubUrl,
-  projectUrl,
   className,
 }) => {
   return (
-    <Card className={cn('w-full hover:shadow-lg transition-shadow', className)}>
-      <CardHeader>
-        <div className="flex items-start gap-4">
-          {icon && (
-            <Avatar
-              src={icon}
-              alt={title}
-              fallback={title.charAt(0)}
-              size="lg"
-              className="rounded-lg"
-            />
-          )}
-          <div className="flex-1">
-            <CardTitle>{title}</CardTitle>
-            <CardDescription>{period}</CardDescription>
+    <Link to={`/works/${id}`} className="block">
+      <Card
+        className={cn(
+          'w-full hover:shadow-lg transition-all cursor-pointer group',
+          className
+        )}
+      >
+        <CardHeader>
+          <div className="flex items-start gap-4">
+            {icon && (
+              <Avatar
+                src={icon}
+                alt={title}
+                fallback={title.charAt(0)}
+                size="lg"
+                className="rounded-lg"
+              />
+            )}
+            <div className="flex-1">
+              <CardTitle>{title}</CardTitle>
+              <CardDescription>{period}</CardDescription>
+            </div>
           </div>
-        </div>
-      </CardHeader>
+        </CardHeader>
 
-      <CardContent className="space-y-4">
-        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-          {description}
-        </p>
+        <CardContent className="space-y-4">
+          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+            {description}
+          </p>
 
-        <TechStackList techStack={techStack} size="sm" showLabels={true} />
-      </CardContent>
-
-      <CardFooter className="gap-2 justify-between flex-wrap">
-        <div className="flex gap-2 flex-wrap">
-          {githubUrl && (
-            <Button variant="outline" size="sm" asChild>
-              <a
-                href={githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <Github className="h-4 w-4" />
-                GitHub
-              </a>
-            </Button>
-          )}
-
-          {projectUrl && (
-            <Button variant="outline" size="sm" asChild>
-              <a
-                href={projectUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <ExternalLink className="h-4 w-4" />
-                View
-              </a>
-            </Button>
-          )}
-        </div>
-
-        <Button variant="default" size="sm" asChild className="ml-auto">
-          <Link to={`/works/${id}`}>
-            詳細を見る
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </Button>
-      </CardFooter>
-    </Card>
+          {/* 技術スタックと矢印アイコンを横並びに */}
+          <div className="flex items-end gap-4">
+            <div className="flex-1">
+              <TechStackList techStack={techStack} size="sm" showLabels={true} />
+            </div>
+            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground group-hover:scale-110 transition-transform shrink-0">
+              <ArrowRight className="h-4 w-4" />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   );
 };
