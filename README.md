@@ -1,73 +1,156 @@
-# React + TypeScript + Vite
+# My Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> React, Vite, TypeScript で構築されたモダンなパーソナルポートフォリオサイト
 
-Currently, two official plugins are available:
+[![React](https://img.shields.io/badge/React-18.x-blue.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-7.x-646CFF.svg)](https://vitejs.dev/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 コンセプト
 
-## React Compiler
+- **高速な表示と優れたUX**  
+  Viteによる高速なビルドと最適化で、快適なブラウジング体験を提供
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **コンポーネント指向**  
+  Atomic Designの考え方に基づき、再利用可能でメンテナンス性の高いUIを構築
 
-## Expanding the ESLint configuration
+- **型安全な開発**  
+  TypeScriptを全面的に採用し、開発段階でのエラーを防止
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **モダンな開発フロー**  
+  VercelとGitHub連携によるCI/CD（継続的インテグレーション/継続的デプロイメント）を実現
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🌐 ライブデモ
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+完成したサイトはこちらからご覧いただけます：
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**➡️ [Portfolio Site](https://portfolio-hayashidareo.vercel.app)** (デプロイ後に更新予定)
+
+## 🛠️ 技術スタック
+
+| 分野 | 技術 |
+|------|------|
+| **フレームワーク** | React 18 |
+| **ビルドツール** | Vite |
+| **言語** | TypeScript |
+| **スタイリング** | Tailwind CSS |
+| **UIコンポーネント** | shadcn/ui |
+| **状態管理** | React Hooks (useState, useContext) |
+| **テスト** | Vitest + React Testing Library |
+| **UIカタログ** | Storybook |
+| **ホスティング** | Vercel |
+
+## 🚀 セットアップとローカル開発
+
+このプロジェクトをローカル環境で動かすための手順です。
+
+### 前提条件
+
+- **Node.js**: v20.19.0 以上、または v22.12.0 以上 ([公式サイト](https://nodejs.org/)からインストール)
+- **npm**: v10 以上 (Node.jsに同梱)
+- **Git**: 最新版
+
+### 🎯 セットアップ手順
+
+```bash
+# 1. このリポジトリをクローン
+git clone https://github.com/HayashidaReo/portfolio.git
+cd portfolio
+
+# 2. 依存関係をインストール
+npm install
+
+# 3. 開発サーバーを起動
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+ブラウザで `http://localhost:5173` を開くと、開発中のポートフォリオサイトが表示されます。
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📜 利用可能なスクリプト
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| コマンド | 説明 |
+|----------|------|
+| `npm run dev` | 開発サーバーを起動します。ホットリロードが有効です。 |
+| `npm run build` | 本番環境用の静的ファイルを `dist` フォルダに生成します。 |
+| `npm run lint` | ESLintを実行し、コードの静的解析を行います。 |
+| `npm run preview` | `build` で生成された本番ファイルをローカルで確認します。 |
+| `npm run storybook` | Storybookを起動し、UIコンポーネントをカタログで確認します。 |
+
+## ☁️ デプロイ
+
+このプロジェクトはVercelへのデプロイが最適化されています。
+
+### デプロイ手順
+
+1. **GitHubリポジトリの準備**  
+   このGitHubリポジトリをあなたのGitHubアカウントにフォークまたはプッシュします。
+
+2. **Vercelでのインポート**  
+   [Vercel](https://vercel.com/)にログインし、"Add New... > Project" を選択します。
+
+3. **リポジトリの接続**  
+   作成したGitHubリポジトリをインポートします。
+
+4. **デプロイの実行**  
+   Vercelが自動でViteプロジェクトを検出し、最適なビルド設定を提案します。設定を変更せず "Deploy" をクリックします。
+
+**🎉 完了！**  
+以降、`main`ブランチにプッシュするたびに、Vercelが自動で新しいバージョンをビルドし、公開サイトに反映します。
+
+## 🏗️ プロジェクト構成 (Atomic Design)
+
+UIコンポーネントは、再利用性と責務の分離を目的として**Atomic Design**の原則に基づいて構成されています。
+
 ```
+src/
+├── components/
+│   ├── atoms/            # ボタンやインプットなど、最小のUI単位
+│   ├── molecules/        # atomsを組み合わせた小さな機能単位 (例: 検索フォーム)
+│   ├── organisms/        # moleculesやatomsで構成されるUIセクション (例: ヘッダー)
+│   ├── templates/        # ページのレイアウト構造
+│   └── pages/            # 具体的なページコンポーネント
+├── hooks/                # カスタムReactフック
+├── services/             # API通信や外部サービス連携
+├── utils/                # 純粋関数とユーティリティ
+├── types/                # TypeScriptの型定義
+├── constants/            # 定数定義
+├── styles/               # グローバルスタイルとテーマ
+└── assets/               # 画像やアイコンなどの静的リソース
+```
+
+### Atomic Designの階層
+
+| レベル | 役割 | 例 |
+|--------|------|-----|
+| **Atoms** | 最小単位のUI要素 | Button, Input, Icon |
+| **Molecules** | Atomsの組み合わせ | SearchBox, Card |
+| **Organisms** | MoleculesとAtomsの複合体 | Header, ProductList |
+| **Templates** | ページのレイアウト構造 | PageLayout, GridLayout |
+| **Pages** | 具体的なページコンポーネント | HomePage, AboutPage |
+
+## 🤝 開発への貢献
+
+機能追加の提案やバグ報告は、GitHubの[Issues](https://github.com/HayashidaReo/portfolio/issues)にて歓迎します。
+
+### 開発フロー
+
+- **ブランチ戦略**: `feature/機能名` の形式でブランチを作成してください
+- **コミット**: [Conventional Commits](https://www.conventionalcommits.org/) の規約に従うことを推奨します
+- **プルリクエスト**: `main`ブランチへのプルリクエストを作成してください
+
+### コミット例
+
+```bash
+feat: ヘッダーコンポーネントを追加
+fix: ボタンのスタイル修正
+docs: READMEの更新
+style: ESLintエラーの修正
+```
+
+## 📄 ライセンス
+
+このプロジェクトは[MIT License](LICENSE)の下で公開されています。
+
+---
+
+**Built with ❤️ by [HayashidaReo](https://github.com/HayashidaReo)**
