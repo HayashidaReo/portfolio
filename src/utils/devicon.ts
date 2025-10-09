@@ -4,53 +4,80 @@
  * @returns DeviconのURL
  */
 export const getDeviconUrl = (techName: string): string => {
-  // 技術名からDevicon用の名前にマッピング
-  const techNameMap: Record<string, string> = {
-    'react': 'react',
-    'typescript': 'typescript',
-    'javascript': 'javascript',
-    'vite': 'vitejs',
-    'tailwind css': 'tailwindcss',
-    'shadcn/ui': 'react', // shadcn/uiはReactベースなのでReactのアイコンを使用
-    'next.js': 'nextjs',
-    'firebase': 'firebase',
-    'zustand': 'react', // Zustandは専用アイコンがないのでReactを使用
-    'flutter': 'flutter',
-    'dart': 'dart',
-    'openweather api': 'openweathermap',
-    'node.js': 'nodejs',
-    'express': 'express',
-    'mongodb': 'mongodb',
-    'postgresql': 'postgresql',
-    'mysql': 'mysql',
-    'python': 'python',
-    'django': 'django',
-    'flask': 'flask',
-    'vue.js': 'vuejs',
-    'angular': 'angularjs',
-    'svelte': 'svelte',
-    'docker': 'docker',
-    'kubernetes': 'kubernetes',
-    'aws': 'amazonwebservices',
-    'gcp': 'googlecloud',
-    'azure': 'azure',
-    'vercel': 'vercel',
-    'git': 'git',
-    'github': 'github',
-    'gitlab': 'gitlab',
-    'figma': 'figma',
-    'graphql': 'graphql',
-    'redux': 'redux',
-    'sass': 'sass',
-    'webpack': 'webpack',
+  // 技術名からDevicon用の名前とバリエーションにマッピング
+  const techNameMap: Record<string, { name: string; variant?: string }> = {
+    // Languages
+    'react': { name: 'react' },
+    'typescript': { name: 'typescript' },
+    'javascript': { name: 'javascript' },
+    'python': { name: 'python' },
+    'dart': { name: 'dart' },
+    'c': { name: 'c' },
+    'c++': { name: 'cplusplus' },
+    'c#': { name: 'csharp' },
+    'swift': { name: 'swift' },
+    'vba': { name: 'visualbasic' },
+    'visual basic': { name: 'visualbasic' },
+
+    // Frameworks / Libraries
+    'vite': { name: 'vitejs' },
+    'tailwind css': { name: 'tailwindcss' },
+    'shadcn/ui': { name: 'react' },
+    'next.js': { name: 'nextjs' },
+    'zustand': { name: 'react' },
+    'flutter': { name: 'flutter' },
+    'django': { name: 'django' },
+    'flask': { name: 'flask' },
+    'vue.js': { name: 'vuejs' },
+    'angular': { name: 'angularjs' },
+    'svelte': { name: 'svelte' },
+    'express': { name: 'express' },
+
+    // Infrastructure / Cloud
+    'firebase': { name: 'firebase' },
+    'supabase': { name: 'supabase' },
+    'docker': { name: 'docker' },
+    'kubernetes': { name: 'kubernetes' },
+    'aws': { name: 'amazonwebservices', variant: 'plain-wordmark' },
+    'gcp': { name: 'googlecloud' },
+    'azure': { name: 'azure' },
+    'vercel': { name: 'vercel' },
+
+    // Tools
+    'git': { name: 'git' },
+    'github': { name: 'github' },
+    'gitlab': { name: 'gitlab' },
+    'figma': { name: 'figma' },
+    'slack': { name: 'slack' },
+    'notion': { name: 'notion' },
+    'vscode': { name: 'vscode' },
+
+    // Other
+    'openweather api': { name: 'openweathermap' },
+    'node.js': { name: 'nodejs' },
+    'mongodb': { name: 'mongodb' },
+    'postgresql': { name: 'postgresql' },
+    'mysql': { name: 'mysql' },
+    'graphql': { name: 'graphql' },
+    'redux': { name: 'redux' },
+    'sass': { name: 'sass' },
+    'webpack': { name: 'webpack' },
+
+    // UI/UX
+    'ui/ux design': { name: 'figma' },
+    'web performance': { name: 'chrome' },
+    'accessibility': { name: 'html5' },
   };
 
   const normalizedName = techName.toLowerCase().trim();
-  const iconName = techNameMap[normalizedName] || normalizedName.replace(/\s+/g, '');
+  const config = techNameMap[normalizedName] || {
+    name: normalizedName.replace(/\s+/g, ''),
+  };
 
-  // Deviconは複数のバリエーションがあるが、original を優先して使用
-  // もしoriginalがない場合はplainにフォールバック
-  return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${iconName}/${iconName}-original.svg`;
+  const iconName = config.name;
+  const variant = config.variant || 'original';
+
+  return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${iconName}/${iconName}-${variant}.svg`;
 };
 
 /**

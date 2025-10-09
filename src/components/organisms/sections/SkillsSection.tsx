@@ -31,6 +31,7 @@ export const SkillsSection: React.FC = () => {
                   <SkillItem
                     key={index}
                     name={skill.name}
+                    iconName={skill.iconName}
                     level={skill.level}
                     experience={skill.experience}
                   />

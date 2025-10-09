@@ -3,7 +3,8 @@
  */
 
 export interface Skill {
-  name: string;
+  name: string; // 表示名
+  iconName?: string; // Devicon用の技術名（指定しない場合はnameを使用）
   level: number; // 0-100
   experience: string; // '実務経験あり', '個人開発', '学習中' など
 }
@@ -20,12 +21,11 @@ export const skillCategories: SkillCategory[] = [
     title: 'Languages',
     skills: [
       { name: 'Dart', level: 80, experience: '実務経験あり' },
-      { name: 'VBA', level: 70, experience: '実務経験あり' },
+      { name: 'VBA', iconName: 'Visual Basic', level: 70, experience: '実務経験あり' },
       { name: 'Python', level: 60, experience: '個人開発' },
-      { name: 'C言語', level: 75, experience: '大学授業' },
+      { name: 'C言語', iconName: 'C', level: 75, experience: '大学授業' },
       { name: 'Swift', level: 50, experience: '個人開発' },
       { name: 'TypeScript', level: 20, experience: '学習中' },
-      
     ],
   },
   {
@@ -34,8 +34,8 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       { name: 'Flutter', level: 90, experience: '個人開発' },
       { name: 'React', level: 30, experience: '学習中' },
-      { name: 'Next.js', level: 30, experience: '学習中' },
-      { name: 'vite', level: 30, experience: '学習中' },
+      { name: 'Next.js', iconName: 'Next.js', level: 30, experience: '学習中' },
+      { name: 'Vite', iconName: 'Vite', level: 30, experience: '学習中' },
       { name: 'Django', level: 20, experience: '使用経験あり' },
     ],
   },
@@ -54,14 +54,13 @@ export const skillCategories: SkillCategory[] = [
     id: 'tools',
     title: 'Other Tools',
     skills: [
-      { name: 'Git/GitHub', level: 90, experience: '実務経験あり' },
+      { name: 'GitHub', level: 90, experience: '実務経験あり' },
       { name: 'Figma', level: 60, experience: '実務経験あり' },
       { name: 'Slack', level: 85, experience: '実務経験あり' },
       { name: 'Notion', level: 80, experience: '実務経験あり' },
       { name: 'VSCode', level: 90, experience: '実務経験あり' },
-      { name: 'Copilot', level: 80, experience: '実務経験あり' },
-      { name: 'Cursor', level: 80, experience: '実務経験あり' },
-      { name: 'Claude Code', level: 70, experience: '実務経験あり' },
+      { name: 'Xcode', level: 50, experience: '個人開発' },
+
     ],
   },
 ];
