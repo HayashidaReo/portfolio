@@ -2,11 +2,11 @@ import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
 import { SocialLink } from '@/components/molecules/SocialLink';
 import { GitHubContributions } from '@/components/molecules/GitHubContributions';
-import { PROFILE } from '@/constants/profile';
+import { profile } from '@/data/profile';
 import { Github, Twitter, FileText, BookOpen } from 'lucide-react';
 
 export const SocialSection: React.FC = () => {
-  const { github, twitter, qiita } = PROFILE.social;
+  const { github, twitter, qiita } = profile.social;
 
   return (
     <section id="social" className="w-full py-16 px-4 md:py-24">
