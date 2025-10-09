@@ -37,7 +37,6 @@
 | **UIコンポーネント** | shadcn/ui |
 | **状態管理** | React Hooks (useState, useContext) |
 | **テスト** | Vitest + React Testing Library |
-| **UIカタログ** | Storybook |
 | **ホスティング** | Vercel |
 
 ## 🚀 セットアップとローカル開発
@@ -74,7 +73,6 @@ npm run dev
 | `npm run build` | 本番環境用の静的ファイルを `dist` フォルダに生成します。 |
 | `npm run lint` | ESLintを実行し、コードの静的解析を行います。 |
 | `npm run preview` | `build` で生成された本番ファイルをローカルで確認します。 |
-| `npm run storybook` | Storybookを起動し、UIコンポーネントをカタログで確認します。 |
 
 ## ☁️ デプロイ
 
