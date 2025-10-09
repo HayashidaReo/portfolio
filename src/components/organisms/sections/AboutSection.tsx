@@ -6,7 +6,8 @@ import { profile } from '@/data/profile';
 import { Heart, Target, Sparkles } from 'lucide-react';
 
 export const AboutSection: React.FC = () => {
-  const { name, title, avatarSrc, interests, vision, background } = profile;
+  const { name, title, organization, grade, avatarSrc, interests, vision, background } =
+    profile;
 
   return (
     <section id="about" className="w-full py-16 px-4 md:py-24">
@@ -16,7 +17,13 @@ export const AboutSection: React.FC = () => {
         <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-3">
           {/* プロフィールカード */}
           <div className="lg:col-span-1">
-            <ProfileCard name={name} title={title} avatarSrc={avatarSrc} />
+            <ProfileCard
+              name={name}
+              title={title}
+              organization={organization}
+              grade={grade}
+              avatarSrc={avatarSrc}
+            />
           </div>
 
           {/* 詳細情報 */}

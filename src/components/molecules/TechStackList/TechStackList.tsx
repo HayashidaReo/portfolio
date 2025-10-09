@@ -1,7 +1,7 @@
 import { TechIcon } from '@/components/atoms/TechIcon';
 
 interface TechStackListProps {
-  techStack: string[];
+  techStack: readonly string[];
   size?: 'sm' | 'md' | 'lg';
   showLabels?: boolean;
   className?: string;

@@ -2,7 +2,7 @@ import React from 'react';
 import { TechStackList } from '@/components/molecules/TechStackList';
 
 interface InterestsListProps {
-  interests: string[];
+  interests: readonly string[];
   className?: string;
 }
 

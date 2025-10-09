@@ -6,8 +6,9 @@ import userIcon from '@/assets/userIcon.jpg';
 export const profile = {
   // 基本情報
   name: 'れお',
-  nameJa: 'れお',
-  title: 'native app Developer',
+  title: 'スマホアプリエンジニア',
+  organization: '神戸大学 工学部 情報知能工学科',
+  grade: '学部3年',
   email: 'hayashida.dev@gmail.com',
   avatarSrc: userIcon,
 
