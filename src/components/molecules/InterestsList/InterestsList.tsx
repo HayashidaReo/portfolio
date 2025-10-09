@@ -1,6 +1,5 @@
 import React from 'react';
-import { Badge } from '@/components/atoms/Badge';
-import { cn } from '@/lib/utils';
+import { TechStackList } from '@/components/molecules/TechStackList';
 
 interface InterestsListProps {
   interests: string[];
@@ -12,12 +11,11 @@ export const InterestsList: React.FC<InterestsListProps> = ({
   className,
 }) => {
   return (
-    <div className={cn('flex flex-wrap gap-2', className)}>
-      {interests.map((interest, index) => (
-        <Badge key={index} variant="secondary">
-          {interest}
-        </Badge>
-      ))}
-    </div>
+    <TechStackList
+      techStack={interests}
+      size="sm"
+      showLabels={true}
+      className={className}
+    />
   );
 };
