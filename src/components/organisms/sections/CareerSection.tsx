@@ -1,37 +1,44 @@
 import React from 'react';
+import { TimelineItem } from '@/components/molecules/TimelineItem';
+import { CareerCard } from '@/components/molecules/CareerCard';
 
 export const CareerSection: React.FC = () => {
-  return (
-    <section id="career" className="section career-section">
-      <div className="section-container">
-        <h2 className="section-title">Career / Experience</h2>
-        <div className="timeline-container">
-          {/* タイムライン表示エリア（Worksと時間軸を統一） */}
-          <div className="timeline">
-            <div className="timeline-item">
-              <div className="timeline-marker">[Timeline Marker]</div>
-              <div className="timeline-content">
-                <div className="career-card">
-                  <h3 className="company-name">[Company Name]</h3>
-                  <div className="employment-period">[Employment Period]</div>
-                  <div className="job-description">
-                    [Job Description]
-                  </div>
-                  <div className="tech-stack">
-                    [Tech Stack Tags]
-                  </div>
-                </div>
-              </div>
-            </div>
+  // TODO: 実際のデータに置き換える
+  const careers = [
+    {
+      company: '株式会社〇〇',
+      period: '2023年4月 - 現在',
+      description:
+        'フロントエンドエンジニアとして、Webアプリケーションの開発に従事。React + TypeScriptを使用した大規模なSPAの開発・保守を担当。UIコンポーネントライブラリの設計・実装、パフォーマンス改善、アクセシビリティ対応などを行っています。',
+      techStack: ['React', 'TypeScript', 'Next.js', 'GraphQL', 'AWS'],
+    },
+    {
+      company: '〇〇大学 情報工学部',
+      period: '2019年4月 - 2023年3月',
+      description:
+        'コンピュータサイエンスの基礎からWeb開発、データベース、アルゴリズムなどを学習。卒業研究ではWebアプリケーションのパフォーマンス最適化に関する研究を行いました。',
+      techStack: ['Python', 'JavaScript', 'SQL', 'Git'],
+    },
+  ];
 
-            {/* 追加の経歴アイテムがここに入る */}
-            <div className="timeline-item">
-              <div className="timeline-marker">[Timeline Marker]</div>
-              <div className="timeline-content">
-                [Another Career Card]
-              </div>
-            </div>
-          </div>
+  return (
+    <section id="career" className="w-full py-16 px-4 md:py-24 bg-muted/30">
+      <div className="container mx-auto max-w-4xl">
+        <h2 className="text-4xl font-bold text-center mb-12">
+          Career / Experience
+        </h2>
+
+        <div className="space-y-0">
+          {careers.map((career, index) => (
+            <TimelineItem key={index}>
+              <CareerCard
+                company={career.company}
+                period={career.period}
+                description={career.description}
+                techStack={career.techStack}
+              />
+            </TimelineItem>
+          ))}
         </div>
       </div>
     </section>

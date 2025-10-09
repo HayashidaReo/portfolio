@@ -1,39 +1,57 @@
 import React from 'react';
+import { TimelineItem } from '@/components/molecules/TimelineItem';
+import { ProjectCard } from '@/components/molecules/ProjectCard';
 
 export const WorksSection: React.FC = () => {
-  return (
-    <section id="works" className="section works-section">
-      <div className="section-container">
-        <h2 className="section-title">Works / Projects</h2>
-        <div className="timeline-container">
-          {/* タイムライン表示エリア（降順: 新しい順） */}
-          <div className="timeline">
-            <div className="timeline-item">
-              <div className="timeline-marker">[Timeline Marker]</div>
-              <div className="timeline-content">
-                <div className="project-card">
-                  <div className="project-icon">[App Icon]</div>
-                  <h3 className="project-name">[Project Name]</h3>
-                  <div className="project-period">[Development Period]</div>
-                  <div className="project-tech-stack">
-                    [Tech Stack Icons]
-                  </div>
-                  <div className="project-overview">
-                    [Project Overview - truncated to 3 lines]
-                  </div>
-                  <button className="read-more-btn">[Read More]</button>
-                </div>
-              </div>
-            </div>
+  // TODO: 実際のデータに置き換える
+  const projects = [
+    {
+      title: 'Portfolio Website',
+      period: '2024年10月 - 現在',
+      description:
+        'React + TypeScript + Viteで構築したモダンなポートフォリオサイト。Atomic Designの原則に基づき、再利用可能なコンポーネントで構成されています。shadcn/uiを使用してUIを実装し、Tailwind CSSでスタイリングしています。',
+      techStack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'shadcn/ui'],
+      githubUrl: 'https://github.com/yourusername/portfolio',
+      projectUrl: 'https://portfolio-example.vercel.app',
+    },
+    {
+      title: 'Task Management App',
+      period: '2024年7月 - 2024年9月',
+      description:
+        'チーム向けのタスク管理アプリケーション。Next.js App Routerを使用し、サーバーサイドレンダリングとクライアントサイドレンダリングを適切に使い分けています。Firebaseをバックエンドとしてリアルタイムなデータ同期を実現しました。',
+      techStack: ['Next.js', 'TypeScript', 'Firebase', 'Zustand'],
+      githubUrl: 'https://github.com/yourusername/task-app',
+    },
+    {
+      title: 'Weather Forecast App',
+      period: '2024年4月 - 2024年6月',
+      description:
+        'OpenWeather APIを使用した天気予報アプリ。Flutterで開発し、iOS/Android両方に対応しています。位置情報を取得して現在地の天気を表示する機能や、お気に入り地点の登録機能を実装しました。',
+      techStack: ['Flutter', 'Dart', 'OpenWeather API'],
+      githubUrl: 'https://github.com/yourusername/weather-app',
+    },
+  ];
 
-            {/* 追加のプロジェクトアイテムがここに入る */}
-            <div className="timeline-item">
-              <div className="timeline-marker">[Timeline Marker]</div>
-              <div className="timeline-content">
-                [Another Project Card]
-              </div>
-            </div>
-          </div>
+  return (
+    <section id="works" className="w-full py-16 px-4 md:py-24">
+      <div className="container mx-auto max-w-4xl">
+        <h2 className="text-4xl font-bold text-center mb-12">
+          Works / Projects
+        </h2>
+
+        <div className="space-y-0">
+          {projects.map((project, index) => (
+            <TimelineItem key={index}>
+              <ProjectCard
+                title={project.title}
+                period={project.period}
+                description={project.description}
+                techStack={project.techStack}
+                githubUrl={project.githubUrl}
+                projectUrl={project.projectUrl}
+              />
+            </TimelineItem>
+          ))}
         </div>
       </div>
     </section>
