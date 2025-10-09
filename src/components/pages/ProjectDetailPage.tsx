@@ -10,6 +10,7 @@ import {
 import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { Avatar } from '@/components/atoms/Avatar';
+import { TechStackList } from '@/components/molecules/TechStackList';
 import { ArrowLeft, Github, ExternalLink, CheckCircle2, Lightbulb, Calendar } from 'lucide-react';
 
 export const ProjectDetailPage: React.FC = () => {
@@ -103,13 +104,11 @@ export const ProjectDetailPage: React.FC = () => {
               </div>
 
               {/* Tech Stack */}
-              <div className="flex flex-wrap gap-2">
-                {project.techStack.map((tech, index) => (
-                  <Badge key={index} variant="secondary" className="text-sm">
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
+              <TechStackList
+                techStack={project.techStack}
+                size="md"
+                showLabels={true}
+              />
 
               {/* Links */}
               {(project.githubUrl || project.projectUrl) && (

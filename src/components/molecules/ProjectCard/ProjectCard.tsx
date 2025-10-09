@@ -11,6 +11,7 @@ import {
 import { Badge } from '@/components/atoms/Badge';
 import { Avatar } from '@/components/atoms/Avatar';
 import { Button } from '@/components/atoms/Button';
+import { TechStackList } from '@/components/molecules/TechStackList';
 import { cn } from '@/lib/utils';
 import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 
@@ -62,13 +63,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           {description}
         </p>
 
-        <div className="flex flex-wrap gap-2">
-          {techStack.map((tech, index) => (
-            <Badge key={index} variant="secondary">
-              {tech}
-            </Badge>
-          ))}
-        </div>
+        <TechStackList techStack={techStack} size="sm" showLabels={true} />
       </CardContent>
 
       <CardFooter className="gap-2 justify-between flex-wrap">
