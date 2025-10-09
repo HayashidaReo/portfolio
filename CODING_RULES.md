@@ -1,7 +1,3 @@
-alwaysApply: true
-
----
-
 # Portfolio Project - AIベース開発コーディングルール
 
 ## 🎯 プロジェクトの設計思想
