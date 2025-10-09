@@ -25,16 +25,16 @@ export const SocialSection: React.FC = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <img src={xIcon} alt="X" className="h-5 w-5 object-contain" />
-                  X (Twitter)
+                  {twitter.title}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm text-muted-foreground">
-                  技術情報や学習記録を発信しています
+                  {twitter.description}
                 </p>
                 <SocialLink
                   icon={xIcon}
-                  label="プロフィールを見る"
+                  label={twitter.buttonLabel}
                   href={twitter.url}
                   bgColor="bg-[#1DA1F2]"
                   textColor="text-white"
@@ -51,16 +51,16 @@ export const SocialSection: React.FC = () => {
                     alt="Qiita"
                     className="h-5 w-5 object-contain"
                   />
-                  Qiita
+                  {qiita.title}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm text-muted-foreground">
-                  技術記事を投稿し、学んだことをアウトプットしています
+                  {qiita.description}
                 </p>
                 <SocialLink
                   icon={qiitaIcon}
-                  label="記事を読む"
+                  label={qiita.buttonLabel}
                   href={qiita.url}
                   bgColor="bg-[#55C500]"
                   textColor="text-white"

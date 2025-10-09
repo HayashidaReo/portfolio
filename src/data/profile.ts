@@ -38,14 +38,22 @@ export const profile = {
     github: {
       username: 'hayashidareo',
       url: 'https://github.com/hayashidareo',
+      title: 'GitHub',
+      buttonLabel: 'プロフィールを見る',
     },
     twitter: {
       username: 'h_y_s_d_',
       url: 'https://twitter.com/h_y_s_d_',
+      title: 'X (Twitter)',
+      description: '技術情報や学習記録を発信しています',
+      buttonLabel: 'プロフィールを見る',
     },
     qiita: {
       username: 'h_y_s_d',
       url: 'https://qiita.com/h_y_s_d',
+      title: 'Qiita',
+      description: '技術記事を投稿し、学んだことをアウトプットしています',
+      buttonLabel: '記事を読む',
     },
   },
 } as const;
