@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Card,
   CardHeader,
@@ -9,10 +10,12 @@ import {
 } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { Avatar } from '@/components/atoms/Avatar';
+import { Button } from '@/components/atoms/Button';
 import { cn } from '@/lib/utils';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 
 interface ProjectCardProps {
+  id: string;
   title: string;
   period: string;
   description: string;
@@ -24,6 +27,7 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
+  id,
   title,
   period,
   description,
@@ -34,7 +38,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   className,
 }) => {
   return (
-    <Card className={cn('w-full', className)}>
+    <Card className={cn('w-full hover:shadow-lg transition-shadow', className)}>
       <CardHeader>
         <div className="flex items-start gap-4">
           {icon && (
@@ -54,7 +58,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       </CardHeader>
 
       <CardContent className="space-y-4">
-        <p className="text-sm text-muted-foreground leading-relaxed">
+        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
           {description}
         </p>
 
@@ -67,32 +71,42 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
       </CardContent>
 
-      {(githubUrl || projectUrl) && (
-        <CardFooter className="gap-2">
-          {githubUrl && (
+      <CardFooter className="gap-2 flex-wrap">
+        <Button variant="default" size="sm" asChild>
+          <Link to={`/works/${id}`}>
+            詳細を見る
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </Button>
+
+        {githubUrl && (
+          <Button variant="outline" size="sm" asChild>
             <a
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
+              onClick={(e) => e.stopPropagation()}
             >
               <Github className="h-4 w-4" />
               GitHub
             </a>
-          )}
-          {projectUrl && (
+          </Button>
+        )}
+
+        {projectUrl && (
+          <Button variant="outline" size="sm" asChild>
             <a
               href={projectUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
+              onClick={(e) => e.stopPropagation()}
             >
               <ExternalLink className="h-4 w-4" />
-              View Project
+              View
             </a>
-          )}
-        </CardFooter>
-      )}
+          </Button>
+        )}
+      </CardFooter>
     </Card>
   );
 };
