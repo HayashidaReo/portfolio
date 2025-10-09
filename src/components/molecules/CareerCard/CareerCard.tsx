@@ -6,7 +6,7 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/atoms/Card';
-import { Badge } from '@/components/atoms/Badge';
+import { TechStackList } from '@/components/molecules/TechStackList';
 import { cn } from '@/lib/utils';
 
 interface CareerCardProps {
@@ -37,13 +37,7 @@ export const CareerCard: React.FC<CareerCardProps> = ({
         </p>
 
         {techStack && techStack.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {techStack.map((tech, index) => (
-              <Badge key={index} variant="outline">
-                {tech}
-              </Badge>
-            ))}
-          </div>
+          <TechStackList techStack={techStack} size="sm" showLabels={true} />
         )}
       </CardContent>
     </Card>
