@@ -3,7 +3,8 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Car
 import { SocialLink } from '@/components/molecules/SocialLink';
 import { GitHubContributions } from '@/components/molecules/GitHubContributions';
 import { profile } from '@/data/profile';
-import { Github, Twitter, FileText, BookOpen } from 'lucide-react';
+import xIcon from '@/assets/xIcon.png';
+import qiitaIcon from '@/assets/qiitaIcon.png';
 
 export const SocialSection: React.FC = () => {
   const { github, twitter, qiita } = profile.social;
@@ -23,7 +24,7 @@ export const SocialSection: React.FC = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Twitter className="h-5 w-5" />
+                  <img src={xIcon} alt="X" className="h-5 w-5 object-contain" />
                   X (Twitter)
                 </CardTitle>
               </CardHeader>
@@ -32,9 +33,11 @@ export const SocialSection: React.FC = () => {
                   技術情報や学習記録を発信しています
                 </p>
                 <SocialLink
-                  icon={Twitter}
-                  label="Twitter Profile"
+                  icon={xIcon}
+                  label="プロフィールを見る"
                   href={twitter.url}
+                  bgColor="bg-[#1DA1F2]"
+                  textColor="text-white"
                 />
               </CardContent>
             </Card>
@@ -43,7 +46,11 @@ export const SocialSection: React.FC = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <FileText className="h-5 w-5" />
+                  <img
+                    src={qiitaIcon}
+                    alt="Qiita"
+                    className="h-5 w-5 object-contain"
+                  />
                   Qiita
                 </CardTitle>
               </CardHeader>
@@ -52,9 +59,11 @@ export const SocialSection: React.FC = () => {
                   技術記事を投稿し、学んだことをアウトプットしています
                 </p>
                 <SocialLink
-                  icon={FileText}
-                  label="Qiita Profile"
+                  icon={qiitaIcon}
+                  label="記事を読む"
                   href={qiita.url}
+                  bgColor="bg-[#55C500]"
+                  textColor="text-white"
                 />
               </CardContent>
             </Card>

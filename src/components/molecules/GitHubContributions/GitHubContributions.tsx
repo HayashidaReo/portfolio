@@ -5,7 +5,8 @@ import {
   CardTitle,
   CardContent,
 } from '@/components/atoms/Card';
-import { Github } from 'lucide-react';
+import { Button } from '@/components/atoms/Button';
+import { TechIcon } from '@/components/atoms/TechIcon';
 
 interface GitHubContributionsProps {
   username: string;
@@ -21,18 +22,42 @@ export const GitHubContributions: React.FC<GitHubContributionsProps> = ({
 }) => {
   // GitHubのコントリビューショングラフ画像URL
   const contributionUrl = `https://ghchart.rshah.org/${username}`;
+  const githubUrl = `https://github.com/${username}`;
 
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Github className="h-5 w-5" />
-          GitHub Contributions
-        </CardTitle>
+        <div className="flex items-center justify-between gap-4">
+          <CardTitle className="flex items-center gap-2">
+            <TechIcon techName="GitHub" size="sm" showLabel={false} />
+            GitHub Contributions
+          </CardTitle>
+          <Button
+            size="sm"
+            asChild
+            className="transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
+            style={{
+              backgroundColor: '#24292e',
+              color: 'white',
+            }}
+          >
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                backgroundColor: '#24292e',
+                color: 'white',
+              }}
+            >
+              プロフィールを見る
+            </a>
+          </Button>
+        </div>
       </CardHeader>
       <CardContent>
         <a
-          href={`https://github.com/${username}`}
+          href={githubUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="block hover:opacity-80 transition-opacity"
