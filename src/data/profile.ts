@@ -1,13 +1,15 @@
 /**
  * プロフィール情報
  */
+import userIcon from '@/assets/userIcon.jpg';
+
 export const profile = {
   // 基本情報
   name: 'れお',
   nameJa: 'れお',
   title: 'native app Developer',
   email: 'hayashida.dev@gmail.com',
-  avatarSrc: '', // プロフィール画像のパス
+  avatarSrc: userIcon,
 
   // 自己紹介
   vision: `
