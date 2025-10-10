@@ -22,6 +22,7 @@ export const careers: Career[] = [
     description:
       '',
     techStack: ['React', 'Next.js', 'GitHub', 'Slack', 'Notion', 'Claude Code'],
+    detailedContentFile: 'starup.md',
   },
   {
     id: 'teamlab',
@@ -30,6 +31,7 @@ export const careers: Career[] = [
     description:
       '',
     techStack: ['Flutter', 'Dart', 'GitHub', 'Slack', 'Figma','Swagger'],
+    detailedContentFile: 'teamlab.md',
   },
   {
     id: 'gonmura',
@@ -38,6 +40,7 @@ export const careers: Career[] = [
     description:
       '',
     techStack: ['Flutter', 'Dart', 'GitHub', 'Slack', 'Firebase', 'Supabase', 'Figma', 'Cursor', 'Claude Code'],
+    detailedContentFile: 'gonmura.md',
     featured: true,
   },
   {
@@ -47,6 +50,7 @@ export const careers: Career[] = [
     description:
       '',
     techStack: ['Python', 'Django', 'AWS', 'Slack', 'Backlog', 'GitHub'],
+    detailedContentFile: 'nagase.md',
   },
   {
     id: 'Amerci',
