@@ -12,7 +12,6 @@ export const getDeviconUrl = (techName: string): string => {
     'javascript': { name: 'javascript' },
     'python': { name: 'python' },
     'dart': { name: 'dart' },
-    'c': { name: 'c' },
     'c++': { name: 'cplusplus' },
     'c#': { name: 'csharp' },
     'swift': { name: 'swift' },

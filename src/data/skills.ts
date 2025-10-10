@@ -23,7 +23,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Dart', level: 80, experience: '実務経験あり' },
       { name: 'VBA', iconName: 'Visual Basic', level: 70, experience: '実務経験あり' },
       { name: 'Python', level: 60, experience: '個人開発' },
-      { name: 'C言語', iconName: 'C', level: 75, experience: '大学授業' },
+      { name: 'C', level: 75, experience: '大学授業' },
       { name: 'Swift', level: 50, experience: '個人開発' },
       { name: 'TypeScript', level: 20, experience: '学習中' },
     ],
