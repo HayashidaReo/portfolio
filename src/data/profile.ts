@@ -33,6 +33,12 @@ export const profile = {
     'AIを用いた開発',
   ],
 
+  // コンタクト情報
+  contact: {
+    email: 'hayashida.dev@gmail.com',
+    twitterDM: 'https://twitter.com/messages/compose?recipient_id=h_y_s_d_',
+  },
+
   // ソーシャルアカウント
   social: {
     github: {

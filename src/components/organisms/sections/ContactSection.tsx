@@ -3,11 +3,10 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Car
 import { ContactForm } from '@/components/molecules/ContactForm';
 import { Mail, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/atoms/Button';
+import { profile } from '@/data';
 
 export const ContactSection: React.FC = () => {
-  // TODO: 実際のメールアドレスに置き換える
-  const email = 'your.email@example.com';
-  const twitterDMUrl = 'https://twitter.com/messages/compose?recipient_id=YOUR_ID';
+  const { email, twitterDM } = profile.contact;
 
   return (
     <section id="contact" className="w-full py-16 px-4 md:py-24 bg-muted/30">
@@ -61,7 +60,7 @@ export const ContactSection: React.FC = () => {
                 X (Twitter) のDMでもご連絡いただけます
               </p>
               <Button variant="outline" className="w-full" asChild>
-                <a href={twitterDMUrl} target="_blank" rel="noopener noreferrer">
+                <a href={twitterDM} target="_blank" rel="noopener noreferrer">
                   Send DM
                 </a>
               </Button>
