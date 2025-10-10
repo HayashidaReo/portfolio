@@ -16,10 +16,12 @@ export const CareerSection: React.FC = () => {
           {careers.map((career, index) => (
             <TimelineItem key={index}>
               <CareerCard
+                id={career.id}
                 company={career.company}
                 period={career.period}
                 description={career.description}
                 techStack={career.techStack}
+                hasDetail={!!career.detailedContentFile}
               />
             </TimelineItem>
           ))}

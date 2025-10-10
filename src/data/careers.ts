@@ -6,8 +6,11 @@ export interface Career {
   id: string;
   company: string;
   period: string;
-  description: string;
+  description: string; // 一覧ページで表示する簡潔な説明
   techStack?: string[];
+  // 詳細ページ専用の項目
+  detailedContentFile?: string; // Markdownファイル名 (例: 'amerci.md')
+  icon?: string; // アイコン画像のパス
 }
 
 export const careers: Career[] = [
@@ -48,15 +51,16 @@ export const careers: Career[] = [
     company: 'Amerci',
     period: '2022年12月 - 現在',
     description:
-      '',
+      '食品・雑貨販売店「Amerci」のExcelとVBAで作成された在庫管理システムを改良。VBAとExcelを用いて、バーコードスキャンによる入出庫管理、在庫レポートの自動生成、発注予測機能などを実装し、手作業によるミスを削減。現在も機能追加や保守を継続中。',
     techStack: ['VBA', 'Excel', 'Python', 'Power Automate', 'PyAutoGUI'],
+    detailedContentFile: 'amerci.md',
   },
   {
     id: 'university',
     company: '神戸大学 工学部 情報知能工学科',
     period: '2023年4月 - 現在',
     description:
-      'コンピュータサイエンスの基礎からWeb開発、データベース、アルゴリズムなどを学習。卒業研究ではWebアプリケーションのパフォーマンス最適化に関する研究を行いました。',
+      'コンピュータサイエンスの基礎から信号解析、シミュレーションやアルゴリズムなどを学習。',
     techStack: ['Python', 'C', 'Java'],
   },
 ];
