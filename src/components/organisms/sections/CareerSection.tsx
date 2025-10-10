@@ -22,6 +22,7 @@ export const CareerSection: React.FC = () => {
                 description={career.description}
                 techStack={career.techStack}
                 hasDetail={!!career.detailedContentFile}
+                featured={career.featured}
               />
             </TimelineItem>
           ))}

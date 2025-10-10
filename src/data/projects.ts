@@ -11,6 +11,7 @@ export interface Project {
   icon?: string; // アイコン画像のパス
   githubUrl?: string; // GitHubリポジトリのURL
   projectUrl?: string; // 公開しているサイトやストアのURL
+  featured?: boolean; // 注目プロジェクトフラグ
   // 詳細ページ専用の項目
   detailedContentFile?: string; // Markdownファイル名 (例: 'portfolio-website.md')
   screenshots?: string[]; // スクリーンショット画像のパスの配列
@@ -78,6 +79,7 @@ export const projects: Project[] = [
     techStack: ['Flutter', 'Dart', 'Firebase', 'Google AdMob', 'in app purchase'],
     projectUrl: 'https://apps.apple.com/jp/app/id6740814731',
     detailedContentFile: 'studynote2.md',
+    featured: true,
   },
   {
     id: 'amerci-official-app',
@@ -88,6 +90,7 @@ export const projects: Project[] = [
     techStack: ['Flutter', 'Dart', 'Firebase', 'VBA'],
     projectUrl: 'https://apps.apple.com/jp/app/id6504146300',
     detailedContentFile: 'amerci-official-app.md',
+    featured: true,
   },
   {
     id: 'flima-manager',

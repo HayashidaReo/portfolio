@@ -23,6 +23,7 @@ export const WorksSection: React.FC = () => {
                 icon={project.icon}
                 githubUrl={project.githubUrl}
                 projectUrl={project.projectUrl}
+                featured={project.featured}
               />
             </TimelineItem>
           ))}

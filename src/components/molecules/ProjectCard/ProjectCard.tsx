@@ -22,6 +22,7 @@ interface ProjectCardProps {
   icon?: string;
   githubUrl?: string;
   projectUrl?: string;
+  featured?: boolean;
   className?: string;
 }
 
@@ -34,16 +35,25 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   icon,
   githubUrl,
   projectUrl,
+  featured,
   className,
 }) => {
   return (
     <Link to={`/works/${id}`} className="block">
       <Card
         className={cn(
-          'w-full hover:shadow-lg transition-all cursor-pointer group',
+          'w-full hover:shadow-lg transition-all cursor-pointer group relative',
           className
         )}
       >
+        {/* Featured Ribbon */}
+        {featured && (
+          <div className="absolute top-0 left-0 z-10 overflow-hidden w-16 h-16">
+            <div className="absolute transform -rotate-45 bg-red-600 text-white text-center font-semibold py-1 left-[-24px] top-[6px] w-[80px] shadow-md text-xs">
+              注目
+            </div>
+          </div>
+        )}
         <CardHeader>
           <div className="flex items-start gap-4">
             {icon && (

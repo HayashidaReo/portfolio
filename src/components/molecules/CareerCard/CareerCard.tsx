@@ -18,6 +18,7 @@ interface CareerCardProps {
   description: string;
   techStack?: string[];
   hasDetail?: boolean;
+  featured?: boolean;
   className?: string;
 }
 
@@ -28,16 +29,25 @@ export const CareerCard: React.FC<CareerCardProps> = ({
   description,
   techStack,
   hasDetail = false,
+  featured,
   className,
 }) => {
   const cardContent = (
     <Card
       className={cn(
-        'w-full',
+        'w-full relative',
         hasDetail && 'hover:shadow-lg transition-all cursor-pointer group',
         className
       )}
     >
+      {/* Featured Ribbon */}
+      {featured && (
+        <div className="absolute top-0 left-0 z-10 overflow-hidden w-16 h-16">
+          <div className="absolute transform -rotate-45 bg-red-600 text-white text-center font-semibold py-1 left-[-24px] top-[6px] w-[80px] shadow-md text-xs">
+            注目
+          </div>
+        </div>
+      )}
       <CardHeader>
         <CardTitle>{company}</CardTitle>
         <CardDescription>{period}</CardDescription>

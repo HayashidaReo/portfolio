@@ -8,6 +8,7 @@ export interface Career {
   period: string;
   description: string; // 一覧ページで表示する簡潔な説明
   techStack?: string[];
+  featured?: boolean; // 注目経歴フラグ
   // 詳細ページ専用の項目
   detailedContentFile?: string; // Markdownファイル名 (例: 'amerci.md')
   icon?: string; // アイコン画像のパス
@@ -37,6 +38,7 @@ export const careers: Career[] = [
     description:
       '',
     techStack: ['Flutter', 'Dart', 'GitHub', 'Slack', 'Firebase', 'Supabase', 'Figma', 'Cursor', 'Claude Code'],
+    featured: true,
   },
   {
     id: 'nagase',
@@ -54,6 +56,7 @@ export const careers: Career[] = [
       '食品・雑貨販売店「Amerci」のExcelとVBAで作成された在庫管理システムを改良。VBAとExcelを用いて、バーコードスキャンによる入出庫管理、在庫レポートの自動生成、発注予測機能などを実装し、手作業によるミスを削減。現在も機能追加や保守を継続中。',
     techStack: ['VBA', 'Excel', 'Python', 'Power Automate', 'PyAutoGUI'],
     detailedContentFile: 'amerci.md',
+    featured: true,
   },
   {
     id: 'university',
