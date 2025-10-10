@@ -7,11 +7,11 @@ import {
   Card,
   CardContent,
 } from '@/components/atoms/Card';
-import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { Avatar } from '@/components/atoms/Avatar';
 import { TechStackList } from '@/components/molecules/TechStackList';
-import { ArrowLeft, Github, ExternalLink, Calendar } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Calendar } from 'lucide-react';
+import { TechIcon } from '@/components/atoms/TechIcon';
 
 export const ProjectDetailPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -81,7 +81,7 @@ export const ProjectDetailPage: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Github className="h-4 w-4" />
+                  <TechIcon techName="GitHub" size="sm" showLabel={false} />
                 </a>
               </Button>
             )}
@@ -143,7 +143,7 @@ export const ProjectDetailPage: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <Github className="h-4 w-4" />
+                        <TechIcon techName="GitHub" size="sm" showLabel={false} />
                         View on GitHub
                       </a>
                     </Button>

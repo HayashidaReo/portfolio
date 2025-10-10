@@ -10,7 +10,8 @@ import {
 import { Avatar } from '@/components/atoms/Avatar';
 import { TechStackList } from '@/components/molecules/TechStackList';
 import { cn } from '@/lib/utils';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
+import { TechIcon } from '@/components/atoms/TechIcon';
 
 interface ProjectCardProps {
   id: string;
@@ -19,6 +20,8 @@ interface ProjectCardProps {
   description: string;
   techStack: string[];
   icon?: string;
+  githubUrl?: string;
+  projectUrl?: string;
   className?: string;
 }
 
@@ -29,6 +32,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
   techStack,
   icon,
+  githubUrl,
+  projectUrl,
   className,
 }) => {
   return (
@@ -51,7 +56,36 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               />
             )}
             <div className="flex-1">
-              <CardTitle>{title}</CardTitle>
+              <div className="flex items-center gap-2">
+                <CardTitle className="flex-1">{title}</CardTitle>
+                {/* GitHub と Project リンクアイコン */}
+                <div className="flex gap-1">
+                  {githubUrl && (
+                    <a
+                      href={githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="p-1.5 rounded-md hover:bg-muted transition-colors"
+                      aria-label="View on GitHub"
+                    >
+                      <TechIcon techName="GitHub" size="sm" showLabel={false} />
+                    </a>
+                  )}
+                  {projectUrl && (
+                    <a
+                      href={projectUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="p-1.5 rounded-md hover:bg-muted transition-colors"
+                      aria-label="View project"
+                    >
+                      <ExternalLink className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                    </a>
+                  )}
+                </div>
+              </div>
               <CardDescription>{period}</CardDescription>
             </div>
           </div>
