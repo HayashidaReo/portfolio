@@ -18,7 +18,7 @@ export const WorksSection: React.FC = () => {
                 id={project.id}
                 title={project.title}
                 period={project.period}
-                description={project.description}
+                description={project.summary}
                 techStack={project.techStack}
                 icon={project.icon}
                 githubUrl={project.githubUrl}

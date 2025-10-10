@@ -12,9 +12,7 @@ export interface Project {
   githubUrl?: string; // GitHubリポジトリのURL
   projectUrl?: string; // 公開しているサイトやストアのURL
   // 詳細ページ専用の項目
-  description: string; // 詳細ページで表示する詳しい説明
-  features: string[]; // 主な機能リスト
-  challenges: string[]; // 開発での挑戦や課題
+  detailedContentFile?: string; // Markdownファイル名 (例: 'portfolio-website.md')
   screenshots?: string[]; // スクリーンショット画像のパスの配列
 }
 
@@ -28,23 +26,7 @@ export const projects: Project[] = [
     techStack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'shadcn/ui'],
     githubUrl: 'https://github.com/hayashidareo/portfolio',
     projectUrl: 'https://portfolio-example.vercel.app',
-    description: `
-      このポートフォリオサイトは、自身の技術力を示すためにモダンなWeb技術を駆使して構築しました。
-      設計思想にはAtomic Designを採用し、コンポーネントの再利用性と保守性を高めています。UIはshadcn/uiをベースに、Tailwind CSSで柔軟なスタイリングを実現しました。
-      また、開発プロセス全体でAIツールを積極的に活用し、仕様策定のドキュメント作成からコード生成、レビューに至るまで、生産性の向上を図っています。
-      `,
-    features: [
-      'Atomic Designに基づいたコンポーネント設計',
-      'shadcn/ui + Tailwind CSSによるUIシステム',
-      'スマートフォンからデスクトップまで対応したレスポンシブデザイン',
-      'タイムライン形式での実績・経歴表示',
-      'AIを活用したドキュメント整備と開発プロセス',
-    ],
-    challenges: [
-      'Atomic Designの原則を実践し、適切な粒度でコンポーネントを分割',
-      'shadcn/uiのテーマカスタマイズと独自コンポーネントの拡張',
-      'Vercelへのデプロイ',
-    ],
+    detailedContentFile: 'portfolio-website.md',
   },
   {
     id: 'warikan-app',
@@ -54,29 +36,7 @@ export const projects: Project[] = [
       'インターンシップのコーディングテストで開発した割り勘アプリ。ユーザーや支出の管理、リアルタイム計算など、Webアプリの基本的な要件をNext.jsで実装。Storybookによるコンポーネント駆動開発やテストの品質向上にも注力しました。',
     techStack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Docker', 'Storybook'],
     githubUrl: 'https://github.com/HayashidaReo/star_up_test',
-    description: `
-      株式会社STARUPのインターンシップ選考課題として作成したWebアプリケーションです。
-      Next.jsを用いて、ユーザー管理、支出管理、リアルタイムでの割り勘計算といったコア機能を実装しました。
-      開発においては、Storybookを用いたコンポーネントの可視化とドキュメント化を徹底し、コンポーネント駆動開発を実践。また、ユニットテストと結合テストを整備し、アプリケーションの品質担保に努めました。Copilotを活用したレビュー体制の構築など、チーム開発を意識した取り組みも行っています。
-      `,
-    features: [
-      'ユーザーの追加・編集・削除',
-      '支出の追加・編集・削除',
-      '通貨変換機能',
-      'リアルタイムでの割り勘計算',
-      'レスポンシブデザイン',
-      'Storybookによるコンポーネントのドキュメント化',
-      'ユニットテストと統合テスト',
-    ],
-    challenges: [
-      'Git-flowに基づいたブランチ戦略の策定と運用',
-      'Storybookを用いたコンポーネント駆動開発の実践',
-      'テストカバレッジの向上と品質保証への取り組み',
-      'Copilotを活用した効率的なコードレビュー体制の構築',
-      '開発環境と本番環境の分離',
-      'APIモックの導入による、フロントエンドの独立したテスト環境整備',
-      '誰が見てもわかるようなドキュメントの整備',
-    ],
+    detailedContentFile: 'warikan-app.md',
   },
   {
     id: 'link-app',
@@ -87,26 +47,7 @@ export const projects: Project[] = [
     techStack: ['Flutter', 'Dart', 'Firebase'],
     githubUrl: 'https://github.com/hayashidareo/link-app',
     projectUrl: 'https://link-map-web.web.app/',
-    description: `
-      このアプリは、子供たちの友人関係やグループ活動をインタラクティブなネットワークグラフで可視化することを目的としています。
-      フロントエンドにはFlutter Webを採用し、Webアプリケーションとしての提供を実現。バックエンドにはFirebase (Firestore) を使用し、リアルタイムでのデータ同期を可能にしました。
-      また、組織の管理者がユーザーアカウントの発行や権限設定を行える管理者画面も実装しており、教育現場などでの利用を想定した作りになっています。
-      `,
-    features: [
-      '子供の関係性をネットワークグラフで可視化',
-      '活動・グループの管理機能',
-      '組織ごとのアカウント発行・権限管理',
-      '学年や所属クラスなどのタグ付け機能',
-      'Firebase(Firestore)によるリアルタイムデータ同期',
-      'レスポンシブデザイン',
-      '管理者向けダッシュボード',
-      'アプリ紹介用のランディングページ',
-    ],
-    challenges: [
-      'Firebase Rulesと連携した、組織・個人単位での複雑な権限管理ロジックの実装',
-      '初のFlutter Web開発における、Web特有のUI/UX設計とパフォーマンス最適化',
-      'アプリの価値と機能を的確に伝える、効果的なランディングページの設計',
-    ],
+    detailedContentFile: 'link-app.md',
   },
   {
     id: 'github-app',
@@ -116,25 +57,7 @@ export const projects: Project[] = [
       '株式会社ゆめみのコーディングテスト課題として作成。GitHub REST APIを利用し、リポジトリ検索から詳細閲覧までを行えるFlutterアプリ。Firebase GitHub認証で取得したトークンでAPIレートリミット対策も実装。',
     techStack: ['Flutter', 'Dart', 'Firebase', 'Riverpod', 'GoRouter', 'Freezed', 'GitHub API'],
     githubUrl: 'https://github.com/HayashidaReo/search_repositories',
-    description: `
-      株式会社ゆめみのコーディングテストで開発した、GitHubのパブリックリポジトリを検索・閲覧できるFlutterアプリです。
-      GitHub REST APIをFlutterから利用し、リポジトリ情報の非同期取得、概要の表示といった機能を実装しました。
-      また、APIのレートリミットを回避するため、Firebase Authentication (GitHub 認証) を導入し、取得したアクセストークンを用いてAPIを叩いています。インターンシップで学んだ技術を実践する機会となりました。
-      `,
-    features: [
-      'Firebase Authentication (GitHub 認証)によるアカウント認証',
-      'キーワードによるリポジトリ検索機能',
-      'リポジトリ詳細（スター数、フォーク数、言語など）の表示',
-      '多言語対応（日本語/英語/中国語/韓国語）',
-      'ライトモード / ダークモード切替',
-    ],
-    challenges: [
-      'Riverpodを用いた状態管理とGoRouterによる画面遷移を組み合わせた、堅牢なアプリ設計の実践',
-      'Firebase GitHub認証で取得したトークンを用いた、APIレートリミットを回避するREST API通信の実装',
-      'Freezedを用いた、型安全で効率的なREST API通信の実装',
-      'Material Design 3に準拠した、動的なテーマ（ライト/ダーク）切替と多言語対応の実装',
-      'クリーンで直感的なUI/UXの追求と、モバイルファーストなレイアウト設計',
-    ],
+    detailedContentFile: 'github-app.md',
   },
   {
     id: 'matching-app',
@@ -144,26 +67,7 @@ export const projects: Project[] = [
       '株式会社Gonmuraのインターンシップ最終課題。FlutterとFirebaseを用いて、認証、プロフィール、投稿、マッチング、DMといったコア機能を実装。MVCアーキテクチャやER図に基づく設計など、実践的な開発プロセスを経験しました。',
     techStack: ['Flutter', 'Dart', 'Firebase', 'Riverpod', 'GoRouter', 'Freezed'],
     githubUrl: 'https://github.com/HayashidaReo/training_matting_app',
-    description: `
-      株式会社Gonmuraでの1ヶ月半にわたる研修の最終課題として開発したマッチングアプリです。
-      研修で学んだ各種パッケージ（Riverpod, GoRouter, Freezedなど）を活用し、マッチングアプリに求められる基本的な機能を一通り実装しました。
-      また、ER図の作成からMVCモデルに基づいたアーキテクチャ設計、UIデザインに至るまで、アプリケーション開発の上流から下流までを一貫して担当しました。
-      `,
-    features: [
-      'Firebase Authenticationによるアカウント認証',
-      'プロフィールの作成・編集機能',
-      '画像付きの投稿（ポスト）機能',
-      'いいね・ブックマーク機能',
-      '双方向フォローによるマッチング機能',
-      'リアルタイムDM機能',
-    ],
-    challenges: [
-      '保守性と拡張性を考慮したMVCアーキテクチャの導入と、責務分離に基づいたレイヤー設計',
-      'FirestoreのStreamを利用した、リアルタイムチャット（DM）機能の実装',
-      'Riverpodを用いた、宣言的でパフォーマンスを意識した状態管理',
-      'FreezedとJsonSerializableを用いた、Firestoreとの間で型安全なデータモデルの構築',
-      'GoRouterによる、宣言的でネストされたルーティングと画面遷移管理',
-    ],
+    detailedContentFile: 'matching-app.md',
   },
   {
     id: 'studynote2',
@@ -173,26 +77,7 @@ export const projects: Project[] = [
       '自作アプリ「StudyNote」の機能とUI/UXを全面的に刷新した後継アプリ。Flutterを用いてクロスプラットフォーム対応を実現し、より直感的で使いやすい成績管理体験を目指しました。広告やアプリ内課金といった収益化機能も導入。',
     techStack: ['Flutter', 'Dart', 'Firebase', 'Google AdMob', 'in app purchase'],
     projectUrl: 'https://apps.apple.com/jp/app/id6740814731',
-    description: `
-「StudyNote2」は、個人開発した初のアプリ「StudyNote」の反省点を活かし、UI/UXを全面的に見直して開発した後継アプリです。
-Flutterを採用することでiOS/Android両対応を実現。複雑な傾斜配点（圧縮配点）の自動計算や、成績推移のグラフ可視化など、学習管理を強力にサポートする機能を搭載しています。
-また、Google AdMobによる広告表示やアプリ内課金といった、アプリの収益化にも挑戦しました。
-`,
-    features: [
-      'テスト成績の登録・管理',
-      '傾斜配点（圧縮配点）への自動変換機能',
-      '成績推移のグラフ可視化',
-      '目標点との比較表示',
-      '試験日までのカウントダウン機能',
-      'Firestoreによる複数端末でのデータ同期',
-    ],
-    challenges: [
-      'in_app_purchaseパッケージを利用した、iOS/Android両対応のアプリ内課金・収益化モデルの構築',
-      '前作のユーザーフィードバックを基にした、直感的なUI/UXへの全面的な再設計',
-      'Firebase Analyticsを用いたユーザー行動分析と、データに基づいた改善サイクルの導入',
-      'ユーザー体験を損なわないレビュー促進機能の実装',
-      '新規ユーザー向けのインタラクティブなオンボーディング体験の設計と実装',
-    ],
+    detailedContentFile: 'studynote2.md',
   },
   {
     id: 'amerci-official-app',
@@ -202,26 +87,7 @@ Flutterを採用することでiOS/Android両対応を実現。複雑な傾斜�
       '食品・雑貨販売店「Amerci」の公式アプリ。店舗と共同で企画・開発し、お知らせ配信やポイント機能などをFlutterで実装しました。初のクライアントワークとして、要件定義からリリースまで一貫して担当したプロジェクトです。',
     techStack: ['Flutter', 'Dart', 'Firebase', 'VBA'],
     projectUrl: 'https://apps.apple.com/jp/app/id6504146300',
-    description: `
-食品・雑貨販売店「Amerci」の顧客向け公式アプリを開発しました。店舗オーナーとの打ち合わせを通じて要件を固め、Flutterを用いてiOS/Androidアプリを構築しました。
-Firebase Cloud Messagingを利用したお知らせのプッシュ通知や、会員限定商品の情報掲載、ポイント機能などを実装。また、店舗の既存レジシステム（VBA）との連携も行いました。
-クライアントの課題解決に直接貢献できた、初のBtoCアプリ開発経験です。
-`,
-    features: [
-      'Firebase認証による会員機能',
-      'プッシュ通知によるお知らせ配信',
-      '会員限定商品の情報掲載',
-      'オリジナルレシピの配信',
-      '購入ポイント機能',
-      'ECサイト(BASE)への導線設置',
-    ],
-    challenges: [
-      'クライアントとの要件定義からリリースまで、開発の全工程を一人で担当',
-      'QRコードスキャンによる、店舗レジシステム（VBA）とのデータ連携機能の実装',
-      'Firebase Cloud Messaging(FCM)を用いたプッシュ通知機能の初実装',
-      'モバイル通信量を考慮した、画像の圧縮とキャッシュ戦略によるパフォーマンス最適化',
-      'リリース後のユーザーフィードバックに基づいた、継続的な機能改善サイクルの運用',
-    ],
+    detailedContentFile: 'amerci-official-app.md',
   },
   {
     id: 'flima-manager',
@@ -231,25 +97,7 @@ Firebase Cloud Messagingを利用したお知らせのプッシュ通知や、�
       'フリマアプリの出品・在庫管理を効率化するiOSアプリ。複数アカウントの一括管理や売上分析機能を搭載。UI/UXデザインに注力し、iPadとiPhoneの両デバイスでの使いやすさを追求しました。',
     techStack: ['Swift', 'UIKit', 'Firebase', 'StoreKit'],
     projectUrl: 'https://apps.apple.com/jp/app/id6478158839',
-    description: `
-フリマアプリの運営を効率化するための管理ツールとして開発。商品の仕入れから在庫管理、販売記録、売上分析までを一元管理できます。
-特にUI/UXにこだわり、iPadとiPhoneの両方で快適に操作できるよう設計しました。
-このプロジェクトを通じて、データベースのパフォーマンスやアプリ内の動線設計の重要性を学びました。StoreKitを用いたアプリ内課金の実装にも初めて挑戦したアプリです。
-`,
-    features: [
-      '取り扱い商品情報の管理',
-      '発注・仕入れ情報の管理',
-      '在庫数の管理',
-      '販売記録の管理',
-      '売上データのグラフ可視化',
-      'CSVインポート・エクスポート機能',
-    ],
-    challenges: [
-      'StoreKitを用いた、iOS対応のアプリ内課金機能の初実装',
-      '「発注中」「在庫」「販売済」といった商品ステータスを管理する、効率的なUIフローの設計',
-      'CSVデータのインポート・エクスポート機能による、効率的なデータ管理の実装',
-      '大量の商品データの中から目的の情報を高速に検索するための、効率的な検索ロジックの実装',
-    ],
+    detailedContentFile: 'flima-manager.md',
   },
   {
     id: 'country-quiz',
@@ -259,23 +107,7 @@ Firebase Cloud Messagingを利用したお知らせのプッシュ通知や、�
       '国旗から国名を当てるクイズアプリ。クイズを楽しみながら、各国の位置や首都などの情報も学べる教育的な側面も持たせています。初めてFirebaseを導入し、ユーザー投稿型のクイズ機能を実現しました。',
     techStack: ['Swift', 'UIKit', 'Firebase', 'Google Maps API', 'Google AdMob'],
     projectUrl: 'https://apps.apple.com/jp/app/id6476065723',
-    description: `
-      クイズ形式で世界の国々について学べるアプリです。単に国名を当てるだけでなく、Google Maps APIと連携し、地図上で国の位置を確認できる機能を実装しました。
-      このプロジェクトで初めてFirebase (Firestore) を導入し、世界中のユーザーが作成したクイズを投稿・共有できる仕組みを実現。バックエンド技術に触れる大きなきっかけとなりました。
-      各国の面積や人口などのデータを収集・整形する作業にも力を入れました。
-      `,
-    features: [
-      '世界中のユーザーによるクイズ投稿機能',
-      '投稿されたクイズで遊ぶ機能',
-      '国別の基本情報（首都、人口など）の学習機能',
-      'Google Maps APIによる地図表示',
-    ],
-    challenges: [
-      'バックエンド基盤としてFirebaseを初導入し、データ設計から実装までを担当',
-      'ユーザー投稿コンテンツの健全性を維持するための、不適切投稿の通報・管理機能の実装',
-      '各国の面積データに基づき、Google Maps APIでの最適な表示倍率を動的に計算するロジック',
-      'ユーザーエンゲージメント向上のための「いいね」機能と、お気に入りクイズの保存・閲覧機能',
-    ],
+    detailedContentFile: 'country-quiz.md',
   },
   {
     id: 'number-guessing-game',
@@ -285,19 +117,7 @@ Firebase Cloud Messagingを利用したお知らせのプッシュ通知や、�
       '出題された数字を質問を繰り返すことで当てるロジックゲーム。この開発経験を通じて、面白いゲーム性には綿密な企画・設計が不可欠であると学びました。Game Centerを導入し、ランキング機能も実装しています。',
     techStack: ['Swift', 'UIKit', 'Google AdMob', 'Game Center'],
     projectUrl: 'https://apps.apple.com/jp/app/id6474898346',
-    description: `
-「アキネーター」のような質問形式のゲームを目指して開発した数字当てゲームです。
-開発を進める中で、質問のバリエーションが乏しくゲーム性が単調になってしまうという課題に直面し、企画段階での深い考察の重要性を痛感しました。
-技術面では、Game Center Kitを導入し、世界中のプレイヤーとスコアを競うランキング機能を初めて実装しました。
-`,
-    features: [
-      '1桁・2桁・3桁の3つの難易度モード',
-      'Game Center連携による世界ランキング機能',
-    ],
-    challenges: [
-      'ゲームの企画・ロジック設計の難しさを実感し、設計の甘さを痛感',
-      'Game Center Kitの導入とリーダーボードの実装',
-    ],
+    detailedContentFile: 'number-guessing-game.md',
   },
   {
     id: 'ikasu-memo',
@@ -307,20 +127,7 @@ Firebase Cloud Messagingを利用したお知らせのプッシュ通知や、�
       '人気ゲーム「スプラトゥーン」のギア構成を記録・管理するための特化型メモアプリ。自身の課題解決から生まれたアプリで、結果的に個人開発アプリの中で最も多く利用されています。',
     techStack: ['Swift', 'UIKit', 'Google AdMob'],
     projectUrl: 'https://apps.apple.com/jp/app/id6446800035',
-    description: `
-      人気ゲーム「スプラトゥーン」の「ギア」と呼ばれる装備の組み合わせを、ステージやルールごとに記録するためのメモアプリです。
-      自分自身が感じていた「このステージのこのルールでは、どの装備が良かったか」を記録したい、という課題を解決するために開発しました。
-      ニッチな需要を的確に捉えた結果、自身のアプリの中で最も多くの方にダウンロード・利用していただく経験ができました。
-      `,
-    features: [
-      'ステージ・ルールごとの武器とギアの登録機能',
-      'よく使うセットを保存できるテンプレート機能',
-      '各セットへのメモコメント機能',
-    ],
-    challenges: [
-      'ゲームの定期アップデートに追従するため、拡張性を考慮したデータ構造への大規模リファクタリング',
-      'ユーザーフィードバックを反映し、ユーザー体験を損なわない広告表示ロジックへの改善',
-    ],
+    detailedContentFile: 'ikasu-memo.md',
   },
   {
     id: 'just-stop',
@@ -330,13 +137,7 @@ Firebase Cloud Messagingを利用したお知らせのプッシュ通知や、�
       'ストップウォッチを5秒ピッタリで止めることを目指すシンプルなゲーム。短期間で企画からリリースまで行い、アプリ開発のサイクルを体験しました。',
     techStack: ['Swift', 'UIKit'],
     projectUrl: 'https://apps.apple.com/jp/app/id6446065460',
-    description: `
-      「5.00秒」を目指してストップウォッチを止める、という単純明快なルールのミニゲームです。
-      小数第四位までの一致を目指す高難易度モードも用意しています。
-      ごくシンプルな機能のアプリを短期間で開発・リリースすることで、アプリ公開までの一連の流れを掴むことを目的としました。
-      `,
-    features: ['シンプルなゲーム性', '複数の難易度モード'],
-    challenges: ['幅広いデバイスでの動作を保証するため、タイマーの精度問題に対し乱数を用いた代替ロジックを考案・実装'],
+    detailedContentFile: 'just-stop.md',
   },
   {
     id: 'studynote',
@@ -346,23 +147,6 @@ Firebase Cloud Messagingを利用したお知らせのプッシュ通知や、�
       '大学受験の過去問や模試の成績を一元管理し、複雑な傾斜配点に自動変換するアプリ。自身が初めてApp Storeにリリースした記念すべきスマートフォンアプリです。',
     techStack: ['Swift', 'UIKit', 'Google AdMob'],
     projectUrl: 'https://apps.apple.com/jp/app/id1670991873',
-    description: `
-このアプリは、私が初めてSwiftとXcodeを学びながら開発し、App Storeにリリースした最初のスマートフォンアプリです。
-大学受験の際に、模試や過去問の成績を管理し、志望校ごとの傾斜配点（圧縮配点）に変換する作業が煩雑だった原体験から着想を得ました。
-この開発を通じて、アプリの企画から実装、リリースまでの一連のプロセスを学びました。
-`,
-    features: [
-      'テスト成績の管理機能',
-      '傾斜配点（圧縮配点）への自動変換機能',
-      '合格最低点などとの比較機能',
-      '試験日までのカウントダウン機能',
-      'テストごとのコメント機能',
-    ],
-    challenges: [
-      'SwiftとXcodeをゼロから学びながら進めた、初めてのネイティブアプリ開発',
-      'App Storeへの初回リリースと審査プロセスの経験',
-      '[反省点]UserDefaultsによるデータ永続化と、拡張性に乏しいKey-Value設計からの学び',
-      '[反省点]動的なリスト表示ではなく静的なUI配置を行ったことによる、保守性の課題とコンポーネント思考の重要性の認識',
-    ],
+    detailedContentFile: 'studynote.md',
   },
 ];

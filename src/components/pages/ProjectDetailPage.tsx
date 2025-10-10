@@ -1,23 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { projects } from '@/data/projects';
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardContent,
 } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { Avatar } from '@/components/atoms/Avatar';
 import { TechStackList } from '@/components/molecules/TechStackList';
-import { ArrowLeft, Github, ExternalLink, CheckCircle2, Lightbulb, Calendar } from 'lucide-react';
+import { ArrowLeft, Github, ExternalLink, Calendar } from 'lucide-react';
 
 export const ProjectDetailPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
+  const [markdownContent, setMarkdownContent] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const project = projects.find((p) => p.id === projectId);
+
+  useEffect(() => {
+    const loadMarkdown = async () => {
+      if (!project?.detailedContentFile) {
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(`/src/data/projects/${project.detailedContentFile}`);
+        const text = await response.text();
+        setMarkdownContent(text);
+      } catch (error) {
+        console.error('Failed to load markdown:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadMarkdown();
+  }, [project]);
 
   if (!project) {
     return (
@@ -139,105 +162,75 @@ export const ProjectDetailPage: React.FC = () => {
                   )}
                 </div>
               )}
+
+              {/* Summary */}
+              <p className="text-muted-foreground leading-relaxed text-base">
+                {project.summary}
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <main className="container mx-auto max-w-4xl px-4 py-8 md:py-12">{/* Remaining content stays the same */}
-
-        {/* Overview */}
-        <Card className="mb-6 border-l-4 border-l-primary shadow-md hover:shadow-lg transition-shadow">
-          <CardHeader>
-            <CardTitle className="text-2xl">概要</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground leading-relaxed whitespace-pre-line text-base">
-              {project.description}
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* Detailed Description */}
-        {project.detailedDescription && (
-          <Card className="mb-6 shadow-md hover:shadow-lg transition-shadow">
-            <CardHeader className="bg-muted/30">
-              <CardTitle className="text-2xl">詳細説明</CardTitle>
-            </CardHeader>
-            <CardContent className="pt-6">
-              <p className="text-muted-foreground leading-relaxed whitespace-pre-line text-base">
-                {project.detailedDescription}
-              </p>
-            </CardContent>
-          </Card>
-        )}
-
-        <div className="grid gap-6 md:grid-cols-2 mb-6">
-          {/* Features */}
-          {project.features && project.features.length > 0 && (
-            <Card className="shadow-md hover:shadow-lg transition-shadow">
-              <CardHeader className="bg-primary/5">
-                <CardTitle className="flex items-center gap-2 text-xl">
-                  <div className="p-2 rounded-lg bg-primary/10">
-                    <CheckCircle2 className="h-5 w-5 text-primary" />
-                  </div>
-                  主な機能
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <ul className="space-y-4">
-                  {project.features.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-3 group">
-                      <div className="mt-0.5 p-1 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                        <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
-                      </div>
-                      <span className="text-muted-foreground text-sm leading-relaxed">
-                        {feature}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+      {/* Main Content - Markdown without Card */}
+      {project.detailedContentFile && (
+        <main className="container mx-auto max-w-4xl px-4 py-8 md:py-12">
+          {isLoading ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">読み込み中...</p>
+            </div>
+          ) : (
+            <div className="prose prose-slate dark:prose-invert max-w-none">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  h1: ({ ...props }) => (
+                    <h1 className="text-3xl font-bold mt-8 mb-4 text-foreground" {...props} />
+                  ),
+                  h2: ({ ...props }) => (
+                    <h2 className="text-2xl font-bold mt-6 mb-3 text-foreground" {...props} />
+                  ),
+                  h3: ({ ...props }) => (
+                    <h3 className="text-xl font-bold mt-4 mb-2 text-foreground" {...props} />
+                  ),
+                  h4: ({ ...props }) => (
+                    <h4 className="text-lg font-bold mt-3 mb-2 text-foreground" {...props} />
+                  ),
+                  p: ({ ...props }) => (
+                    <p className="text-muted-foreground leading-relaxed mb-4" {...props} />
+                  ),
+                  ul: ({ ...props }) => (
+                    <ul className="list-disc list-inside space-y-2 mb-4 text-muted-foreground" {...props} />
+                  ),
+                  ol: ({ ...props }) => (
+                    <ol className="list-decimal list-inside space-y-2 mb-4 text-muted-foreground" {...props} />
+                  ),
+                  li: ({ ...props }) => (
+                    <li className="text-muted-foreground" {...props} />
+                  ),
+                  hr: ({ ...props }) => (
+                    <hr className="my-8 border-border" {...props} />
+                  ),
+                  blockquote: ({ ...props }) => (
+                    <blockquote className="border-l-4 border-primary pl-4 italic my-4 text-muted-foreground" {...props} />
+                  ),
+                  code: ({ ...props }) => (
+                    <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono" {...props} />
+                  ),
+                  pre: ({ ...props }) => (
+                    <pre className="bg-muted p-4 rounded-lg overflow-x-auto my-4" {...props} />
+                  ),
+                }}
+              >
+                {markdownContent}
+              </ReactMarkdown>
+            </div>
           )}
 
-          {/* Challenges */}
-          {project.challenges && project.challenges.length > 0 && (
-            <Card className="shadow-md hover:shadow-lg transition-shadow">
-              <CardHeader className="bg-amber-500/5">
-                <CardTitle className="flex items-center gap-2 text-xl">
-                  <div className="p-2 rounded-lg bg-amber-500/10">
-                    <Lightbulb className="h-5 w-5 text-amber-600 dark:text-amber-500" />
-                  </div>
-                  技術的な挑戦
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <ul className="space-y-4">
-                  {project.challenges.map((challenge, index) => (
-                    <li key={index} className="flex items-start gap-3 group">
-                      <div className="mt-0.5 p-1 rounded-full bg-amber-500/10 group-hover:bg-amber-500/20 transition-colors">
-                        <Lightbulb className="h-4 w-4 text-amber-600 dark:text-amber-500 flex-shrink-0" />
-                      </div>
-                      <span className="text-muted-foreground text-sm leading-relaxed">
-                        {challenge}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          )}
-        </div>
-
-        {/* Screenshots */}
-        {project.screenshots && project.screenshots.length > 0 && (
-          <Card className="mb-6 shadow-md hover:shadow-lg transition-shadow">
-            <CardHeader className="bg-muted/30">
-              <CardTitle className="text-2xl">スクリーンショット</CardTitle>
-            </CardHeader>
-            <CardContent className="pt-6">
+          {/* Screenshots */}
+          {project.screenshots && project.screenshots.length > 0 && (
+            <div className="mt-12">
+              <h2 className="text-2xl font-bold mb-6 text-foreground">スクリーンショット</h2>
               <div className="grid gap-6 md:grid-cols-2">
                 {project.screenshots.map((screenshot, index) => (
                   <div
@@ -252,23 +245,23 @@ export const ProjectDetailPage: React.FC = () => {
                   </div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
-        )}
+            </div>
+          )}
 
-        {/* Back Button */}
-        <div className="mt-16 flex justify-center">
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={() => navigate('/')}
-            className="shadow-md hover:shadow-lg transition-all"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            一覧に戻る
-          </Button>
-        </div>
-      </main>
+          {/* Back Button */}
+          <div className="mt-16 flex justify-center">
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => navigate('/')}
+              className="shadow-md hover:shadow-lg transition-all"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              一覧に戻る
+            </Button>
+          </div>
+        </main>
+      )}
 
       {/* Footer Spacer */}
       <div className="h-16"></div>
