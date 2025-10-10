@@ -29,10 +29,10 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/hayashidareo/portfolio',
     projectUrl: 'https://portfolio-example.vercel.app',
     description: `
-このポートフォリオサイトは、自身の技術力を示すためにモダンなWeb技術を駆使して構築しました。
-設計思想にはAtomic Designを採用し、コンポーネントの再利用性と保守性を高めています。UIはshadcn/uiをベースに、Tailwind CSSで柔軟なスタイリングを実現しました。
-また、開発プロセス全体でAIツールを積極的に活用し、仕様策定のドキュメント作成からコード生成、レビューに至るまで、生産性の向上を図っています。
-`,
+      このポートフォリオサイトは、自身の技術力を示すためにモダンなWeb技術を駆使して構築しました。
+      設計思想にはAtomic Designを採用し、コンポーネントの再利用性と保守性を高めています。UIはshadcn/uiをベースに、Tailwind CSSで柔軟なスタイリングを実現しました。
+      また、開発プロセス全体でAIツールを積極的に活用し、仕様策定のドキュメント作成からコード生成、レビューに至るまで、生産性の向上を図っています。
+      `,
     features: [
       'Atomic Designに基づいたコンポーネント設計',
       'shadcn/ui + Tailwind CSSによるUIシステム',
@@ -55,10 +55,10 @@ export const projects: Project[] = [
     techStack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Docker', 'Storybook'],
     githubUrl: 'https://github.com/HayashidaReo/star_up_test',
     description: `
-株式会社STARUPのインターンシップ選考課題として作成したWebアプリケーションです。
-Next.jsを用いて、ユーザー管理、支出管理、リアルタイムでの割り勘計算といったコア機能を実装しました。
-開発においては、Storybookを用いたコンポーネントの可視化とドキュメント化を徹底し、コンポーネント駆動開発を実践。また、ユニットテストと結合テストを整備し、アプリケーションの品質担保に努めました。Copilotを活用したレビュー体制の構築など、チーム開発を意識した取り組みも行っています。
-`,
+      株式会社STARUPのインターンシップ選考課題として作成したWebアプリケーションです。
+      Next.jsを用いて、ユーザー管理、支出管理、リアルタイムでの割り勘計算といったコア機能を実装しました。
+      開発においては、Storybookを用いたコンポーネントの可視化とドキュメント化を徹底し、コンポーネント駆動開発を実践。また、ユニットテストと結合テストを整備し、アプリケーションの品質担保に努めました。Copilotを活用したレビュー体制の構築など、チーム開発を意識した取り組みも行っています。
+      `,
     features: [
       'ユーザーの追加・編集・削除',
       '支出の追加・編集・削除',
@@ -88,10 +88,10 @@ Next.jsを用いて、ユーザー管理、支出管理、リアルタイムで�
     githubUrl: 'https://github.com/hayashidareo/link-app',
     projectUrl: 'https://link-map-web.web.app/',
     description: `
-このアプリは、子供たちの友人関係やグループ活動をインタラクティブなネットワークグラフで可視化することを目的としています。
-フロントエンドにはFlutter Webを採用し、Webアプリケーションとしての提供を実現。バックエンドにはFirebase (Firestore) を使用し、リアルタイムでのデータ同期を可能にしました。
-また、組織の管理者がユーザーアカウントの発行や権限設定を行える管理者画面も実装しており、教育現場などでの利用を想定した作りになっています。
-`,
+      このアプリは、子供たちの友人関係やグループ活動をインタラクティブなネットワークグラフで可視化することを目的としています。
+      フロントエンドにはFlutter Webを採用し、Webアプリケーションとしての提供を実現。バックエンドにはFirebase (Firestore) を使用し、リアルタイムでのデータ同期を可能にしました。
+      また、組織の管理者がユーザーアカウントの発行や権限設定を行える管理者画面も実装しており、教育現場などでの利用を想定した作りになっています。
+      `,
     features: [
       '子供の関係性をネットワークグラフで可視化',
       '活動・グループの管理機能',
@@ -106,6 +106,63 @@ Next.jsを用いて、ユーザー管理、支出管理、リアルタイムで�
       'Firebase Rulesと連携した、組織・個人単位での複雑な権限管理ロジックの実装',
       '初のFlutter Web開発における、Web特有のUI/UX設計とパフォーマンス最適化',
       'アプリの価値と機能を的確に伝える、効果的なランディングページの設計',
+    ],
+  },
+  {
+    id: 'github-app',
+    title: 'GitHubレポジトリ検索アプリ',
+    period: '2025年4月',
+    summary:
+      '株式会社ゆめみのコーディングテスト課題として作成。GitHub REST APIを利用し、リポジトリ検索から詳細閲覧までを行えるFlutterアプリ。Firebase GitHub認証で取得したトークンでAPIレートリミット対策も実装。',
+    techStack: ['Flutter', 'Dart', 'Firebase', 'Riverpod', 'GoRouter', 'Freezed', 'GitHub API'],
+    githubUrl: 'https://github.com/HayashidaReo/search_repositories',
+    description: `
+      株式会社ゆめみのコーディングテストで開発した、GitHubのパブリックリポジトリを検索・閲覧できるFlutterアプリです。
+      GitHub REST APIをFlutterから利用し、リポジトリ情報の非同期取得、概要の表示といった機能を実装しました。
+      また、APIのレートリミットを回避するため、Firebase Authentication (GitHub 認証) を導入し、取得したアクセストークンを用いてAPIを叩いています。インターンシップで学んだ技術を実践する機会となりました。
+      `,
+    features: [
+      'Firebase Authentication (GitHub 認証)によるアカウント認証',
+      'キーワードによるリポジトリ検索機能',
+      'リポジトリ詳細（スター数、フォーク数、言語など）の表示',
+      '多言語対応（日本語/英語/中国語/韓国語）',
+      'ライトモード / ダークモード切替',
+    ],
+    challenges: [
+      'Riverpodを用いた状態管理とGoRouterによる画面遷移を組み合わせた、堅牢なアプリ設計の実践',
+      'Firebase GitHub認証で取得したトークンを用いた、APIレートリミットを回避するREST API通信の実装',
+      'Freezedを用いた、型安全で効率的なREST API通信の実装',
+      'Material Design 3に準拠した、動的なテーマ（ライト/ダーク）切替と多言語対応の実装',
+      'クリーンで直感的なUI/UXの追求と、モバイルファーストなレイアウト設計',
+    ],
+  },
+  {
+    id: 'matching-app',
+    title: 'マッチングアプリ',
+    period: '2025年2月 - 2025年3月',
+    summary:
+      '株式会社Gonmuraのインターンシップ最終課題。FlutterとFirebaseを用いて、認証、プロフィール、投稿、マッチング、DMといったコア機能を実装。MVCアーキテクチャやER図に基づく設計など、実践的な開発プロセスを経験しました。',
+    techStack: ['Flutter', 'Dart', 'Firebase', 'Riverpod', 'GoRouter', 'Freezed'],
+    githubUrl: 'https://github.com/HayashidaReo/training_matting_app',
+    description: `
+      株式会社Gonmuraでの1ヶ月半にわたる研修の最終課題として開発したマッチングアプリです。
+      研修で学んだ各種パッケージ（Riverpod, GoRouter, Freezedなど）を活用し、マッチングアプリに求められる基本的な機能を一通り実装しました。
+      また、ER図の作成からMVCモデルに基づいたアーキテクチャ設計、UIデザインに至るまで、アプリケーション開発の上流から下流までを一貫して担当しました。
+      `,
+    features: [
+      'Firebase Authenticationによるアカウント認証',
+      'プロフィールの作成・編集機能',
+      '画像付きの投稿（ポスト）機能',
+      'いいね・ブックマーク機能',
+      '双方向フォローによるマッチング機能',
+      'リアルタイムDM機能',
+    ],
+    challenges: [
+      '保守性と拡張性を考慮したMVCアーキテクチャの導入と、責務分離に基づいたレイヤー設計',
+      'FirestoreのStreamを利用した、リアルタイムチャット（DM）機能の実装',
+      'Riverpodを用いた、宣言的でパフォーマンスを意識した状態管理',
+      'FreezedとJsonSerializableを用いた、Firestoreとの間で型安全なデータモデルの構築',
+      'GoRouterによる、宣言的でネストされたルーティングと画面遷移管理',
     ],
   },
   {
