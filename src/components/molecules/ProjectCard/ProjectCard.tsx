@@ -76,7 +76,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="p-1.5 rounded-md hover:bg-muted transition-colors"
+                      className="p-1.5 rounded-md hover:bg-muted transition-colors  flex items-center justify-center"
                       aria-label="View on GitHub"
                     >
                       <TechIcon techName="GitHub" size="sm" showLabel={false} />
@@ -88,10 +88,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="p-1.5 rounded-md hover:bg-muted transition-colors"
+                      className="p-1.5 rounded-md hover:bg-muted transition-colors flex items-center justify-center"
                       aria-label="View project"
                     >
-                      <ExternalLink className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                      <ExternalLink className="h-6 w-6 text-foreground" />
                     </a>
                   )}
                 </div>

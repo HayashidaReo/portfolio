@@ -80,6 +80,7 @@ export const ProjectDetailPage: React.FC = () => {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="flex items-center justify-center"
                 >
                   <TechIcon techName="GitHub" size="sm" showLabel={false} />
                 </a>
@@ -91,8 +92,9 @@ export const ProjectDetailPage: React.FC = () => {
                   href={project.projectUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="flex items-center justify-center"
                 >
-                  <ExternalLink className="h-4 w-4" />
+                  <ExternalLink className="h-6 w-6 text-foreground" />
                 </a>
               </Button>
             )}
@@ -154,8 +156,9 @@ export const ProjectDetailPage: React.FC = () => {
                         href={project.projectUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2"
                       >
-                        <ExternalLink className="h-4 w-4" />
+                        <ExternalLink className="h-5 w-5" />
                         プロジェクトを見る
                       </a>
                     </Button>
