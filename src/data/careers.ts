@@ -1,6 +1,7 @@
 /**
  * 経歴情報
  */
+import amerciStockManagerImage from '@/assets/career/amerci-stock-manager.jpeg';
 
 export interface Career {
   id: string;
@@ -12,6 +13,7 @@ export interface Career {
   // 詳細ページ専用の項目
   detailedContentFile?: string; // Markdownファイル名 (例: 'amerci.md')
   icon?: string; // アイコン画像のパス
+  images?: { [key: string]: string }; // 詳細ページで使用する画像
 }
 
 export const careers: Career[] = [
@@ -61,6 +63,9 @@ export const careers: Career[] = [
     techStack: ['VBA', 'Excel', 'Python', 'Power Automate', 'PyAutoGUI'],
     detailedContentFile: 'amerci.md',
     featured: true,
+    images: {
+      stockManager: amerciStockManagerImage,
+    },
   },
   {
     id: 'university',

@@ -12,6 +12,38 @@ import { Avatar } from '@/components/atoms/Avatar';
 import { TechStackList } from '@/components/molecules/TechStackList';
 import { ArrowLeft, Calendar, ExternalLink } from 'lucide-react';
 
+/**
+ * CareerDetailPage - 経歴詳細ページコンポーネント
+ * 
+ * 【画像プレースホルダー機能の使用方法】
+ * 
+ * 1. 画像ファイルの配置:
+ *    src/assets/career/ ディレクトリに画像を配置
+ *    例: src/assets/career/amerci-stock-manager.jpeg
+ * 
+ * 2. careers.ts でのimport:
+ *    import imageFile from '@/assets/career/image.jpg';
+ * 
+ * 3. Career オブジェクトに画像を追加:
+ *    {
+ *      id: 'example',
+ *      // ... other properties
+ *      images: {
+ *        stockManager: imageFile,  // キー名は任意
+ *        dashboard: anotherImage   // 複数画像も可能
+ *      }
+ *    }
+ * 
+ * 4. Markdownファイル内でのプレースホルダー使用:
+ *    {{stockManager}}  // 自動で<img>タグに置換される
+ * 
+ * 【メリット】
+ * - assetsディレクトリで画像を一元管理
+ * - Viteによる画像最適化（WebP変換、ハッシュ化等）
+ * - TypeScriptによる型安全性
+ * - ビルド時の不要ファイル検出
+ */
+
 export const CareerDetailPage: React.FC = () => {
   const { careerId } = useParams<{ careerId: string }>();
   const navigate = useNavigate();
@@ -29,7 +61,22 @@ export const CareerDetailPage: React.FC = () => {
 
       try {
         const response = await fetch(`/src/data/careers/${career.detailedContentFile}`);
-        const text = await response.text();
+        let text = await response.text();
+        
+        // プレースホルダーを画像URLに置換
+        // 使用方法:
+        // 1. careers.tsでimport: import imageFile from '@/assets/career/image.jpg';
+        // 2. careerオブジェクトのimagesに追加: images: { myImage: imageFile }
+        // 3. Markdownファイル内でプレースホルダー使用: {{myImage}}
+        // 4. 自動で![myImage](optimized-image-url)に置換される
+        if (career.images) {
+          Object.entries(career.images).forEach(([key, imageUrl]) => {
+            const placeholder = `{{${key}}}`;
+            const imageMarkdown = `![${key}](${imageUrl})`;
+            text = text.replace(new RegExp(placeholder, 'g'), imageMarkdown);
+          });
+        }
+        
         setMarkdownContent(text);
       } catch (error) {
         console.error('Failed to load markdown:', error);
