@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import { projects } from '@/data/projects';
 import {
   Card,
@@ -10,104 +8,24 @@ import {
 import { Button } from '@/components/atoms/Button';
 import { Avatar } from '@/components/atoms/Avatar';
 import { TechStackList } from '@/components/molecules/TechStackList';
+import { MarkdownRenderer } from '@/components/molecules/MarkdownRenderer';
+import { useMarkdownLoader } from '@/hooks/useMarkdownLoader';
 import { ArrowLeft, ExternalLink, Calendar } from 'lucide-react';
 import { TechIcon } from '@/components/atoms/TechIcon';
 
-/**
- * ProjectDetailPage - プロジェクト詳細ページコンポーネント
- * 
- * 【画像プレースホルダー機能の使用方法】
- * CareerDetailPageと同様の機能をサポートしています。
- * 
- * 1. 画像ファイルの配置:
- *    src/assets/project/ ディレクトリに画像を配置
- *    例: src/assets/project/studyNote2_graph.jpg
- * 
- * 2. projects.ts でのimport:
- *    import imageFile from '@/assets/project/image.jpg';
- * 
- * 3. Project オブジェクトに画像を追加:
- *    {
- *      id: 'example',
- *      // ... other properties
- *      images: {
- *        studyNote2Graph: imageFile,  // キー名は任意
- *        screenshot: anotherImage     // 複数画像も可能
- *      }
- *    }
- * 
- * 4. Markdownファイル内でのプレースホルダー使用:
- *    {{studyNote2Graph}}  // 自動で<img>タグに置換される
- */
 
 export const ProjectDetailPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
-  const [markdownContent, setMarkdownContent] = useState<string>('');
-  const [isLoading, setIsLoading] = useState(true);
-
   const project = projects.find((p) => p.id === projectId);
+  
+  // Markdownファイルの読み込み
+  const { content: markdownContent, isLoading } = useMarkdownLoader({
+    filePath: project?.detailedContentFile,
+    basePath: 'projects'
+  });
 
-  useEffect(() => {
-    const loadMarkdown = async () => {
-      if (!project?.detailedContentFile) {
-        setIsLoading(false);
-        return;
-      }
 
-      try {
-        const response = await fetch(`/src/data/projects/${project.detailedContentFile}`);
-        let text = await response.text();
-        
-        // プレースホルダーを画像URLに置換
-        // 使用方法:
-        // 1. projects.tsでimport: import imageFile from '@/assets/project/image.jpg';
-        // 2. projectオブジェクトのimagesに追加: images: { myImage: imageFile }
-        // 3. Markdownファイル内でプレースホルダー使用: 
-        //    {{myImage}} または {{myImage|サイズ指定|キャプション}}
-        //    例: {{myImage|medium|志望校別得点率の比較画面}}
-        // 4. 自動で![キャプション](optimized-image-url)に置換される
-        if (project.images) {
-          Object.entries(project.images).forEach(([key, imageUrl]) => {
-            // サイズ指定 + キャプション付きプレースホルダーの処理
-            const placeholderWithSizeAndCaption = new RegExp(`{{${key}\\|(small|medium|large)\\|([^}]+)}}`, 'g');
-            text = text.replace(placeholderWithSizeAndCaption, (_, size, caption) => {
-              return `![${caption}-${size}](${imageUrl})`;
-            });
-            
-            // キャプション付きプレースホルダーの処理（サイズ指定なし）
-            const placeholderWithCaption = new RegExp(`{{${key}\\|([^}|]+)}}`, 'g');
-            text = text.replace(placeholderWithCaption, (_, caption) => {
-              // サイズ指定がない場合はcaptionのみ
-              if (!['small', 'medium', 'large'].includes(caption)) {
-                return `![${caption}](${imageUrl})`;
-              }
-              return `{{${key}|${caption}}}`; // サイズ指定の場合は元に戻す
-            });
-            
-            // サイズ指定付きプレースホルダーの処理
-            const placeholderWithSize = new RegExp(`{{${key}\\|(small|medium|large)}}`, 'g');
-            text = text.replace(placeholderWithSize, (_, size) => {
-              return `![${key}-${size}](${imageUrl})`;
-            });
-            
-            // 通常のプレースホルダーの処理
-            const placeholder = `{{${key}}}`;
-            const imageMarkdown = `![${key}](${imageUrl})`;
-            text = text.replace(new RegExp(placeholder, 'g'), imageMarkdown);
-          });
-        }
-        
-        setMarkdownContent(text);
-      } catch (error) {
-        console.error('Failed to load markdown:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadMarkdown();
-  }, [project]);
 
   if (!project) {
     return (
@@ -250,83 +168,11 @@ export const ProjectDetailPage: React.FC = () => {
               <p className="text-muted-foreground">読み込み中...</p>
             </div>
           ) : (
-            <div className="prose prose-slate dark:prose-invert max-w-none">
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                components={{
-                  h1: ({ ...props }) => (
-                    <h1 className="text-3xl font-bold mt-8 mb-4 text-foreground" {...props} />
-                  ),
-                  h2: ({ ...props }) => (
-                    <h2 className="text-2xl font-bold mt-6 mb-3 text-foreground" {...props} />
-                  ),
-                  h3: ({ ...props }) => (
-                    <h3 className="text-xl font-bold mt-4 mb-2 text-foreground" {...props} />
-                  ),
-                  h4: ({ ...props }) => (
-                    <h4 className="text-lg font-bold mt-3 mb-2 text-foreground" {...props} />
-                  ),
-                  p: ({ ...props }) => (
-                    <p className="text-muted-foreground leading-relaxed mb-4" {...props} />
-                  ),
-                  ul: ({ ...props }) => (
-                    <ul className="list-disc list-inside space-y-2 mb-4 text-muted-foreground" {...props} />
-                  ),
-                  ol: ({ ...props }) => (
-                    <ol className="list-decimal list-inside space-y-2 mb-4 text-muted-foreground" {...props} />
-                  ),
-                  li: ({ ...props }) => (
-                    <li className="text-muted-foreground" {...props} />
-                  ),
-                  hr: ({ ...props }) => (
-                    <hr className="my-8 border-border" {...props} />
-                  ),
-                  blockquote: ({ ...props }) => (
-                    <blockquote className="border-l-4 border-primary pl-4 italic my-4 text-muted-foreground" {...props} />
-                  ),
-                  code: ({ ...props }) => (
-                    <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono" {...props} />
-                  ),
-                  pre: ({ ...props }) => (
-                    <pre className="bg-muted p-4 rounded-lg overflow-x-auto my-4" {...props} />
-                  ),
-                  img: ({ src, alt, ...props }) => {
-                    // alt属性からサイズ情報を取得
-                    const altText = alt || '';
-                    const isSmall = altText.includes('-small');
-                    const isMedium = altText.includes('-medium');
-                    const isLarge = altText.includes('-large');
-                    
-                    // サイズに応じたクラスを設定
-                    let sizeClass = 'max-w-full md:max-w-2xl lg:max-w-3xl'; // デフォルト
-                    if (isSmall) sizeClass = 'max-w-full md:max-w-md lg:max-w-lg';
-                    else if (isMedium) sizeClass = 'max-w-full md:max-w-xl lg:max-w-2xl';
-                    else if (isLarge) sizeClass = 'max-w-full md:max-w-4xl lg:max-w-5xl';
-                    
-                    // 表示用のalt属性（サイズ情報を除去）
-                    const displayAlt = altText.replace(/-(?:small|medium|large)$/, '');
-                    
-                    return (
-                      <div className="my-6 flex flex-col items-center">
-                        <img 
-                          src={src} 
-                          alt={displayAlt} 
-                          className={`${sizeClass} w-auto h-auto rounded-lg shadow-md border border-border`}
-                          {...props}
-                        />
-                        {displayAlt && (
-                          <p className="text-sm text-muted-foreground mt-2 text-center italic">
-                            {displayAlt}
-                          </p>
-                        )}
-                      </div>
-                    );
-                  },
-                }}
-              >
-                {markdownContent}
-              </ReactMarkdown>
-            </div>
+            <MarkdownRenderer 
+              content={markdownContent} 
+              images={project?.images}
+              isLoading={isLoading}
+            />
           )}
 
           {/* Screenshots */}
