@@ -145,7 +145,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
                 <img 
                   src={src} 
                   alt={displayAlt} 
-                  className={`${sizeClass} w-auto h-auto rounded-lg shadow-md border border-border`}
+                  className={`${sizeClass} w-auto h-auto rounded-lg border`}
                   {...props}
                 />
                 {displayAlt && (
