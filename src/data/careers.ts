@@ -29,9 +29,9 @@ export const careers: Career[] = [
   {
     id: 'teamlab',
     company: '株式会社チームラボ',
-    period: '2025年8月',
+    period: '2025年8月18日 - 2025年8月29日',
     description:
-      '',
+      'Flutterエンジニアとして2週間のインターンシップを経験し、未リリースのSNSアプリ開発に参加。お知らせ表示画面の開発を、データ層・ドメイン層の実装からUI実装まで一貫して担当しました。技術的制約のあるUI実装では、エンジニアリング的な解決策だけでなく、デザイナーと直接対話し仕様を見直すことで、双方にとって最適な解決策を導き出しました。この経験を通じ、Atomic Designやテスト手法など、保守性と品質を重視した開発プロセスの重要性も深く学びました。',
     techStack: ['Flutter', 'Dart', 'GitHub', 'Slack', 'Figma','Swagger'],
     detailedContentFile: 'teamlab.md',
   },
@@ -40,7 +40,7 @@ export const careers: Career[] = [
     company: '株式会社Gonmura',
     period: '2025年2月 - 2025年7月',
     description:
-      '',
+      'Flutter受託開発会社にてインターンシップを経験。1.5ヶ月の研修でRiverpodやMVCなどを学んだ後、実務としてマッチングアプリのWeb管理画面開発に参加。ワイヤーフレーム作成から実装までを一貫して担当し、UI設計やデータモデリングのスキルを深めました。さらに、既存機能の課題を発見し、「よくある質問」機能のFirebaseデータ構造の変更を自ら提案・実装。非効率な更新プロセスを改善し、運用効率とメンテナンス性を大幅に向上させチームに貢献。',
     techStack: ['Flutter', 'Dart', 'GitHub', 'Slack', 'Firebase', 'Supabase', 'Figma', 'Cursor', 'Claude Code'],
     detailedContentFile: 'gonmura.md',
     featured: true,
@@ -50,7 +50,7 @@ export const careers: Career[] = [
     company: '株式会社ナガセ',
     period: '2024年1月 - 2025年2月',
     description:
-      '',
+            '東進などの映像授業を提供する企業の社会人向け部門にて、大学生のみで構成されるシステム開発チームに所属。Django製のデータ登録アプリ開発では、初のWeb開発ながらバックエンド処理を実装し、自走して技術を習得。また、PythonとAWS Lambdaを用いたアンケートレポートのバッチ処理開発では、月次実行のみだった仕様に対し、臨時依頼の多さから任意実行できる機能拡張を自ら提案・実装。さらに操作手順をドキュメント化し、チーム全体の業務効率化に貢献。',
     techStack: ['Python', 'Django', 'AWS', 'Slack', 'Backlog', 'GitHub'],
     detailedContentFile: 'nagase.md',
   },
