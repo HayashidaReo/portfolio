@@ -1,7 +1,7 @@
 /**
  * プロフィール情報
  */
-import userIcon from '@/assets/userIcon.jpg';
+import userIcon from '@/assets/profile/userIcon.jpg';
 
 export const profile = {
   // 基本情報

@@ -3,8 +3,8 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Car
 import { SocialLink } from '@/components/molecules/SocialLink';
 import { GitHubContributions } from '@/components/molecules/GitHubContributions';
 import { profile } from '@/data/profile';
-import xIcon from '@/assets/xIcon.png';
-import qiitaIcon from '@/assets/qiitaIcon.png';
+import xIcon from '@/assets/icon/xIcon.png';
+import qiitaIcon from '@/assets/icon/qiitaIcon.png';
 
 export const SocialSection: React.FC = () => {
   const { github, twitter, qiita } = profile.social;
