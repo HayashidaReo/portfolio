@@ -67,10 +67,35 @@ export const CareerDetailPage: React.FC = () => {
         // 使用方法:
         // 1. careers.tsでimport: import imageFile from '@/assets/career/image.jpg';
         // 2. careerオブジェクトのimagesに追加: images: { myImage: imageFile }
-        // 3. Markdownファイル内でプレースホルダー使用: {{myImage}}
-        // 4. 自動で![myImage](optimized-image-url)に置換される
+        // 3. Markdownファイル内でプレースホルダー使用: 
+        //    {{myImage}} または {{myImage|サイズ指定|キャプション}}
+        //    例: {{myImage|medium|賞味期限管理画面}}
+        // 4. 自動で![キャプション](optimized-image-url)に置換される
         if (career.images) {
           Object.entries(career.images).forEach(([key, imageUrl]) => {
+            // サイズ指定 + キャプション付きプレースホルダーの処理
+            const placeholderWithSizeAndCaption = new RegExp(`{{${key}\\|(small|medium|large)\\|([^}]+)}}`, 'g');
+            text = text.replace(placeholderWithSizeAndCaption, (_, size, caption) => {
+              return `![${caption}-${size}](${imageUrl})`;
+            });
+            
+            // キャプション付きプレースホルダーの処理（サイズ指定なし）
+            const placeholderWithCaption = new RegExp(`{{${key}\\|([^}|]+)}}`, 'g');
+            text = text.replace(placeholderWithCaption, (_, caption) => {
+              // サイズ指定がない場合はcaptionのみ
+              if (!['small', 'medium', 'large'].includes(caption)) {
+                return `![${caption}](${imageUrl})`;
+              }
+              return `{{${key}|${caption}}}`; // サイズ指定の場合は元に戻す
+            });
+            
+            // サイズ指定付きプレースホルダーの処理
+            const placeholderWithSize = new RegExp(`{{${key}\\|(small|medium|large)}}`, 'g');
+            text = text.replace(placeholderWithSize, (_, size) => {
+              return `![${key}-${size}](${imageUrl})`;
+            });
+            
+            // 通常のプレースホルダーの処理
             const placeholder = `{{${key}}}`;
             const imageMarkdown = `![${key}](${imageUrl})`;
             text = text.replace(new RegExp(placeholder, 'g'), imageMarkdown);
@@ -214,6 +239,38 @@ export const CareerDetailPage: React.FC = () => {
                   pre: ({ ...props }) => (
                     <pre className="bg-muted p-4 rounded-lg overflow-x-auto my-4" {...props} />
                   ),
+                  img: ({ src, alt, ...props }) => {
+                    // alt属性からサイズ情報を取得
+                    const altText = alt || '';
+                    const isSmall = altText.includes('-small');
+                    const isMedium = altText.includes('-medium');
+                    const isLarge = altText.includes('-large');
+                    
+                    // サイズに応じたクラスを設定
+                    let sizeClass = 'max-w-full md:max-w-2xl lg:max-w-3xl'; // デフォルト
+                    if (isSmall) sizeClass = 'max-w-full md:max-w-md lg:max-w-lg';
+                    else if (isMedium) sizeClass = 'max-w-full md:max-w-xl lg:max-w-2xl';
+                    else if (isLarge) sizeClass = 'max-w-full md:max-w-4xl lg:max-w-5xl';
+                    
+                    // 表示用のalt属性（サイズ情報を除去）
+                    const displayAlt = altText.replace(/-(?:small|medium|large)$/, '');
+                    
+                    return (
+                      <div className="my-6 flex flex-col items-center">
+                        <img 
+                          src={src} 
+                          alt={displayAlt} 
+                          className={`${sizeClass} w-auto h-auto rounded-lg shadow-md border border-border`}
+                          {...props}
+                        />
+                        {displayAlt && (
+                          <p className="text-sm text-muted-foreground mt-2 text-center italic">
+                            {displayAlt}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  },
                 }}
               >
                 {markdownContent}

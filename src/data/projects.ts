@@ -2,6 +2,8 @@
  * Projectインターフェース
  * ポートフォリオに掲載するプロジェクトの型定義
  */
+import studyNote2GraphImage from '@/assets/project/studyNote2_graph.jpg';
+
 export interface Project {
   id: string; // プロジェクトの一意なID
   title: string; // プロジェクト名
@@ -15,6 +17,7 @@ export interface Project {
   // 詳細ページ専用の項目
   detailedContentFile?: string; // Markdownファイル名 (例: 'portfolio-website.md')
   screenshots?: string[]; // スクリーンショット画像のパスの配列
+  images?: { [key: string]: string }; // 詳細ページで使用する画像
 }
 
 export const projects: Project[] = [
@@ -80,6 +83,9 @@ export const projects: Project[] = [
     projectUrl: 'https://apps.apple.com/jp/app/id6740814731',
     detailedContentFile: 'studynote2.md',
     featured: true,
+    images: {
+      studyNote2Graph: studyNote2GraphImage,
+    },
   },
   {
     id: 'amerci-official-app',

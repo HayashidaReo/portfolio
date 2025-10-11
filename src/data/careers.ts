@@ -1,7 +1,7 @@
 /**
  * 経歴情報
  */
-import amerciStockManagerImage from '@/assets/career/amerci-stock-manager.jpeg';
+import amerciStockManagerImage from '@/assets/career/amerci_stockManager.jpeg';
 
 export interface Career {
   id: string;
