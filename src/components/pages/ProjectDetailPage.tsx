@@ -139,46 +139,6 @@ export const ProjectDetailPage: React.FC = () => {
                 showLabels={true}
               />
 
-              {/* Links */}
-              {(project.githubUrl || project.projectUrl) && (
-                <TooltipProvider>
-                  <div className="flex flex-wrap gap-3 pt-2">
-                    {project.githubUrl && (
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button variant="outline" asChild>
-                            <a
-                              href={project.githubUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              <TechIcon techName="GitHub" size="sm" showLabel={false} />
-                              View on GitHub
-                            </a>
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>リポジトリを見る</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    )}
-                    {project.projectUrl && (
-                      <Button asChild>
-                        <a
-                          href={project.projectUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2"
-                        >
-                          <ExternalLink className="h-5 w-5" />
-                          プロジェクトを見る
-                        </a>
-                      </Button>
-                    )}
-                  </div>
-                </TooltipProvider>
-              )}
-
               {/* Summary */}
               <p className="text-muted-foreground leading-relaxed text-base">
                 {project.summary}
