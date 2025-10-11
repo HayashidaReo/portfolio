@@ -1,1 +1,0 @@
-export { TechIcon } from './TechIcon';

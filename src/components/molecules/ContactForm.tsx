@@ -1,7 +1,5 @@
 import React from 'react';
-import { Input } from '@/components/atoms/Input';
-import { Textarea } from '@/components/atoms/Textarea';
-import { Button } from '@/components/atoms/Button';
+import { Input, Textarea, Button } from '@/components/atoms';
 import { cn } from '@/lib/utils';
 
 interface ContactFormProps {

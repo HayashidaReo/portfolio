@@ -1,13 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '@/components/atoms/Card';
-import { TechStackList } from '@/components/molecules/TechStackList';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms';
+import { TechStackList } from '@/components/molecules';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
 

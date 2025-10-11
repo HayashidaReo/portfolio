@@ -1,7 +1,5 @@
 import React from 'react';
-import { Progress } from '@/components/atoms/Progress';
-import { Badge } from '@/components/atoms/Badge';
-import { TechIcon } from '@/components/atoms/TechIcon';
+import { Progress, Badge, TechIcon } from '@/components/atoms';
 import { cn } from '@/lib/utils';
 
 interface SkillItemProps {

@@ -1,14 +1,8 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { careers } from '@/data/careers';
-import {
-  Card,
-  CardContent,
-} from '@/components/atoms/Card';
-import { Button } from '@/components/atoms/Button';
-import { Avatar } from '@/components/atoms/Avatar';
-import { TechStackList } from '@/components/molecules/TechStackList';
-import { MarkdownRenderer } from '@/components/molecules/MarkdownRenderer';
+import { Card, CardContent, Button, Avatar } from '@/components/atoms';
+import { TechStackList, MarkdownRenderer } from '@/components/molecules';
 import { useMarkdownLoader } from '@/hooks/useMarkdownLoader';
 import { ArrowLeft, Calendar, ExternalLink } from 'lucide-react';
 

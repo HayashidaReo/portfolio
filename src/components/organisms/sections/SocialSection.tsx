@@ -1,7 +1,6 @@
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
-import { SocialLink } from '@/components/molecules/SocialLink';
-import { GitHubContributions } from '@/components/molecules/GitHubContributions';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms';
+import { SocialLink, GitHubContributions } from '@/components/molecules';
 import { profile } from '@/data/profile';
 import xIcon from '@/assets/icon/xIcon.png';
 import qiitaIcon from '@/assets/icon/qiitaIcon.png';

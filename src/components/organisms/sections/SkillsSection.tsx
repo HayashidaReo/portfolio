@@ -1,6 +1,5 @@
 import React from 'react';
-import { SkillCategory } from '@/components/molecules/SkillCategory';
-import { SkillItem } from '@/components/molecules/SkillItem';
+import { SkillCategory, SkillItem } from '@/components/molecules';
 import { skillCategories } from '@/data/skills';
 import { Code2, Layers, Cloud, Wrench } from 'lucide-react';
 

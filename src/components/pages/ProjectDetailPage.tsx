@@ -4,20 +4,17 @@ import { projects } from '@/data/projects';
 import {
   Card,
   CardContent,
-} from '@/components/atoms/Card';
-import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/atoms/Tooltip';
-import { Button } from '@/components/atoms/Button';
-import { Avatar } from '@/components/atoms/Avatar';
-import { TechStackList } from '@/components/molecules/TechStackList';
-import { MarkdownRenderer } from '@/components/molecules/MarkdownRenderer';
+  Button,
+  Avatar,
+  TechIcon,
+} from '@/components/atoms';
+import { TechStackList, MarkdownRenderer } from '@/components/molecules';
 import { useMarkdownLoader } from '@/hooks/useMarkdownLoader';
 import { ArrowLeft, ExternalLink, Calendar } from 'lucide-react';
-import { TechIcon } from '@/components/atoms/TechIcon';
 
 
 export const ProjectDetailPage: React.FC = () => {

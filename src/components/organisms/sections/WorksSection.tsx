@@ -1,6 +1,5 @@
 import React from 'react';
-import { TimelineItem } from '@/components/molecules/TimelineItem';
-import { ProjectCard } from '@/components/molecules/ProjectCard';
+import { TimelineItem, ProjectCard } from '@/components/molecules';
 import { projects } from '@/data/projects';
 
 export const WorksSection: React.FC = () => {

@@ -1,7 +1,5 @@
 import React from 'react';
-import { ProfileCard } from '@/components/molecules/ProfileCard';
-import { InfoCard } from '@/components/molecules/InfoCard';
-import { InterestsList } from '@/components/molecules/InterestsList';
+import { ProfileCard, InfoCard, InterestsList } from '@/components/molecules';
 import { profile } from '@/data/profile';
 import { Heart, Target, Sparkles } from 'lucide-react';
 

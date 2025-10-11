@@ -6,18 +6,16 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-} from '@/components/atoms/Card';
-import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/atoms/Tooltip';
-import { Avatar } from '@/components/atoms/Avatar';
-import { TechStackList } from '@/components/molecules/TechStackList';
+  Avatar,
+  TechIcon,
+} from '@/components/atoms';
+import { TechStackList } from '@/components/molecules';
 import { cn } from '@/lib/utils';
 import { ArrowRight, ExternalLink } from 'lucide-react';
-import { TechIcon } from '@/components/atoms/TechIcon';
 
 interface ProjectCardProps {
   id: string;

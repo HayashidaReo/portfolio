@@ -1,5 +1,5 @@
 import React from 'react';
-import { TechStackList } from '@/components/molecules/TechStackList';
+import { TechStackList } from '@/components/molecules';
 
 interface InterestsListProps {
   interests: readonly string[];

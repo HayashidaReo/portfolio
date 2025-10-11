@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from '@/components/atoms/Card';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms';
 import { cn } from '@/lib/utils';
 
 interface InfoCardProps {

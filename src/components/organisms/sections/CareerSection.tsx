@@ -1,6 +1,5 @@
 import React from 'react';
-import { TimelineItem } from '@/components/molecules/TimelineItem';
-import { CareerCard } from '@/components/molecules/CareerCard';
+import { TimelineItem, CareerCard } from '@/components/molecules';
 import { careers } from '@/data/careers';
 
 export const CareerSection: React.FC = () => {

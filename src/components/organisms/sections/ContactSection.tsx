@@ -1,8 +1,7 @@
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/Card';
-import { ContactForm } from '@/components/molecules/ContactForm';
+import { Card, CardHeader, CardTitle, CardContent, Button } from '@/components/atoms';
+import { ContactForm } from '@/components/molecules';
 import { Mail, MessageCircle } from 'lucide-react';
-import { Button } from '@/components/atoms/Button';
 import { profile } from '@/data';
 
 export const ContactSection: React.FC = () => {

@@ -1,4 +1,4 @@
-import { TechIcon } from '@/components/atoms/TechIcon';
+import { TechIcon } from '@/components/atoms';
 
 interface TechStackListProps {
   techStack: readonly string[];

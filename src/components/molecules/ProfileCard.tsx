@@ -1,6 +1,5 @@
 import React from 'react';
-import { Avatar } from '@/components/atoms/Avatar';
-import { Card, CardContent } from '@/components/atoms/Card';
+import { Avatar, Card, CardContent } from '@/components/atoms';
 import { cn } from '@/lib/utils';
 
 interface ProfileCardProps {

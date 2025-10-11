@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from '@/components/atoms/Card';
-import { Button } from '@/components/atoms/Button';
-import { TechIcon } from '@/components/atoms/TechIcon';
+import { Card, CardHeader, CardTitle, CardContent, Button, TechIcon } from '@/components/atoms';
 
 interface GitHubContributionsProps {
   username: string;

@@ -1,1 +1,0 @@
-export { GitHubContributions } from './GitHubContributions';
