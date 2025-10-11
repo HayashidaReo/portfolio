@@ -5,6 +5,12 @@ import {
   Card,
   CardContent,
 } from '@/components/atoms/Card';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/atoms/Tooltip';
 import { Button } from '@/components/atoms/Button';
 import { Avatar } from '@/components/atoms/Avatar';
 import { TechStackList } from '@/components/molecules/TechStackList';
@@ -58,32 +64,48 @@ export const ProjectDetailPage: React.FC = () => {
             <ArrowLeft className="h-4 w-4" />
             戻る
           </Button>
-          <div className="flex gap-2">
-            {project.githubUrl && (
-              <Button variant="ghost" size="sm" asChild>
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center"
-                >
-                  <TechIcon techName="GitHub" size="sm" showLabel={false} />
-                </a>
-              </Button>
-            )}
-            {project.projectUrl && (
-              <Button variant="ghost" size="sm" asChild>
-                <a
-                  href={project.projectUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center"
-                >
-                  <ExternalLink className="h-6 w-6 text-foreground" />
-                </a>
-              </Button>
-            )}
-          </div>
+          <TooltipProvider>
+            <div className="flex gap-2">
+              {project.githubUrl && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="ghost" size="sm" asChild>
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center"
+                      >
+                        <TechIcon techName="GitHub" size="sm" showLabel={false} />
+                      </a>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>リポジトリを見る</p>
+                  </TooltipContent>
+                </Tooltip>
+              )}
+              {project.projectUrl && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="ghost" size="sm" asChild>
+                      <a
+                        href={project.projectUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center"
+                      >
+                        <ExternalLink className="h-6 w-6 text-foreground" />
+                      </a>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>プロジェクトサイトを見る</p>
+                  </TooltipContent>
+                </Tooltip>
+              )}
+            </div>
+          </TooltipProvider>
         </div>
       </header>
 
@@ -122,33 +144,42 @@ export const ProjectDetailPage: React.FC = () => {
 
               {/* Links */}
               {(project.githubUrl || project.projectUrl) && (
-                <div className="flex flex-wrap gap-3 pt-2">
-                  {project.githubUrl && (
-                    <Button variant="outline" asChild>
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <TechIcon techName="GitHub" size="sm" showLabel={false} />
-                        View on GitHub
-                      </a>
-                    </Button>
-                  )}
-                  {project.projectUrl && (
-                    <Button asChild>
-                      <a
-                        href={project.projectUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2"
-                      >
-                        <ExternalLink className="h-5 w-5" />
-                        プロジェクトを見る
-                      </a>
-                    </Button>
-                  )}
-                </div>
+                <TooltipProvider>
+                  <div className="flex flex-wrap gap-3 pt-2">
+                    {project.githubUrl && (
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline" asChild>
+                            <a
+                              href={project.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <TechIcon techName="GitHub" size="sm" showLabel={false} />
+                              View on GitHub
+                            </a>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>リポジトリを見る</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    )}
+                    {project.projectUrl && (
+                      <Button asChild>
+                        <a
+                          href={project.projectUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center gap-2"
+                        >
+                          <ExternalLink className="h-5 w-5" />
+                          プロジェクトを見る
+                        </a>
+                      </Button>
+                    )}
+                  </div>
+                </TooltipProvider>
               )}
 
               {/* Summary */}
