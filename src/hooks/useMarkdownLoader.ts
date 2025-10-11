@@ -36,7 +36,7 @@ export const useMarkdownLoader = ({
         setIsLoading(true);
         setError(null);
         
-        const response = await fetch(`/src/data/${basePath}/${filePath}`);
+        const response = await fetch(`/markdown/${basePath}/${filePath}`);
         
         if (!response.ok) {
           throw new Error(`Failed to fetch markdown: ${response.status}`);
