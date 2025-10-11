@@ -2,7 +2,7 @@
  * Projectインターフェース
  * ポートフォリオに掲載するプロジェクトの型定義
  */
-import studyNote2GraphImage from '@/assets/project/studyNote2_graph.jpg';
+import studyNote2GraphImage from '@/assets/project/studyNote2_graph.png';
 
 export interface Project {
   id: string; // プロジェクトの一意なID
