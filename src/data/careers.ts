@@ -59,7 +59,7 @@ export const careers: Career[] = [
     company: 'Amerci',
     period: '2022年12月 - 現在',
     description:
-      '食品・雑貨販売店「Amerci」のExcelとVBAで作成された在庫管理システムを改良。VBAとExcelを用いて、バーコードスキャンによる入出庫管理、在庫レポートの自動生成、発注予測機能などを実装し、手作業によるミスを削減。現在も機能追加や保守を継続中。',
+      'アルバイト先の食品・雑貨販売店「Amerci」のExcel/VBA製レジ・在庫管理システムを、業務効率化とミス削減のため改良。VBAとExcel関数、Python、BASE API、Outlookを組み合わせ、発注書作成の半自動化、納品時QRコード発行の全自動化（3分→30秒）、BASE在庫のリアルタイム自動連携、賞味期限管理・自動割引適用などを実現。手作業を大幅に削減し、在庫管理精度や業務効率、保守性を向上。',
     techStack: ['VBA', 'Excel', 'Python', 'Power Automate', 'PyAutoGUI'],
     detailedContentFile: 'amerci.md',
     featured: true,
