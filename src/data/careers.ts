@@ -22,9 +22,10 @@ export const careers: Career[] = [
     company: '株式会社STARUP',
     period: '2025年9月 - 現在',
     description:
-      '',
+      'Webフロントエンドエンジニアとして、受託開発と自社SaaS（設計図管理アプリ）を展開する企業にてインターンシップを経験中。実務を通して、未経験であったReact, Next.js, TypeScriptを基礎から実践的に習得しました。設計図管理アプリの品質向上に繋がるバグ修正や機能改善を担当し、自走して学ぶ姿勢と迅速なアウトプットでチームに貢献しています。',
     techStack: ['React', 'Next.js', 'GitHub', 'Slack', 'Notion', 'Claude Code'],
-    detailedContentFile: 'starup.md',
+    // detailedContentFile: 'starup.md',
+
   },
   {
     id: 'teamlab',
