@@ -126,6 +126,32 @@ src/
 | **Templates** | ページのレイアウト構造 | PageLayout, GridLayout |
 | **Pages** | 具体的なページコンポーネント | HomePage, AboutPage |
 
+### 🖼️ 画像プレースホルダー機能
+
+Markdownファイル内で画像を表示する際の機能です。assetsディレクトリで画像を一元管理しながら、Viteの最適化機能を活用できます。
+
+**使用手順：**
+1. `src/assets/career/` に画像を配置
+2. `src/data/careers.ts` で画像をimport
+3. Career オブジェクトの `images` プロパティに追加
+4. Markdownファイル内で `{{imageKey}}` として使用
+
+**例：**
+```typescript
+// careers.ts
+import stockImage from '@/assets/career/stock-manager.jpeg';
+
+export const careers = [{
+  // ...
+  images: { stockManager: stockImage }
+}];
+```
+
+```markdown
+<!-- Markdownファイル内 -->
+{{stockManager}}  <!-- 自動で<img>タグに置換 -->
+```
+
 ## 🤝 開発への貢献
 
 機能追加の提案やバグ報告は、GitHubの[Issues](https://github.com/HayashidaReo/portfolio/issues)にて歓迎します。
