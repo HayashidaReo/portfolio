@@ -7,6 +7,8 @@ export { GitHubContributions } from './GitHubContributions';
 export { InfoCard } from './InfoCard';
 export { InterestsList } from './InterestsList';
 export { MarkdownRenderer } from './MarkdownRenderer';
+export { MobileNavigation } from './MobileNavigation';
+export { NavigationBar } from './NavigationBar';
 export { ProfileCard } from './ProfileCard';
 export { ProjectCard } from './ProjectCard';
 export { SkillCategory } from './SkillCategory';
