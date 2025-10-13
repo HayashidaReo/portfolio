@@ -42,7 +42,7 @@ export const ProjectDetailPage: React.FC = () => {
             <p className="text-muted-foreground">
               指定されたプロジェクトは存在しないか、削除された可能性があります。
             </p>
-            <Button onClick={() => navigate('/')} className="mt-4">
+            <Button onClick={() => navigate(-1)} className="mt-4">
               <ArrowLeft className="h-4 w-4" />
               ホームに戻る
             </Button>
@@ -57,7 +57,7 @@ export const ProjectDetailPage: React.FC = () => {
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
         <div className="container mx-auto max-w-6xl flex h-16 items-center justify-between px-4">
-          <Button variant="ghost" onClick={() => navigate('/')} className="gap-2">
+          <Button variant="ghost" onClick={() => navigate(-1)} className="gap-2">
             <ArrowLeft className="h-4 w-4" />
             戻る
           </Button>
@@ -189,7 +189,7 @@ export const ProjectDetailPage: React.FC = () => {
             <Button
               variant="outline"
               size="lg"
-              onClick={() => navigate('/')}
+              onClick={() => navigate(-1)}
               className="shadow-md hover:shadow-lg transition-all"
             >
               <ArrowLeft className="h-4 w-4" />
