@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/atoms';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, FeaturedRibbon } from '@/components/atoms';
 import { TechStackList } from '@/components/molecules';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
@@ -40,13 +40,7 @@ export const CareerCard = React.memo<CareerCardProps>(({
       )}
     >
       {/* Featured Ribbon */}
-      {featured && (
-        <div className="absolute top-0 left-0 z-10 overflow-hidden w-16 h-16">
-          <div className="absolute transform -rotate-45 bg-red-600 text-white text-center font-semibold py-1 left-[-24px] top-[6px] w-[80px] shadow-md text-xs">
-            注目
-          </div>
-        </div>
-      )}
+      {featured && <FeaturedRibbon />}
       <CardHeader>
         <CardTitle>{company}</CardTitle>
         <CardDescription>{period}</CardDescription>
