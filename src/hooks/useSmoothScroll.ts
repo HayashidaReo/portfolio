@@ -40,17 +40,27 @@ export const useSmoothScroll = (options: UseSmoothScrollOptions = {}) => {
 
   const scrollToElement = useCallback((targetId: string) => {
     const targetElement = document.getElementById(targetId);
-    
+
     if (!targetElement) {
       console.warn(`Element with id "${targetId}" not found`);
       return;
     }
 
-    const startPosition = window.pageYOffset;
     const targetPosition = targetElement.offsetTop - offset;
+
+    // prefers-reduced-motionが有効な場合は即座にスクロール
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      window.scrollTo(0, targetPosition);
+      return;
+    }
+
+    // アニメーション付きスクロール
+    const startPosition = window.pageYOffset;
     const distance = targetPosition - startPosition;
     const easingFunction = getEasingFunction(easing);
-    
+
     let startTime: number | null = null;
 
     const animateScroll = (currentTime: number) => {
@@ -61,7 +71,7 @@ export const useSmoothScroll = (options: UseSmoothScrollOptions = {}) => {
       const timeElapsed = currentTime - startTime;
       const progress = Math.min(timeElapsed / duration, 1);
       const ease = easingFunction(progress);
-      
+
       window.scrollTo(0, startPosition + distance * ease);
 
       if (timeElapsed < duration) {
