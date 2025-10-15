@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   Card,
   CardHeader,
@@ -42,14 +41,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   featured,
   className,
 }) => {
+  const handleCardClick = () => {
+    window.location.href = `/works/${id}`;
+  };
+
   return (
-    <Link to={`/works/${id}`} className="block">
-      <Card
-        className={cn(
-          'w-full hover:shadow-lg transition-all cursor-pointer group relative',
-          className
-        )}
-      >
+    <Card
+      className={cn(
+        'w-full hover:shadow-lg transition-all cursor-pointer group relative',
+        className
+      )}
+      onClick={handleCardClick}
+    >
         {/* Featured Ribbon */}
         {featured && (
           <div className="absolute top-0 left-0 z-10 overflow-hidden w-16 h-16">
@@ -82,7 +85,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                             href={githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              window.open(githubUrl, '_blank', 'noopener,noreferrer');
+                            }}
                             className="p-1.5 rounded-md hover:bg-muted transition-colors flex items-center justify-center"
                             aria-label="View on GitHub"
                           >
@@ -101,7 +108,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                             href={projectUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              window.open(projectUrl, '_blank', 'noopener,noreferrer');
+                            }}
                             className="p-1.5 rounded-md hover:bg-muted transition-colors flex items-center justify-center"
                             aria-label="View project"
                           >
@@ -137,6 +148,5 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         </CardContent>
       </Card>
-    </Link>
   );
 };

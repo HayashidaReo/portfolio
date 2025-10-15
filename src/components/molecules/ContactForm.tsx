@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Input, Textarea, Button } from '@/components/atoms';
 import { cn } from '@/lib/utils';
 import { submitContactForm } from '@/utils/formspree';
+import { useToast } from '@/hooks';
 import type { ContactFormData, FormSubmitStatus } from '@/types';
 
 interface ContactFormProps {
@@ -10,33 +11,47 @@ interface ContactFormProps {
 
 export const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
   const [status, setStatus] = useState<FormSubmitStatus>('idle');
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const { success, error } = useToast();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('submitting');
-    setErrorMessage('');
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     const data: ContactFormData = {
       name: formData.get('name') as string,
       email: formData.get('email') as string,
       message: formData.get('message') as string,
     };
 
+    console.log('Submitting form...', data);
+
     const result = await submitContactForm(data);
+
+    console.log('Submit result:', result);
 
     if (result.ok) {
       setStatus('success');
-      // フォームをリセット
-      e.currentTarget.reset();
+      // 成功メッセージをスナックバーで表示
+      success('送信完了', 'お問い合わせいただきありがとうございます。確認後ご連絡させていただきます。');
+      // フォームをリセット（状態更新後に実行）
+      setTimeout(() => {
+        form.reset();
+      }, 100);
     } else {
       setStatus('error');
       const generalError = result.errors?.find((err) => err.field === 'general');
-      setErrorMessage(
-        generalError?.message || '送信に失敗しました。もう一度お試しください。'
-      );
+      const errorMsg =
+        generalError?.message || '送信に失敗しました。もう一度お試しください。';
+      // エラーメッセージをスナックバーで表示
+      error('送信失敗', errorMsg);
     }
+
+    // 送信完了後、状態をリセット
+    setTimeout(() => {
+      setStatus('idle');
+    }, 500);
   };
 
   return (
@@ -81,18 +96,6 @@ export const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
           disabled={status === 'submitting'}
         />
       </div>
-
-      {status === 'success' && (
-        <div className="rounded-md bg-green-50 p-4 text-sm text-green-800 dark:bg-green-900/20 dark:text-green-400">
-          メッセージを送信しました。お問い合わせありがとうございます!
-        </div>
-      )}
-
-      {status === 'error' && errorMessage && (
-        <div className="rounded-md bg-red-50 p-4 text-sm text-red-800 dark:bg-red-900/20 dark:text-red-400">
-          {errorMessage}
-        </div>
-      )}
 
       <Button
         type="submit"

@@ -38,7 +38,9 @@ export interface ButtonProps
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, ...props }, ref) => {
+  ({ className, variant, size, asChild, ...props }, ref) => {
+    // asChildが指定されている場合は、子要素をそのまま使用
+    // （現時点では未実装のため、警告を避けるためだけに除外）
     return (
       <button
         className={cn(buttonVariants({ variant, size, className }))}
