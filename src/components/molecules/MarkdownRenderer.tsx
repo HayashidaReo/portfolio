@@ -100,9 +100,27 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
           h4: ({ ...props }) => (
             <h4 className="text-lg font-bold mt-3 mb-2 text-foreground" {...props} />
           ),
-          p: ({ ...props }) => (
-            <p className="text-muted-foreground leading-relaxed mb-4" {...props} />
-          ),
+          p: ({ node, children, ...props }) => {
+            // 子要素に画像が含まれているかチェック
+            const hasImage = node?.children?.some((child: any) =>
+              child.type === 'element' && child.tagName === 'img'
+            );
+
+            // 画像がある場合はdivを使用（pタグ内にブロック要素を入れないため）
+            if (hasImage) {
+              return (
+                <div className="text-muted-foreground leading-relaxed mb-4" {...props}>
+                  {children}
+                </div>
+              );
+            }
+
+            return (
+              <p className="text-muted-foreground leading-relaxed mb-4" {...props}>
+                {children}
+              </p>
+            );
+          },
           ul: ({ ...props }) => (
             <ul className="list-disc list-inside space-y-2 mb-4 text-muted-foreground" {...props} />
           ),
@@ -130,21 +148,21 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
             const isSmall = altText.includes('-small');
             const isMedium = altText.includes('-medium');
             const isLarge = altText.includes('-large');
-            
+
             // サイズに応じたクラスを設定
             let sizeClass = 'max-w-full md:max-w-2xl lg:max-w-3xl'; // デフォルト
             if (isSmall) sizeClass = 'max-w-full md:max-w-md lg:max-w-lg';
             else if (isMedium) sizeClass = 'max-w-full md:max-w-xl lg:max-w-2xl';
             else if (isLarge) sizeClass = 'max-w-full md:max-w-4xl lg:max-w-5xl';
-            
+
             // 表示用のalt属性（サイズ情報を除去）
             const displayAlt = altText.replace(/-(?:small|medium|large)$/, '');
-            
+
             return (
               <div className="my-6 flex flex-col items-center">
-                <img 
-                  src={src} 
-                  alt={displayAlt} 
+                <img
+                  src={src}
+                  alt={displayAlt}
                   className={`${sizeClass} w-auto h-auto rounded-lg border`}
                   {...props}
                 />
