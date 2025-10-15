@@ -1,20 +1,9 @@
 /**
- * 経歴情報
+ * 経歴データ
+ * ポートフォリオに掲載する経歴の一覧
  */
+import type { Career } from '@/types';
 import amerciStockManagerImage from '@/assets/career/amerci_stockManager.jpeg';
-
-export interface Career {
-  id: string;
-  company: string;
-  period: string;
-  description: string; // 一覧ページで表示する簡潔な説明
-  techStack?: string[];
-  featured?: boolean; // 注目経歴フラグ
-  // 詳細ページ専用の項目
-  detailedContentFile?: string; // Markdownファイル名 (例: 'amerci.md')
-  icon?: string; // アイコン画像のパス
-  images?: { [key: string]: string }; // 詳細ページで使用する画像
-}
 
 export const careers: Career[] = [
   {

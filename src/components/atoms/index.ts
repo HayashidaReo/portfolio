@@ -5,6 +5,7 @@ export { Avatar } from './Avatar';
 export { Badge } from './Badge';
 export { Button } from './Button';
 export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './Card';
+export { FeaturedRibbon } from './FeaturedRibbon';
 export { Input } from './Input';
 export { NavigationLink } from './NavigationLink';
 export { Progress } from './Progress';

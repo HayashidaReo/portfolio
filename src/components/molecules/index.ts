@@ -10,6 +10,7 @@ export { LoadingScreen } from './LoadingScreen';
 export { MarkdownRenderer } from './MarkdownRenderer';
 export { MobileNavigation } from './MobileNavigation';
 export { NavigationBar } from './NavigationBar';
+export { NotFoundCard } from './NotFoundCard';
 export { ProfileCard } from './ProfileCard';
 export { ProjectCard } from './ProjectCard';
 export { SkillCategory } from './SkillCategory';

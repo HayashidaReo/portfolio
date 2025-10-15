@@ -25,8 +25,6 @@ interface ToastContextType {
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
-let toastCount = 0;
-
 /**
  * ToastのContextプロバイダー
  */
@@ -34,9 +32,21 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [toasts, setToasts] = useState<ToastState[]>([]);
+  const toastCountRef = React.useRef(0);
+
+  const dismiss = useCallback((id: string) => {
+    setToasts((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, visible: false } : t))
+    );
+
+    // アニメーション後に完全に削除
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id));
+    }, 300);
+  }, []);
 
   const toast = useCallback((options: ToastOptions) => {
-    const id = `toast-${++toastCount}`;
+    const id = `toast-${++toastCountRef.current}`;
     const duration = options.duration ?? 3000;
 
     const newToast: ToastState = {
@@ -55,18 +65,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     return id;
-  }, []);
-
-  const dismiss = useCallback((id: string) => {
-    setToasts((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, visible: false } : t))
-    );
-
-    // アニメーション後に完全に削除
-    setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== id));
-    }, 300);
-  }, []);
+  }, [dismiss]);
 
   const dismissAll = useCallback(() => {
     setToasts((prev) => prev.map((t) => ({ ...t, visible: false })));
@@ -121,6 +120,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
 /**
  * Toast(スナックバー)を管理するカスタムフック
  */
+// eslint-disable-next-line react-refresh/only-export-components
 export const useToast = () => {
   const context = useContext(ToastContext);
   if (!context) {

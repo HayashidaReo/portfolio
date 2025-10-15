@@ -34,13 +34,13 @@ export const NavigationLink: React.FC<NavigationLinkProps> = ({
       aria-label={item.ariaLabel || `${item.label}セクションへ移動`}
       aria-current={isActive ? 'page' : undefined}
       className={`
-        relative w-full text-left px-4 py-3 md:py-2 text-base md:text-sm font-medium 
+        relative w-full text-left px-4 py-3 md:py-2 text-base md:text-sm font-medium
         transition-all duration-300 ease-in-out
         hover:text-blue-600 hover:bg-blue-50 md:hover:bg-transparent
-        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+        focus:outline-none
         rounded-md md:rounded-none
-        ${isActive 
-          ? 'text-blue-600 bg-blue-100 md:bg-transparent font-semibold' 
+        ${isActive
+          ? 'text-blue-600 bg-blue-100 md:bg-transparent font-semibold'
           : 'text-gray-700 hover:text-blue-600'
         }
       `}
