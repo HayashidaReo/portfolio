@@ -1,24 +1,9 @@
 /**
- * Projectインターフェース
- * ポートフォリオに掲載するプロジェクトの型定義
+ * プロジェクトデータ
+ * ポートフォリオに掲載するプロジェクトの一覧
  */
+import type { Project } from '@/types';
 import studyNote2GraphImage from '@/assets/project/studyNote2_graph.png';
-
-export interface Project {
-  id: string; // プロジェクトの一意なID
-  title: string; // プロジェクト名
-  period: string; // 制作期間
-  summary: string; // 一覧ページで表示する簡潔な概要
-  techStack: string[]; // 使用技術スタック
-  icon?: string; // アイコン画像のパス
-  githubUrl?: string; // GitHubリポジトリのURL
-  projectUrl?: string; // 公開しているサイトやストアのURL
-  featured?: boolean; // 注目プロジェクトフラグ
-  // 詳細ページ専用の項目
-  detailedContentFile?: string; // Markdownファイル名 (例: 'portfolio-website.md')
-  screenshots?: string[]; // スクリーンショット画像のパスの配列
-  images?: { [key: string]: string }; // 詳細ページで使用する画像
-}
 
 export const projects: Project[] = [
   {

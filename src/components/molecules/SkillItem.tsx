@@ -10,7 +10,12 @@ interface SkillItemProps {
   className?: string;
 }
 
-export const SkillItem: React.FC<SkillItemProps> = ({
+/**
+ * SkillItem - スキルアイテムコンポーネント
+ *
+ * React.memoでメモ化し、スキル一覧で多数レンダリングされる際の不要な再レンダリングを防止
+ */
+export const SkillItem = React.memo<SkillItemProps>(({
   name,
   iconName,
   level,
@@ -38,4 +43,6 @@ export const SkillItem: React.FC<SkillItemProps> = ({
       {level !== undefined && <Progress value={level} className="h-2" />}
     </div>
   );
-};
+});
+
+SkillItem.displayName = 'SkillItem';

@@ -4,19 +4,25 @@ import remarkGfm from 'remark-gfm';
 
 /**
  * MarkdownRenderer - 共通Markdownレンダリングコンポーネント
- * 
+ *
  * 【画像プレースホルダー機能】
  * - {{imageKey}} - デフォルトサイズで画像表示
  * - {{imageKey|size}} - サイズ指定 (small|medium|large)
  * - {{imageKey|caption}} - キャプション指定
  * - {{imageKey|size|caption}} - サイズ + キャプション指定
- * 
+ *
  * 【使用方法】
  * 1. データファイル(careers.ts/projects.ts)で画像をimport
  * 2. オブジェクトのimagesプロパティに追加
  * 3. Markdownファイル内でプレースホルダー使用
  * 4. 自動でレスポンシブな<img>タグに変換
  */
+
+interface MarkdownNode {
+  type: string;
+  tagName?: string;
+  children?: MarkdownNode[];
+}
 
 interface MarkdownRendererProps {
   /** Markdownコンテンツ */
@@ -102,7 +108,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
           ),
           p: ({ node, children, ...props }) => {
             // 子要素に画像が含まれているかチェック
-            const hasImage = node?.children?.some((child: any) =>
+            const hasImage = node?.children?.some((child: MarkdownNode) =>
               child.type === 'element' && child.tagName === 'img'
             );
 
@@ -164,6 +170,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
                   src={src}
                   alt={displayAlt}
                   className={`${sizeClass} w-auto h-auto rounded-lg border`}
+                  loading="lazy"
                   {...props}
                 />
                 {displayAlt && (

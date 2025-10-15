@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { careers } from '@/data/careers';
-import { Card, CardContent, Button, Avatar } from '@/components/atoms';
-import { TechStackList, MarkdownRenderer } from '@/components/molecules';
-import { FullPageLoading } from '@/components/organisms';
-import { useMarkdownLoader } from '@/hooks/useMarkdownLoader';
-import { ArrowLeft, Calendar, ExternalLink } from 'lucide-react';
+import { Button, Avatar } from '@/components/atoms';
+import { TechStackList, MarkdownRenderer, NotFoundCard } from '@/components/molecules';
+import { FullPageLoading, DetailPageHeader } from '@/components/organisms';
+import { useMarkdownLoader, useScrollToTop } from '@/hooks';
+import { ArrowLeft, Calendar } from 'lucide-react';
 
 export const CareerDetailPage: React.FC = () => {
   const { careerId } = useParams<{ careerId: string }>();
@@ -19,38 +19,10 @@ export const CareerDetailPage: React.FC = () => {
   });
 
   // ページ遷移時とローディング完了時にページトップへスクロール
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [careerId]);
-
-  useEffect(() => {
-    if (!isLoading) {
-      window.scrollTo(0, 0);
-    }
-  }, [isLoading]);
-
-
+  useScrollToTop({ dependencies: [careerId], isLoading });
 
   if (!career) {
-    return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-background to-muted/20">
-        <Card className="max-w-md w-full shadow-lg">
-          <CardContent className="pt-6 text-center space-y-4">
-            <div className="w-16 h-16 mx-auto rounded-full bg-destructive/10 flex items-center justify-center">
-              <ExternalLink className="h-8 w-8 text-destructive" />
-            </div>
-            <h1 className="text-2xl font-bold">経歴が見つかりません</h1>
-            <p className="text-muted-foreground">
-              指定された経歴は存在しないか、削除された可能性があります。
-            </p>
-            <Button onClick={() => navigate(-1)} className="mt-4">
-              <ArrowLeft className="h-4 w-4" />
-              ホームに戻る
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    );
+    return <NotFoundCard entityName="経歴" />;
   }
 
   // ローディング中の表示
@@ -61,14 +33,7 @@ export const CareerDetailPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
-        <div className="container mx-auto max-w-6xl flex h-16 items-center justify-between px-4">
-          <Button variant="ghost" onClick={() => navigate(-1)} className="gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            戻る
-          </Button>
-        </div>
-      </header>
+      <DetailPageHeader onBack={() => navigate(-1)} />
 
       {/* Hero Section */}
       <div className="border-b bg-gradient-to-b from-muted/30 to-background">

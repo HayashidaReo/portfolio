@@ -12,6 +12,7 @@ import {
   TooltipTrigger,
   Avatar,
   TechIcon,
+  FeaturedRibbon,
 } from '@/components/atoms';
 import { TechStackList } from '@/components/molecules';
 import { cn } from '@/lib/utils';
@@ -30,7 +31,12 @@ interface ProjectCardProps {
   className?: string;
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({
+/**
+ * ProjectCard - プロジェクトカードコンポーネント
+ *
+ * React.memoでメモ化し、タイムラインで複数表示される際の不要な再レンダリングを防止
+ */
+export const ProjectCard = React.memo<ProjectCardProps>(({
   id,
   title,
   period,
@@ -50,13 +56,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       )}
     >
       {/* Featured Ribbon */}
-      {featured && (
-        <div className="absolute top-0 left-0 z-10 overflow-hidden w-16 h-16">
-          <div className="absolute transform -rotate-45 bg-red-600 text-white text-center font-semibold py-1 left-[-24px] top-[6px] w-[80px] shadow-md text-xs">
-            注目
-          </div>
-        </div>
-      )}
+      {featured && <FeaturedRibbon />}
       <CardHeader>
         <div className="flex items-start gap-4">
           {icon && (
@@ -145,4 +145,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       {cardContent}
     </Link>
   );
-};
+});
+
+ProjectCard.displayName = 'ProjectCard';
