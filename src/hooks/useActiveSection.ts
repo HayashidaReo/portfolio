@@ -23,7 +23,7 @@ export const useActiveSection = (options: UseActiveSectionOptions) => {
   const { sectionIds, offset = 100, throttleMs = 16 } = options;
   const [activeSection, setActiveSection] = useState<string>('');
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
-  const throttleTimeoutRef = useRef<number | null>(null);
+  const throttleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // スクロール位置から最も適切なアクティブセクションを計算
   const calculateActiveSection = useCallback(() => {
