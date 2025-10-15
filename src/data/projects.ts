@@ -29,7 +29,7 @@ export const projects: Project[] = [
       '自身のスキルと実績を伝えるために構築したポートフォリオサイト。Atomic Designに基づいたコンポーネント設計を行い、shadcn/uiとTailwind CSSでUIを構築。AIを積極的に活用し、ドキュメント整備から開発まで効率的に進めました。',
     techStack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'shadcn/ui'],
     githubUrl: 'https://github.com/hayashidareo/portfolio',
-    projectUrl: 'https://portfolio-example.vercel.app',
+    projectUrl: 'https://hysd-portfolio.vercel.app',
     detailedContentFile: 'portfolio-website.md',
   },
   {
