@@ -30,7 +30,7 @@ export const TechIcon: React.FC<TechIconProps> = ({
 
   // ラベルがある場合はコンテナスタイルを適用、ない場合はアイコンのみ
   const containerClass = showLabel
-    ? `inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary/50 hover:bg-secondary transition-colors border border-border/50 ${className}`
+    ? `inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-border ${className}`
     : `inline-flex items-center ${className}`;
 
   // 画像が読み込めない場合は何も表示しない
