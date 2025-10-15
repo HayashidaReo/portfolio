@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button } from '@/components/atoms';
+import { Button, TechIcon } from '@/components/atoms';
 import { cn } from '@/lib/utils';
 
 interface SocialLinkProps {
-  icon?: React.ComponentType<{ className?: string }> | string; // Lucide icon or image path
+  icon?: React.ComponentType<{ className?: string }>; // Lucide icon
+  techName?: string; // 技術名（TechIconを使用する場合）
   label: string;
   href: string;
   bgColor?: string; // カスタム背景色
@@ -13,13 +14,13 @@ interface SocialLinkProps {
 
 export const SocialLink: React.FC<SocialLinkProps> = ({
   icon,
+  techName,
   label,
   href,
   bgColor,
   className,
 }) => {
-  const isImageIcon = typeof icon === 'string';
-  const IconComponent = !isImageIcon ? icon as React.ComponentType<{ className?: string }> : null;
+  const IconComponent = icon;
 
   // 背景色をCSSの色コードに変換（bg-[#xxxxx]形式から#xxxxxを抽出）
   const extractColor = (colorClass: string) => {
@@ -63,8 +64,8 @@ export const SocialLink: React.FC<SocialLinkProps> = ({
             : undefined
         }
       >
-        {isImageIcon && icon ? (
-          <img src={icon} alt={label} className="h-5 w-5 object-contain" />
+        {techName ? (
+          <TechIcon techName={techName} size="sm" />
         ) : (
           IconComponent && <IconComponent className="h-5 w-5" />
         )}

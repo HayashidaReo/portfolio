@@ -1,9 +1,51 @@
+// カスタムSVGアイコンのimport
+import admobIcon from '@/assets/icon/admob.svg';
+import backlogIcon from '@/assets/icon/backlog.svg';
+import claudeIcon from '@/assets/icon/claude.svg';
+import cursorIcon from '@/assets/icon/cursor.svg';
+import excelIcon from '@/assets/icon/excel.svg';
+import gameCenterIcon from '@/assets/icon/gameCenter.svg';
+import googleMapIcon from '@/assets/icon/googleMap.svg';
+import powerAutomateIcon from '@/assets/icon/powerAutomate.svg';
+import qiitaIcon from '@/assets/icon/qiita.svg';
+import riverpodIcon from '@/assets/icon/riverpod.svg';
+import storekitIcon from '@/assets/icon/storekit.svg';
+import uikitIcon from '@/assets/icon/uikit.svg';
+import xIcon from '@/assets/icon/x.svg';
+
+
 /**
  * 技術名からDeviconのURLを生成する
  * @param techName - 技術名（例: "React", "TypeScript", "Next.js"）
  * @returns DeviconのURL
  */
 export const getDeviconUrl = (techName: string): string => {
+  // カスタムSVGアイコンのマッピング
+  const customIconMap: Record<string, string> = {
+    'google admob': admobIcon,
+    'backlog': backlogIcon,
+    'claude code': claudeIcon,
+    'cursor': cursorIcon,
+    'excel': excelIcon,
+    'game center': gameCenterIcon,
+    'google maps api': googleMapIcon,
+    'power automate': powerAutomateIcon,
+    'qiita': qiitaIcon,
+    'riverpod': riverpodIcon,
+    'storekit': storekitIcon,
+    'store kit': storekitIcon,
+    'uikit': uikitIcon,
+    'x': xIcon,
+    'twitter': xIcon,
+  };
+
+  const normalizedName = techName.toLowerCase().trim();
+
+  // カスタムアイコンが存在する場合はそれを返す
+  if (customIconMap[normalizedName]) {
+    return customIconMap[normalizedName];
+  }
+
   // 技術名からDevicon用の名前とバリエーションにマッピング
   const techNameMap: Record<string, { name: string; variant?: string }> = {
     // Languages
@@ -27,10 +69,16 @@ export const getDeviconUrl = (techName: string): string => {
     'flutter': { name: 'flutter' },
     'django': { name: 'django' },
     'flask': { name: 'flask' },
+    'pyautogui': { name: 'python' },
     'vue.js': { name: 'vuejs' },
     'angular': { name: 'angularjs' },
     'svelte': { name: 'svelte' },
     'express': { name: 'express' },
+    'in app purchase': { name: 'dart' },
+    'gorouter': { name: 'dart' },
+    'freezed': { name: 'dart' },
+
+
 
     // Infrastructure / Cloud
     'firebase': { name: 'firebase' },
@@ -45,6 +93,7 @@ export const getDeviconUrl = (techName: string): string => {
     // Tools
     'git': { name: 'git' },
     'github': { name: 'github' },
+    'github api': { name: 'github' },
     'gitlab': { name: 'gitlab' },
     'figma': { name: 'figma' },
     'slack': { name: 'slack' },
@@ -68,7 +117,6 @@ export const getDeviconUrl = (techName: string): string => {
     'accessibility': { name: 'html5' },
   };
 
-  const normalizedName = techName.toLowerCase().trim();
   const config = techNameMap[normalizedName] || {
     name: normalizedName.replace(/\s+/g, ''),
   };

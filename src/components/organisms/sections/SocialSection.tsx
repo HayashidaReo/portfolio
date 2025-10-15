@@ -1,9 +1,7 @@
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms';
+import { Card, CardHeader, CardTitle, CardContent, TechIcon } from '@/components/atoms';
 import { SocialLink, GitHubContributions } from '@/components/molecules';
 import { profile } from '@/data/profile';
-import xIcon from '@/assets/icon/xIcon.png';
-import qiitaIcon from '@/assets/icon/qiitaIcon.png';
 
 export const SocialSection: React.FC = () => {
   const { github, twitter, qiita } = profile.social;
@@ -23,7 +21,7 @@ export const SocialSection: React.FC = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <img src={xIcon} alt="X" className="h-5 w-5 object-contain" />
+                  <TechIcon techName="x" size="sm" />
                   {twitter.title}
                 </CardTitle>
               </CardHeader>
@@ -32,7 +30,7 @@ export const SocialSection: React.FC = () => {
                   {twitter.description}
                 </p>
                 <SocialLink
-                  icon={xIcon}
+                  techName="x"
                   label={twitter.buttonLabel}
                   href={twitter.url}
                   bgColor="bg-[#1DA1F2]"
@@ -45,11 +43,7 @@ export const SocialSection: React.FC = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <img
-                    src={qiitaIcon}
-                    alt="Qiita"
-                    className="h-5 w-5 object-contain"
-                  />
+                  <TechIcon techName="qiita" size="sm" />
                   {qiita.title}
                 </CardTitle>
               </CardHeader>
@@ -58,7 +52,7 @@ export const SocialSection: React.FC = () => {
                   {qiita.description}
                 </p>
                 <SocialLink
-                  icon={qiitaIcon}
+                  techName="qiita"
                   label={qiita.buttonLabel}
                   href={qiita.url}
                   bgColor="bg-[#55C500]"
