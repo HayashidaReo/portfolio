@@ -43,9 +43,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     // asChild=trueの場合、子要素にスタイルを適用してそのまま返す
     if (asChild && React.isValidElement(children)) {
-      return React.cloneElement(children, {
+      const childElement = children as React.ReactElement<{ className?: string }>;
+      return React.cloneElement(childElement, {
         ...props,
-        className: cn(buttonClasses, children.props.className),
+        className: cn(buttonClasses, childElement.props.className),
         ref,
       } as any);
     }
