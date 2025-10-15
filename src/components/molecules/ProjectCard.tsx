@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Card,
   CardHeader,
@@ -41,112 +42,107 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   featured,
   className,
 }) => {
-  const handleCardClick = () => {
-    window.location.href = `/works/${id}`;
-  };
-
-  return (
+  const cardContent = (
     <Card
       className={cn(
         'w-full hover:shadow-lg transition-all cursor-pointer group relative',
         className
       )}
-      onClick={handleCardClick}
     >
-        {/* Featured Ribbon */}
-        {featured && (
-          <div className="absolute top-0 left-0 z-10 overflow-hidden w-16 h-16">
-            <div className="absolute transform -rotate-45 bg-red-600 text-white text-center font-semibold py-1 left-[-24px] top-[6px] w-[80px] shadow-md text-xs">
-              注目
-            </div>
+      {/* Featured Ribbon */}
+      {featured && (
+        <div className="absolute top-0 left-0 z-10 overflow-hidden w-16 h-16">
+          <div className="absolute transform -rotate-45 bg-red-600 text-white text-center font-semibold py-1 left-[-24px] top-[6px] w-[80px] shadow-md text-xs">
+            注目
           </div>
-        )}
-        <CardHeader>
-          <div className="flex items-start gap-4">
-            {icon && (
-              <Avatar
-                src={icon}
-                alt={title}
-                fallback={title.charAt(0)}
-                size="lg"
-                className="rounded-lg"
-              />
-            )}
-            <div className="flex-1">
-              <div className="flex items-center gap-2">
-                <CardTitle className="flex-1">{title}</CardTitle>
-                {/* GitHub と Project リンクアイコン */}
-                <TooltipProvider>
-                  <div className="flex gap-1">
-                    {githubUrl && (
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <a
-                            href={githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              e.preventDefault();
-                              window.open(githubUrl, '_blank', 'noopener,noreferrer');
-                            }}
-                            className="p-1.5 rounded-md hover:bg-muted transition-colors flex items-center justify-center"
-                            aria-label="View on GitHub"
-                          >
-                            <TechIcon techName="GitHub" size="sm" showLabel={false} />
-                          </a>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>リポジトリを見る</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    )}
-                    {projectUrl && (
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <a
-                            href={projectUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              e.preventDefault();
-                              window.open(projectUrl, '_blank', 'noopener,noreferrer');
-                            }}
-                            className="p-1.5 rounded-md hover:bg-muted transition-colors flex items-center justify-center"
-                            aria-label="View project"
-                          >
-                            <ExternalLink className="h-6 w-6 text-foreground" />
-                          </a>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>プロジェクトサイトを見る</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    )}
-                  </div>
-                </TooltipProvider>
-              </div>
-              <CardDescription>{period}</CardDescription>
+        </div>
+      )}
+      <CardHeader>
+        <div className="flex items-start gap-4">
+          {icon && (
+            <Avatar
+              src={icon}
+              alt={title}
+              fallback={title.charAt(0)}
+              size="lg"
+              className="rounded-lg"
+            />
+          )}
+          <div className="flex-1">
+            <div className="flex items-center gap-2">
+              <CardTitle className="flex-1">{title}</CardTitle>
+              {/* GitHub と Project リンクアイコン */}
+              <TooltipProvider>
+                <div className="flex gap-1 relative z-10">
+                  {githubUrl && (
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.open(githubUrl, '_blank', 'noopener,noreferrer');
+                          }}
+                          className="p-1.5 rounded-md hover:bg-muted transition-colors flex items-center justify-center"
+                          aria-label="View on GitHub"
+                        >
+                          <TechIcon techName="GitHub" size="sm" showLabel={false} />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>リポジトリを見る</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  )}
+                  {projectUrl && (
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.open(projectUrl, '_blank', 'noopener,noreferrer');
+                          }}
+                          className="p-1.5 rounded-md hover:bg-muted transition-colors flex items-center justify-center"
+                          aria-label="View project"
+                        >
+                          <ExternalLink className="h-6 w-6 text-foreground" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>プロジェクトサイトを見る</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  )}
+                </div>
+              </TooltipProvider>
             </div>
+            <CardDescription>{period}</CardDescription>
           </div>
-        </CardHeader>
+        </div>
+      </CardHeader>
 
-        <CardContent className="space-y-4">
-          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-            {description}
-          </p>
+      <CardContent className="space-y-4">
+        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+          {description}
+        </p>
 
-          {/* 技術スタックと矢印アイコンを横並びに */}
-          <div className="flex items-end gap-4">
-            <div className="flex-1">
-              <TechStackList techStack={techStack} size="sm" showLabels={true} />
-            </div>
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground group-hover:scale-110 transition-transform shrink-0">
-              <ArrowRight className="h-4 w-4" />
-            </div>
+        {/* 技術スタックと矢印アイコンを横並びに */}
+        <div className="flex items-end gap-4">
+          <div className="flex-1">
+            <TechStackList techStack={techStack} size="sm" showLabels={true} />
           </div>
-        </CardContent>
-      </Card>
+          <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground group-hover:scale-110 transition-transform shrink-0">
+            <ArrowRight className="h-4 w-4" />
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+
+  return (
+    <Link to={`/works/${id}`} className="block">
+      {cardContent}
+    </Link>
   );
 };
