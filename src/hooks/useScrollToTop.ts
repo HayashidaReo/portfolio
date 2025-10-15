@@ -30,6 +30,7 @@ export const useScrollToTop = ({
   // ページ遷移時のスクロール
   useEffect(() => {
     window.scrollTo(0, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 
   // ローディング完了時のスクロール（isLoadingが指定されている場合のみ）
