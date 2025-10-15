@@ -8,6 +8,7 @@ export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 export { Input } from './Input';
 export { NavigationLink } from './NavigationLink';
 export { Progress } from './Progress';
+export { Spinner } from './Spinner';
 export { TechIcon } from './TechIcon';
 export { Textarea } from './Textarea';
 export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './Tooltip';

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { projects } from '@/data/projects';
 import {
@@ -13,6 +13,7 @@ import {
   TechIcon,
 } from '@/components/atoms';
 import { TechStackList, MarkdownRenderer } from '@/components/molecules';
+import { FullPageLoading } from '@/components/organisms';
 import { useMarkdownLoader } from '@/hooks/useMarkdownLoader';
 import { ArrowLeft, ExternalLink, Calendar } from 'lucide-react';
 
@@ -21,12 +22,23 @@ export const ProjectDetailPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
   const project = projects.find((p) => p.id === projectId);
-  
+
   // Markdownファイルの読み込み
   const { content: markdownContent, isLoading } = useMarkdownLoader({
     filePath: project?.detailedContentFile,
     basePath: 'projects'
   });
+
+  // ページ遷移時とローディング完了時にページトップへスクロール
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [projectId]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      window.scrollTo(0, 0);
+    }
+  }, [isLoading]);
 
 
 
@@ -49,6 +61,59 @@ export const ProjectDetailPage: React.FC = () => {
           </CardContent>
         </Card>
       </div>
+    );
+  }
+
+  // ローディング中の表示
+  if (isLoading) {
+    return (
+      <FullPageLoading
+        message="読み込み中..."
+        headerRight={
+          <TooltipProvider>
+            <div className="flex gap-2">
+              {project.githubUrl && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="ghost" size="sm" asChild>
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center"
+                      >
+                        <TechIcon techName="GitHub" size="sm" showLabel={false} />
+                      </a>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>リポジトリを見る</p>
+                  </TooltipContent>
+                </Tooltip>
+              )}
+              {project.projectUrl && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="ghost" size="sm" asChild>
+                      <a
+                        href={project.projectUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center"
+                      >
+                        <ExternalLink className="h-6 w-6 text-foreground" />
+                      </a>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>プロジェクトサイトを見る</p>
+                  </TooltipContent>
+                </Tooltip>
+              )}
+            </div>
+          </TooltipProvider>
+        }
+      />
     );
   }
 
@@ -151,17 +216,10 @@ export const ProjectDetailPage: React.FC = () => {
       {/* Main Content - Markdown without Card */}
       {project.detailedContentFile && (
         <main className="container mx-auto max-w-4xl px-4 py-8 md:py-12">
-          {isLoading ? (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground">読み込み中...</p>
-            </div>
-          ) : (
-            <MarkdownRenderer 
-              content={markdownContent} 
-              images={project?.images}
-              isLoading={isLoading}
-            />
-          )}
+          <MarkdownRenderer
+            content={markdownContent}
+            images={project?.images}
+          />
 
           {/* Screenshots */}
           {project.screenshots && project.screenshots.length > 0 && (

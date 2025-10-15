@@ -6,6 +6,7 @@ export { ContactForm } from './ContactForm';
 export { GitHubContributions } from './GitHubContributions';
 export { InfoCard } from './InfoCard';
 export { InterestsList } from './InterestsList';
+export { LoadingScreen } from './LoadingScreen';
 export { MarkdownRenderer } from './MarkdownRenderer';
 export { MobileNavigation } from './MobileNavigation';
 export { NavigationBar } from './NavigationBar';

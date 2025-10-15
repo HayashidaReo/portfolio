@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { careers } from '@/data/careers';
 import { Card, CardContent, Button, Avatar } from '@/components/atoms';
 import { TechStackList, MarkdownRenderer } from '@/components/molecules';
+import { FullPageLoading } from '@/components/organisms';
 import { useMarkdownLoader } from '@/hooks/useMarkdownLoader';
 import { ArrowLeft, Calendar, ExternalLink } from 'lucide-react';
 
@@ -10,12 +11,23 @@ export const CareerDetailPage: React.FC = () => {
   const { careerId } = useParams<{ careerId: string }>();
   const navigate = useNavigate();
   const career = careers.find((c) => c.id === careerId);
-  
+
   // Markdownファイルの読み込み
   const { content: markdownContent, isLoading } = useMarkdownLoader({
     filePath: career?.detailedContentFile,
     basePath: 'careers'
   });
+
+  // ページ遷移時とローディング完了時にページトップへスクロール
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [careerId]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      window.scrollTo(0, 0);
+    }
+  }, [isLoading]);
 
 
 
@@ -39,6 +51,11 @@ export const CareerDetailPage: React.FC = () => {
         </Card>
       </div>
     );
+  }
+
+  // ローディング中の表示
+  if (isLoading) {
+    return <FullPageLoading message="読み込み中..." />;
   }
 
   return (
@@ -103,8 +120,6 @@ export const CareerDetailPage: React.FC = () => {
           <MarkdownRenderer
             content={markdownContent}
             images={career.images}
-            isLoading={isLoading}
-            loadingMessage="読み込み中..."
           />
 
           {/* Back Button */}
