@@ -16,8 +16,11 @@ const sizeMap = {
 
 /**
  * 技術スタックのアイコンを表示するAtomコンポーネント
+ *
+ * React.memoでメモ化し、不要な再レンダリングを防止
+ * TechStackListで多数レンダリングされるため、パフォーマンス最適化が重要
  */
-export const TechIcon: React.FC<TechIconProps> = ({
+export const TechIcon = React.memo<TechIconProps>(({
   techName,
   size = 'md',
   showLabel = false,
@@ -79,4 +82,6 @@ export const TechIcon: React.FC<TechIconProps> = ({
       )}
     </div>
   );
-};
+});
+
+TechIcon.displayName = 'TechIcon';

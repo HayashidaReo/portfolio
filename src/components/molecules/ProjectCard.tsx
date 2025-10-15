@@ -30,7 +30,12 @@ interface ProjectCardProps {
   className?: string;
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({
+/**
+ * ProjectCard - プロジェクトカードコンポーネント
+ *
+ * React.memoでメモ化し、タイムラインで複数表示される際の不要な再レンダリングを防止
+ */
+export const ProjectCard = React.memo<ProjectCardProps>(({
   id,
   title,
   period,
@@ -145,4 +150,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       {cardContent}
     </Link>
   );
-};
+});
+
+ProjectCard.displayName = 'ProjectCard';

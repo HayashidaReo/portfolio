@@ -16,7 +16,12 @@ interface CareerCardProps {
   className?: string;
 }
 
-export const CareerCard: React.FC<CareerCardProps> = ({
+/**
+ * CareerCard - 経歴カードコンポーネント
+ *
+ * React.memoでメモ化し、タイムラインで複数表示される際の不要な再レンダリングを防止
+ */
+export const CareerCard = React.memo<CareerCardProps>(({
   id,
   company,
   period,
@@ -73,4 +78,6 @@ export const CareerCard: React.FC<CareerCardProps> = ({
   }
 
   return cardContent;
-};
+});
+
+CareerCard.displayName = 'CareerCard';
