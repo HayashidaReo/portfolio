@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToastContainer } from './ToastContainer';
+import { Toast } from './Toast';
 import { useToast } from '@/hooks';
 
 /**
@@ -9,5 +9,24 @@ import { useToast } from '@/hooks';
 export const Toaster: React.FC = () => {
   const { toasts, dismiss } = useToast();
 
-  return <ToastContainer toasts={toasts} onDismiss={dismiss} />;
+  if (toasts.length === 0) return null;
+
+  return (
+    <div className="fixed bottom-0 right-0 z-50 flex flex-col gap-2 p-4 pointer-events-none">
+      {toasts.map((toast) => (
+        <Toast
+          key={toast.id}
+          variant={toast.variant}
+          title={toast.title}
+          description={toast.description}
+          onClose={() => dismiss(toast.id)}
+          className={
+            toast.visible
+              ? 'animate-in slide-in-from-bottom-5'
+              : 'animate-out slide-out-to-bottom-5'
+          }
+        />
+      ))}
+    </div>
+  );
 };
