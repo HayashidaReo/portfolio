@@ -38,15 +38,27 @@ export interface ButtonProps
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild, ...props }, ref) => {
-    // asChildが指定されている場合は、子要素をそのまま使用
-    // （現時点では未実装のため、警告を避けるためだけに除外）
+  ({ className, variant, size, asChild, children, ...props }, ref) => {
+    const buttonClasses = cn(buttonVariants({ variant, size, className }));
+
+    // asChild=trueの場合、子要素にスタイルを適用してそのまま返す
+    if (asChild && React.isValidElement(children)) {
+      return React.cloneElement(children, {
+        ...props,
+        className: cn(buttonClasses, children.props.className),
+        ref,
+      } as any);
+    }
+
+    // 通常のボタン要素として描画
     return (
       <button
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={buttonClasses}
         ref={ref}
         {...props}
-      />
+      >
+        {children}
+      </button>
     );
   }
 );
