@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { careers } from '@/data/careers';
 import { Card, CardContent, Button, Avatar } from '@/components/atoms';
 import { TechStackList, MarkdownRenderer } from '@/components/molecules';
+import { FullPageLoading } from '@/components/organisms';
 import { useMarkdownLoader } from '@/hooks/useMarkdownLoader';
 import { ArrowLeft, Calendar, ExternalLink } from 'lucide-react';
 
@@ -10,12 +11,23 @@ export const CareerDetailPage: React.FC = () => {
   const { careerId } = useParams<{ careerId: string }>();
   const navigate = useNavigate();
   const career = careers.find((c) => c.id === careerId);
-  
+
   // Markdownファイルの読み込み
   const { content: markdownContent, isLoading } = useMarkdownLoader({
     filePath: career?.detailedContentFile,
     basePath: 'careers'
   });
+
+  // ページ遷移時とローディング完了時にページトップへスクロール
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [careerId]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      window.scrollTo(0, 0);
+    }
+  }, [isLoading]);
 
 
 
@@ -31,7 +43,7 @@ export const CareerDetailPage: React.FC = () => {
             <p className="text-muted-foreground">
               指定された経歴は存在しないか、削除された可能性があります。
             </p>
-            <Button onClick={() => navigate('/')} className="mt-4">
+            <Button onClick={() => navigate(-1)} className="mt-4">
               <ArrowLeft className="h-4 w-4" />
               ホームに戻る
             </Button>
@@ -41,12 +53,17 @@ export const CareerDetailPage: React.FC = () => {
     );
   }
 
+  // ローディング中の表示
+  if (isLoading) {
+    return <FullPageLoading message="読み込み中..." />;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
         <div className="container mx-auto max-w-6xl flex h-16 items-center justify-between px-4">
-          <Button variant="ghost" onClick={() => navigate('/')} className="gap-2">
+          <Button variant="ghost" onClick={() => navigate(-1)} className="gap-2">
             <ArrowLeft className="h-4 w-4" />
             戻る
           </Button>
@@ -103,8 +120,6 @@ export const CareerDetailPage: React.FC = () => {
           <MarkdownRenderer
             content={markdownContent}
             images={career.images}
-            isLoading={isLoading}
-            loadingMessage="読み込み中..."
           />
 
           {/* Back Button */}
@@ -112,7 +127,7 @@ export const CareerDetailPage: React.FC = () => {
             <Button
               variant="outline"
               size="lg"
-              onClick={() => navigate('/')}
+              onClick={() => navigate(-1)}
               className="shadow-md hover:shadow-lg transition-all"
             >
               <ArrowLeft className="h-4 w-4" />

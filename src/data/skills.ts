@@ -33,6 +33,7 @@ export const skillCategories: SkillCategory[] = [
     title: 'Frameworks / Libraries',
     skills: [
       { name: 'Flutter', level: 90, experience: '個人開発' },
+      { name: 'UIKit', level: 40, experience: '個人開発' },
       { name: 'React', level: 30, experience: '学習中' },
       { name: 'Next.js', iconName: 'Next.js', level: 30, experience: '学習中' },
       { name: 'Vite', iconName: 'Vite', level: 30, experience: '学習中' },
@@ -59,6 +60,8 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Slack', level: 85, experience: '実務経験あり' },
       { name: 'Notion', level: 80, experience: '実務経験あり' },
       { name: 'VSCode', level: 90, experience: '実務経験あり' },
+      { name: 'Cursor', level: 75, experience: '実務経験あり' },
+      { name: 'Claude Code', level: 80, experience: '実務経験あり' },
       { name: 'Xcode', level: 50, experience: '個人開発' },
 
     ],

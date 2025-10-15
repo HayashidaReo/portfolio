@@ -48,7 +48,7 @@ export const projects: Project[] = [
     period: '2024年5月 - 2024年7月',
     summary:
       '子供たちの関係性をネットワークグラフで可視化するWebアプリ。Flutter WebとFirebaseを採用し、リアルタイムでのデータ同期を実現。組織ごとのアカウント発行や権限管理が可能な管理者機能も実装しました。',
-    techStack: ['Flutter', 'Dart', 'Firebase'],
+    techStack: ['Flutter', 'Dart', 'Firebase', 'Riverpod', 'GoRouter', 'Freezed'],
     githubUrl: 'https://github.com/hayashidareo/link-app',
     projectUrl: 'https://link-map-web.web.app/',
     detailedContentFile: 'link-app.md',
@@ -104,7 +104,7 @@ export const projects: Project[] = [
     period: '2024年2月',
     summary:
       'フリマアプリの出品・在庫管理を効率化するiOSアプリ。複数アカウントの一括管理や売上分析機能を搭載。UI/UXデザインに注力し、iPadとiPhoneの両デバイスでの使いやすさを追求しました。',
-    techStack: ['Swift', 'UIKit', 'Firebase', 'StoreKit'],
+    techStack: ['Swift', 'UIKit', 'Firebase', 'Google AdMob', 'StoreKit'],
     projectUrl: 'https://apps.apple.com/jp/app/id6478158839',
     detailedContentFile: 'flima-manager.md',
   },
@@ -144,7 +144,7 @@ export const projects: Project[] = [
     period: '2023年2月',
     summary:
       'ストップウォッチを5秒ピッタリで止めることを目指すシンプルなゲーム。短期間で企画からリリースまで行い、アプリ開発のサイクルを体験しました。',
-    techStack: ['Swift', 'UIKit'],
+    techStack: ['Swift', 'UIKit', 'Google AdMob'],
     projectUrl: 'https://apps.apple.com/jp/app/id6446065460',
     detailedContentFile: 'just-stop.md',
   },

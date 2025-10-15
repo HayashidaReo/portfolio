@@ -12,7 +12,7 @@ export const HomePage: React.FC = () => {
   return (
     <PageLayout>
       <Header />
-      <main className="main-content">
+      <main className="pt-16">
         <AboutSection />
         <SkillsSection />
         <WorksSection />

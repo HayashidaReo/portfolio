@@ -38,13 +38,28 @@ export interface ButtonProps
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, ...props }, ref) => {
+  ({ className, variant, size, asChild, children, ...props }, ref) => {
+    const buttonClasses = cn(buttonVariants({ variant, size, className }));
+
+    // asChild=trueの場合、子要素にスタイルを適用してそのまま返す
+    if (asChild && React.isValidElement(children)) {
+      const childElement = children as React.ReactElement<{ className?: string }>;
+      return React.cloneElement(childElement, {
+        ...props,
+        className: cn(buttonClasses, childElement.props.className),
+        ref,
+      } as any);
+    }
+
+    // 通常のボタン要素として描画
     return (
       <button
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={buttonClasses}
         ref={ref}
         {...props}
-      />
+      >
+        {children}
+      </button>
     );
   }
 );

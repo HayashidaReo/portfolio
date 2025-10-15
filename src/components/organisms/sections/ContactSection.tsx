@@ -1,9 +1,8 @@
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent, Button } from '@/components/atoms';
+import { Card, CardHeader, CardTitle, CardContent, Button, TechIcon } from '@/components/atoms';
 import { ContactForm } from '@/components/molecules';
 import { Mail } from 'lucide-react';
 import { profile } from '@/data';
-import xIcon from '@/assets/icon/xIcon.png';
 
 export const ContactSection: React.FC = () => {
   const { email, twitterDM } = profile.contact;
@@ -51,7 +50,7 @@ export const ContactSection: React.FC = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <img src={xIcon} alt="X" className="h-5 w-5 object-contain" />
+                <TechIcon techName="x" size="sm" />
                 Direct Message
               </CardTitle>
             </CardHeader>
