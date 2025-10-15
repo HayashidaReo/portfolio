@@ -25,11 +25,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
       message: formData.get('message') as string,
     };
 
-    console.log('Submitting form...', data);
-
     const result = await submitContactForm(data);
-
-    console.log('Submit result:', result);
 
     if (result.ok) {
       setStatus('success');
