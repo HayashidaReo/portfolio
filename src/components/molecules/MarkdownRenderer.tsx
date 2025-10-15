@@ -170,6 +170,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
                   src={src}
                   alt={displayAlt}
                   className={`${sizeClass} w-auto h-auto rounded-lg border`}
+                  loading="lazy"
                   {...props}
                 />
                 {displayAlt && (

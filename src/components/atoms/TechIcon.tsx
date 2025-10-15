@@ -51,6 +51,7 @@ export const TechIcon = React.memo<TechIconProps>(({
         src={iconUrl}
         alt={`${techName} icon`}
         className={`${sizeClass} object-contain`}
+        loading="lazy"
         onError={(e) => {
           // アイコンの読み込みに失敗した場合のフォールバック処理
           const target = e.target as HTMLImageElement;
