@@ -1,153 +1,471 @@
-# Portfolio Project - AIベース開発コーディングルール
+# Portfolio Project - コーディングルール
 
 ## 🎯 プロジェクトの設計思想
 
-このプロジェクトは以下の4つの原則に基づいて設計されています：
+このプロジェクトは以下の5つの原則に基づいて設計・実装されています：
 
 - **シンプルさと表現力**: 少ない記述量で直感的に扱えるコード
-- **型安全性の徹底**: 実行時エラーを未然に防ぐ型システム
-- **アトミックデザイン**: 再利用可能で一貫したUIコンポーネント体系
-- **AI協調開発**: AIと開発者が効率的に協業できる構造
+- **完全な型安全性**: `any`型禁止、実行時エラーを未然に防ぐ厳格な型システム
+- **厳格なAtomic Design**: 5階層（Atoms/Molecules/Organisms/Templates/Pages）を厳密に適用
+- **AI協調開発最適化**: 明確な命名規則と詳細な型定義により、AIと開発者が効率的に協業
+- **パフォーマンス重視**: React.memo、遅延読み込み、Intersection Observer等の最適化を積極導入
 
 ## 🏗️ アーキテクチャ設計ルール
 
 ### 1. アトミックデザインによるコンポーネント設計
 
+実装済みのディレクトリ構造：
+
 ```
 src/
 ├── components/
-│   ├── atoms/      # 最小単位のUI要素（Button, Input, Icon等）
-│   ├── molecules/  # atoms の組み合わせ（SearchBox, Card等）
-│   ├── organisms/  # molecules + atoms の複合体（Header, ProductList等）
-│   ├── templates/  # ページのレイアウト構造
-│   └── pages/      # 具体的なページコンポーネント
-├── hooks/          # カスタムフック
-├── services/       # API通信や外部サービス連携
-├── utils/          # 純粋関数とユーティリティ
-├── types/          # 型定義
-├── constants/      # 定数定義
-└── styles/         # グローバルスタイルとテーマ
+│   ├── atoms/            # 16個 - 最小単位のUI要素
+│   │   ├── Avatar.tsx
+│   │   ├── Badge.tsx
+│   │   ├── Button.tsx   # CVA使用
+│   │   ├── Card.tsx     # Header, Title, Description, Content, Footer
+│   │   ├── FeaturedRibbon.tsx
+│   │   ├── Input.tsx
+│   │   ├── NavigationLink.tsx
+│   │   ├── Progress.tsx
+│   │   ├── Spinner.tsx
+│   │   ├── TechIcon.tsx # Devicon統合
+│   │   ├── Textarea.tsx
+│   │   ├── Toast.tsx
+│   │   ├── Toaster.tsx
+│   │   ├── Tooltip.tsx  # Radix UI
+│   │   └── index.ts     # Barrel export
+│   │
+│   ├── molecules/        # 19個 - atomsの組み合わせ
+│   │   ├── CareerCard.tsx
+│   │   ├── ContactForm.tsx         # Formspree連携
+│   │   ├── GitHubContributions.tsx # GitHub API
+│   │   ├── InfoCard.tsx
+│   │   ├── InterestsList.tsx
+│   │   ├── LoadingScreen.tsx
+│   │   ├── MarkdownRenderer.tsx    # react-markdown
+│   │   ├── MobileNavigation.tsx
+│   │   ├── NavigationBar.tsx
+│   │   ├── NotFoundCard.tsx
+│   │   ├── ProfileCard.tsx
+│   │   ├── ProjectCard.tsx         # React.memo最適化
+│   │   ├── SkillCategory.tsx
+│   │   ├── SkillItem.tsx
+│   │   ├── SocialLink.tsx
+│   │   ├── TechStackList.tsx
+│   │   ├── TimelineItem.tsx
+│   │   └── index.ts
+│   │
+│   ├── organisms/        # 8個 - ビジネスロジック含む複合体
+│   │   ├── Header.tsx
+│   │   ├── DetailPageHeader.tsx
+│   │   ├── FullPageLoading.tsx
+│   │   ├── sections/     # 6個のセクション
+│   │   │   ├── AboutSection.tsx
+│   │   │   ├── SkillsSection.tsx
+│   │   │   ├── WorksSection.tsx    # タイムライン
+│   │   │   ├── CareerSection.tsx   # タイムライン
+│   │   │   ├── SocialSection.tsx
+│   │   │   └── ContactSection.tsx
+│   │   └── index.ts
+│   │
+│   ├── templates/        # 1個 - レイアウト構造
+│   │   ├── PageLayout.tsx
+│   │   └── index.ts
+│   │
+│   └── pages/            # 3個 - 具体的なページ
+│       ├── HomePage.tsx
+│       ├── ProjectDetailPage.tsx
+│       ├── CareerDetailPage.tsx
+│       └── index.ts
+│
+├── hooks/                # 5個 - カスタムフック
+│   ├── useToast.ts       # Context API使用
+│   ├── useMarkdownLoader.ts
+│   ├── useActiveSection.ts
+│   ├── useSmoothScroll.ts
+│   └── useScrollToTop.ts
+│
+├── services/             # 外部サービス連携
+│   ├── formspree.ts      # Formspree API
+│   └── github.ts         # GitHub API (予定)
+│
+├── utils/                # ユーティリティ関数
+│   ├── devicon.ts        # 100+ 技術アイコンマッピング
+│   ├── formspree.ts      # フォーム送信
+│   └── utils.ts          # cn関数 (clsx + tailwind-merge)
+│
+├── types/                # 5ファイル - 型定義
+│   ├── project.ts
+│   ├── career.ts
+│   ├── skill.ts
+│   ├── profile.ts
+│   └── social.ts
+│
+├── data/                 # アプリケーションデータ
+│   ├── projects.ts       # 12件
+│   ├── careers.ts        # 6件
+│   ├── skills.ts         # 25スキル (4カテゴリ)
+│   └── profile.ts        # プロフィール情報
+│
+├── lib/                  # ライブラリ関連設定
+│   └── utils.ts
+│
+├── constants/            # 定数定義
+│   └── sectionIds.ts
+│
+├── styles/               # グローバルスタイル
+│   └── index.css         # Tailwind directives
+│
+├── assets/               # 静的リソース
+│   ├── career/          # 経歴関連画像
+│   ├── project/         # プロジェクト関連画像
+│   ├── profile/         # プロフィール画像
+│   └── icon/            # 12個のカスタムSVGアイコン
+│
+└── test/                 # テスト設定
+    └── setup.ts
 ```
 
-### 2. コンポーネントの責務分離原則
+### 2. コンポーネントの責務分離原則（実装ベース）
 
-- **Atoms**: 単一の責務を持つ最小要素（プロパティの変更のみで見た目が変わる）
-- **Molecules**: 複数のAtomsを組み合わせた機能単位
-- **Organisms**: ビジネスロジックを含む複合コンポーネント
-- **Templates**: レイアウトのみを責務とする（データに依存しない）
-- **Pages**: 具体的なデータとテンプレートを組み合わせる
-
-### 3. 状態管理の階層化
-
-- **ローカル状態**: useState, useReducer
-- **コンポーネント間共有**: Context API
-- **グローバル状態**: Zustand（導入予定）
-- **サーバー状態**: TanStack Query（導入予定）
-
-## 🔒 型安全性ルール
-
-### 4. 型定義の厳格な管理
-
-- すべてのコンポーネントプロパティに型定義を必須化
-- `any`型の使用を禁止（unknown型を推奨）
-- オプショナルプロパティの明確な区別
-
-```typescript
-// Good
-interface ButtonProps {
-  variant: 'primary' | 'secondary' | 'outline';
-  size?: 'small' | 'medium' | 'large';
-  onClick: () => void;
-  children: React.ReactNode;
-}
-
-// Bad
-interface ButtonProps {
-  variant: any;
-  size: string;
-  onClick: Function;
-  children: any;
-}
-```
-
-### 5. 型推論の活用
-
-- Zodスキーマによる実行時型チェック（導入予定）
-- TypeScriptの厳格モードを有効化
-- Generic型の積極的な活用
-
-## 🎨 アトミックデザイン実装ルール
-
-### 6. Atoms設計原則
-
-- 単一の視覚的要素のみを担当
-- propsによる見た目の制御のみ
+#### **Atoms**
+- 単一責務の最小要素
+- propsのみで見た目が変わる
 - ビジネスロジックを含まない
+- 他のコンポーネントに依存しない
 
-```typescript
-// Example: Button atom
-interface ButtonProps {
-  variant: 'primary' | 'secondary' | 'ghost';
-  size: 'sm' | 'md' | 'lg';
-  disabled?: boolean;
-  loading?: boolean;
-  children: React.ReactNode;
-  onClick?: () => void;
-}
-```
-
-### 7. Molecules設計原則
-
+#### **Molecules**
 - 2つ以上のAtomsを組み合わせ
 - 単一の機能を提供
 - 再利用可能な設計
-- props drilling を避ける構造
+- ビジネスロジックは最小限
 
-### 8. Organisms設計原則
 
+#### **Organisms**
+- MoleculesとAtomsの複合体
 - ビジネスロジックを含む
 - カスタムフックでロジックを分離
-- データフェッチングを担当
+- データフェッチング可能
 - ページ固有の要素を避ける
 
-## 📝 コーディングスタイル
+#### **Templates**
+- レイアウト構造のみを責務とする
+- データに依存しない
+- childrenで内容を受け取る
 
-### 9. ファイル命名規則
+#### **Pages**
+- 具体的なデータとテンプレートを組み合わせる
+- ルーティングのエントリーポイント
+- 複数のOrganismsを組み合わせる
 
-- コンポーネント: PascalCase（`Button.tsx`, `SearchForm.tsx`）
-- フック: camelCase + useプレフィックス（`useLocalStorage.ts`）
-- ユーティリティ: camelCase（`formatDate.ts`）
-- 型定義: PascalCase + Typeサフィックス（`UserType.ts`）
+### 3. 状態管理の階層化（実装済み）
 
-### 10. コンポーネント構造の統一
-
+#### **ローカル状態** - useState, useRef
 ```typescript
-// 推奨構造
-import React from 'react';
-import type { ComponentProps } from './ComponentName.types';
-import { useComponentLogic } from './ComponentName.hooks';
-import styles from './ComponentName.module.css';
+// ContactForm.tsx
+const [name, setName] = useState('');
+const [email, setEmail] = useState('');
+const [message, setMessage] = useState('');
+const [isSubmitting, setIsSubmitting] = useState(false);
+```
 
-export const ComponentName: React.FC<ComponentProps> = ({ 
-  prop1, 
-  prop2, 
-  ...props 
-}) => {
-  const { state, handlers } = useComponentLogic({ prop1, prop2 });
-  
+#### **コンポーネント間共有** - Context API
+```typescript
+// hooks/useToast.ts - Context APIによるグローバル通知管理
+import { createContext, useContext, useState, useCallback, useRef } from 'react';
+
+interface Toast {
+  id: number;
+  message: string;
+  type: 'default' | 'success' | 'error' | 'warning' | 'info';
+}
+
+interface ToastContextValue {
+  toasts: Toast[];
+  toast: (message: string, type?: Toast['type']) => void;
+  success: (message: string) => void;
+  error: (message: string) => void;
+  warning: (message: string) => void;
+  info: (message: string) => void;
+  removeToast: (id: number) => void;
+}
+
+const ToastContext = createContext<ToastContextValue | undefined>(undefined);
+
+export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [toasts, setToasts] = useState<Toast[]>([]);
+  const toastIdRef = useRef(0);
+
+  const toast = useCallback((message: string, type: Toast['type'] = 'default') => {
+    const id = toastIdRef.current++;
+    setToasts((prev) => [...prev, { id, message, type }]);
+
+    // 自動削除
+    setTimeout(() => {
+      removeToast(id);
+    }, 5000);
+  }, []);
+
+  const success = useCallback((message: string) => toast(message, 'success'), [toast]);
+  const error = useCallback((message: string) => toast(message, 'error'), [toast]);
+  const warning = useCallback((message: string) => toast(message, 'warning'), [toast]);
+  const info = useCallback((message: string) => toast(message, 'info'), [toast]);
+
+  const removeToast = useCallback((id: number) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
+
   return (
-    <div className={styles.container} {...props}>
-      {/* JSX content */}
-    </div>
+    <ToastContext.Provider value={{ toasts, toast, success, error, warning, info, removeToast }}>
+      {children}
+    </ToastContext.Provider>
+  );
+};
+
+export const useToast = () => {
+  const context = useContext(ToastContext);
+  if (!context) {
+    throw new Error('useToast must be used within ToastProvider');
+  }
+  return context;
+};
+```
+
+#### **データ状態** - 静的データ管理
+- プロジェクト、経歴、スキル、プロフィールデータは `src/data/` で管理
+- 単一データソース原則に従い、一覧・詳細で同じデータを使用
+```typescript
+// data/projects.ts
+export const projects: Project[] = [
+  {
+    id: 'portfolio-website',
+    title: 'ポートフォリオサイト',
+    period: '2025年10月',
+    summary: 'React + TypeScript + Viteで構築した...',
+    techStack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
+    githubUrl: 'https://github.com/HayashidaReo/portfolio',
+    detailedContentFile: 'portfolio-website.md',
+    images: { /* 画像パス */ },
+  },
+  // ... 11件
+];
+```
+
+## 🔒 型安全性ルール
+
+### 4. 型定義の厳格な管理（実装済み）
+
+**必須ルール:**
+- すべてのコンポーネントpropsに型定義を必須化
+- `any`型の使用を**完全禁止**
+- オプショナルプロパティの明確な区別 (`?`)
+- Union型による厳密な値制限
+
+**実装例:**
+```typescript
+// types/project.ts - 厳密な型定義
+export interface Project {
+  id: string;
+  title: string;
+  period: string;
+  summary: string;
+  techStack: string[];
+  githubUrl?: string;          // オプショナル
+  projectUrl?: string;         // オプショナル
+  detailedContentFile?: string;// オプショナル
+  featured?: boolean;          // オプショナル
+  images?: Record<string, string>; // 画像プレースホルダー用
+}
+
+// types/skill.ts
+export interface Skill {
+  name: string;
+  iconName?: string;
+  level: number;              // 0-100
+  experience: '実務経験' | '個人開発' | '学習中'; // Union型
+}
+
+export interface SkillCategory {
+  category: 'Languages' | 'Frameworks' | 'Infrastructure' | 'Tools'; // Union型
+  skills: Skill[];
+}
+```
+
+**コンポーネントprops型定義:**
+```typescript
+// ProjectCard.tsx
+interface ProjectCardProps {
+  project: Project;           // 型エイリアス使用
+  onClick?: () => void;       // オプショナル、型注釈
+  className?: string;         // オプショナル
+}
+
+// MarkdownRenderer.tsx
+interface MarkdownRendererProps {
+  content: string;
+  images?: Record<string, string>; // オプショナル
+}
+```
+
+### 5. 型推論とTypeScript厳格モード（実装済み）
+
+**tsconfig.json 設定:**
+```json
+{
+  "compilerOptions": {
+    "strict": true,                    // 厳格モード有効
+    "noImplicitAny": true,            // any型の暗黙的使用禁止
+    "strictNullChecks": true,         // null/undefinedチェック厳格化
+    "strictFunctionTypes": true,      // 関数型の厳格チェック
+    "strictPropertyInitialization": true,
+    "noUnusedLocals": true,           // 未使用ローカル変数エラー
+    "noUnusedParameters": true,       // 未使用パラメータエラー
+    "noFallthroughCasesInSwitch": true
+  }
+}
+```
+
+**Generic型の活用:**
+```typescript
+// utils/devicon.ts
+export function getTechStackIcons<T extends string>(
+  techStack: T[]
+): Array<{ tech: T; iconUrl: string }> {
+  return techStack.map((tech) => ({
+    tech,
+    iconUrl: getDeviconUrl(tech),
+  }));
+}
+
+// React.forwardRef の型定義
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, ...props }, ref) => {
+    // ...
+  }
+);
+```
+
+## 🎨 アトミックデザイン実装ルール（実装済み）
+
+### 6. 実装されたAtomsの特徴
+
+**CVA (Class Variance Authority) 活用:**
+```typescript
+// Button.tsx - バリアント管理の実装例
+const buttonVariants = cva(baseStyles, {
+  variants: {
+    variant: { default, destructive, outline, secondary, ghost, link },
+    size: { default, sm, lg, icon }
+  }
+});
+```
+
+**shadcn/ui スタイル:**
+- Card (Header, Title, Description, Content, Footer)
+- Tooltip (Radix UI ベース)
+- Badge, Progress, Input, Textarea
+
+**カスタムAtoms:**
+- TechIcon - Devicon統合、100+技術対応
+- FeaturedRibbon - 注目マーク表示
+- NavigationLink - アクティブ状態管理
+
+### 7. 実装されたMoleculesの特徴
+
+**React.memo最適化:**
+```typescript
+// ProjectCard.tsx
+export const ProjectCard = React.memo<ProjectCardProps>(({ project, onClick, className }) => {
+  // ... 再レンダリング最適化
+});
+```
+
+## 📝 コーディングスタイル（実装済み）
+
+### 9. ファイル命名規則の実践
+
+**実装されている命名:**
+- コンポーネント: PascalCase
+  - `Button.tsx`, `ProjectCard.tsx`, `WorksSection.tsx`
+- フック: camelCase + `use` プレフィックス
+  - `useToast.ts`, `useMarkdownLoader.ts`, `useActiveSection.ts`
+- ユーティリティ: camelCase
+  - `devicon.ts`, `formspree.ts`, `utils.ts`
+- 型定義: camelCase
+  - `project.ts`, `career.ts`, `skill.ts`
+- データ: camelCase + 複数形
+  - `projects.ts`, `careers.ts`, `skills.ts`
+
+### 10. 実装されているコンポーネント構造
+
+**Tailwind CSS スタイル:**
+```typescript
+// WorksSection.tsx
+export const WorksSection: React.FC = () => {
+  const navigate = useNavigate();
+
+  return (
+    <section id="works" className="py-20">
+      <h2 className="text-3xl font-bold mb-12">Works</h2>
+      <div className="space-y-8">
+        {projects.map((project) => (
+          <TimelineItem key={project.id} date={project.period}>
+            <ProjectCard
+              project={project}
+              onClick={() => navigate(`/works/${project.id}`)}
+            />
+          </TimelineItem>
+        ))}
+      </div>
+    </section>
   );
 };
 ```
 
-### 11. Export/Import規則
+**cn()関数による動的クラス管理:**
+```typescript
+// utils/utils.ts
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
-- Named exportを優先（default exportは最小限）
-- barrel export（index.ts）でモジュールを整理
-- 相対パスより絶対パスを優先（alias設定）
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+// 使用例
+<Card className={cn('w-full hover:shadow-lg transition-all', className)} />
+```
+
+### 11. Export/Import規則の実践
+
+**Named export 実装:**
+```typescript
+// components/atoms/index.ts - Barrel export
+export { Avatar } from './Avatar';
+export { Badge } from './Badge';
+export { Button } from './Button';
+export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './Card';
+// ... 全Atomsをエクスポート
+```
+
+**絶対パス import (@/ alias):**
+```typescript
+// vite.config.ts
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+});
+
+// 使用例
+import { Button } from '@/components/atoms';
+import { projects } from '@/data/projects';
+import { getDeviconUrl } from '@/utils/devicon';
+import type { Project } from '@/types/project';
+```
 
 ## 🧪 テストとストーリー
 
@@ -175,21 +493,113 @@ export const ComponentName: React.FC<ComponentProps> = ({
 - 既存パターンとの一貫性を要求
 - テストケースの考慮を依頼
 
-## 🚀 パフォーマンス最適化
+## 🚀 パフォーマンス最適化（実装済み）
 
-### 15. React最適化
+### 15. React最適化の実践
 
-- React.memoの適切な使用
-- useCallback, useMemoの戦略的活用
-- 適切なkey属性の設定
-- lazy loadingとSuspenseの活用
+**React.memo 実装:**
+```typescript
+// ProjectCard.tsx - リスト表示の最適化
+export const ProjectCard = React.memo<ProjectCardProps>(({ project, onClick, className }) => {
+  // propsが変わらない限り再レンダリングしない
+  return <Card>...</Card>;
+});
+```
 
-### 16. バンドル最適化
+**useCallback 実装:**
+```typescript
+// useToast.ts
+const toast = useCallback((message: string, type: Toast['type'] = 'default') => {
+  // ... 関数メモ化
+}, []);
 
-- 不要なライブラリの除去
-- Tree shakingの最大化
-- 動的importの活用
-- 画像の最適化
+const success = useCallback((message: string) => toast(message, 'success'), [toast]);
+```
+
+**key属性の適切な設定:**
+```typescript
+{projects.map((project) => (
+  <TimelineItem key={project.id} date={project.period}>
+    <ProjectCard project={project} />
+  </TimelineItem>
+))}
+```
+
+**遅延読み込み:**
+```typescript
+// useMarkdownLoader.ts - Markdownのオンデマンド読み込み
+const [content, setContent] = useState<string>('');
+const [isLoading, setIsLoading] = useState(true);
+
+useEffect(() => {
+  if (!detailedContentFile) return;
+
+  fetch(`/markdown/${type}/${detailedContentFile}`)
+    .then((res) => res.text())
+    .then((text) => setContent(text))
+    .finally(() => setIsLoading(false));
+}, [detailedContentFile, type]);
+```
+
+**Intersection Observer活用:**
+```typescript
+// useActiveSection.ts - スクロール検出の効率化
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+  return () => observer.disconnect();
+}, []);
+```
+
+### 16. バンドル最適化の実践
+
+**Vite設定:**
+```typescript
+// vite.config.ts
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'router': ['react-router-dom'],
+          'markdown': ['react-markdown', 'remark-gfm', 'rehype-raw'],
+        },
+      },
+    },
+  },
+});
+```
+
+**Tree shaking:**
+- Named exportの使用
+- 未使用コードの自動削除
+
+**画像最適化:**
+- assetsディレクトリでViteが自動最適化
+- import文による画像読み込み（ハッシュ付きURL生成）
+
+```typescript
+// data/projects.ts
+import portfolioImage from '@/assets/project/portfolio.png';
+
+export const projects: Project[] = [
+  {
+    // ...
+    images: { screenshot: portfolioImage }, // Viteが最適化
+  },
+];
+```
 
 ## 🔄 開発フロー
 
