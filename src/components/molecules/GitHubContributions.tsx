@@ -22,9 +22,11 @@ export const GitHubContributions: React.FC<GitHubContributionsProps> = ({
       <CardHeader>
         <div className="flex items-center justify-between gap-2 md:gap-4">
           <CardTitle className="flex items-center gap-2">
-            <div className="shrink-0 w-8 h-8 md:w-6 md:h-6">
-              <TechIcon techName="GitHub" showLabel={false} className="w-full h-full" />
-            </div>
+            <TechIcon 
+              techName="GitHub" 
+              showLabel={false} 
+              className="shrink-0 w-8 h-8 md:w-6 md:h-6" 
+            />
             <span className="text-base md:text-xl">GitHub Contributions</span>
           </CardTitle>
           <Button
