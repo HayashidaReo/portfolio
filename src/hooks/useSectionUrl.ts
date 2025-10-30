@@ -29,11 +29,16 @@ type ScrollBehavior = 'smooth' | 'auto';
 
 /**
  * セクションにスクロールするヘルパー関数
+ * prefers-reduced-motionユーザー設定を考慮したスクロール動作
  */
 const scrollToSection = (sectionId: string, behavior: ScrollBehavior = 'smooth'): boolean => {
   const element = document.getElementById(sectionId);
   if (element) {
-    element.scrollIntoView({ behavior, block: 'start' });
+    // prefers-reduced-motionが有効な場合は即座にスクロール
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const finalBehavior = prefersReducedMotion ? 'auto' : behavior;
+    
+    element.scrollIntoView({ behavior: finalBehavior, block: 'start' });
     return true;
   }
   console.warn(`[useSectionUrl] Section element not found: ${sectionId}`);
