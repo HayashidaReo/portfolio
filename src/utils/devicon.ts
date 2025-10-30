@@ -12,7 +12,7 @@ import riverpodIcon from '@/assets/icon/riverpod.svg';
 import storekitIcon from '@/assets/icon/storekit.svg';
 import uikitIcon from '@/assets/icon/uikit.svg';
 import xIcon from '@/assets/icon/x.svg';
-import sendGrid from '@/assets/icon/sendgrid.svg';
+import sendGrid from '@/assets/icon/sendGrid.svg';
 import gemini from '@/assets/icon/gemini.svg';
 
 
