@@ -12,6 +12,7 @@ import riverpodIcon from '@/assets/icon/riverpod.svg';
 import storekitIcon from '@/assets/icon/storekit.svg';
 import uikitIcon from '@/assets/icon/uikit.svg';
 import xIcon from '@/assets/icon/x.svg';
+import sendGrid from '@/assets/icon/sendgrid.svg';
 
 
 /**
@@ -20,7 +21,7 @@ import xIcon from '@/assets/icon/x.svg';
  * @returns DeviconのURL
  */
 export const getDeviconUrl = (techName: string): string => {
-  // カスタムSVGアイコンのマッピング
+  // カスタムSVGアイコンのマッピング(全て小文字)
   const customIconMap: Record<string, string> = {
     'google admob': admobIcon,
     'backlog': backlogIcon,
@@ -37,6 +38,7 @@ export const getDeviconUrl = (techName: string): string => {
     'uikit': uikitIcon,
     'x': xIcon,
     'twitter': xIcon,
+    'sendgrid': sendGrid,
   };
 
   const normalizedName = techName.toLowerCase().trim();
@@ -82,6 +84,9 @@ export const getDeviconUrl = (techName: string): string => {
 
     // Infrastructure / Cloud
     'firebase': { name: 'firebase' },
+    'firestore': { name: 'firebase' },
+    'functions': { name: 'firebase' },
+    'authentication': { name: 'firebase' },
     'supabase': { name: 'supabase' },
     'docker': { name: 'docker' },
     'kubernetes': { name: 'kubernetes' },

@@ -12,7 +12,7 @@ export const projects: Project[] = [
     period: '2025年10月後半 - 現在',
     summary:
       '自身のスキルと実績を伝えるために構築したポートフォリオサイト。Atomic Designに基づいたコンポーネント設計を行い、shadcn/uiとTailwind CSSでUIを構築。AIを積極的に活用し、ドキュメント整備から開発まで効率的に進めました。',
-    techStack: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'shadcn/ui' ,'Zustand', 'Presentation API'],
+    techStack: ['React', 'TypeScript', 'Next.js', 'Authentication', 'Firestore', 'Functions', 'SendGrid', 'Tailwind CSS', 'shadcn/ui', 'Zustand', 'Presentation API'],
     // projectUrl: '',
     detailedContentFile: 'nikken-next.md',
   },
