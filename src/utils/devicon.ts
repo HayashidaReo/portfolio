@@ -12,6 +12,8 @@ import riverpodIcon from '@/assets/icon/riverpod.svg';
 import storekitIcon from '@/assets/icon/storekit.svg';
 import uikitIcon from '@/assets/icon/uikit.svg';
 import xIcon from '@/assets/icon/x.svg';
+import sendGrid from '@/assets/icon/sendGrid.svg';
+import gemini from '@/assets/icon/gemini.svg';
 
 
 /**
@@ -20,7 +22,7 @@ import xIcon from '@/assets/icon/x.svg';
  * @returns DeviconのURL
  */
 export const getDeviconUrl = (techName: string): string => {
-  // カスタムSVGアイコンのマッピング
+  // カスタムSVGアイコンのマッピング(全て小文字)
   const customIconMap: Record<string, string> = {
     'google admob': admobIcon,
     'backlog': backlogIcon,
@@ -37,6 +39,9 @@ export const getDeviconUrl = (techName: string): string => {
     'uikit': uikitIcon,
     'x': xIcon,
     'twitter': xIcon,
+    'sendgrid': sendGrid,
+    'gemini api': gemini,
+    'gemini': gemini,
   };
 
   const normalizedName = techName.toLowerCase().trim();
@@ -82,6 +87,11 @@ export const getDeviconUrl = (techName: string): string => {
 
     // Infrastructure / Cloud
     'firebase': { name: 'firebase' },
+    'firestore': { name: 'firebase' },
+    'realtime db': { name: 'firebase' },
+    'functions': { name: 'firebase' },
+    'authentication': { name: 'firebase' },
+    'storage': { name: 'firebase' },
     'supabase': { name: 'supabase' },
     'docker': { name: 'docker' },
     'kubernetes': { name: 'kubernetes' },
@@ -110,6 +120,7 @@ export const getDeviconUrl = (techName: string): string => {
     'redux': { name: 'redux' },
     'sass': { name: 'sass' },
     'webpack': { name: 'webpack' },
+    'presentation api': { name: 'html5' },
 
     // UI/UX
     'ui/ux design': { name: 'figma' },

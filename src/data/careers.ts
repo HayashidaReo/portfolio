@@ -4,6 +4,7 @@
  */
 import type { Career } from '@/types';
 import amerciStockManagerImage from '@/assets/career/amerci_stockManager.jpeg';
+import baseAiImage from '@/assets/career/base_ai.png';
 
 export const careers: Career[] = [
   {
@@ -55,6 +56,7 @@ export const careers: Career[] = [
     featured: true,
     images: {
       stockManager: amerciStockManagerImage,
+      baseAi: baseAiImage,
     },
   },
   {
