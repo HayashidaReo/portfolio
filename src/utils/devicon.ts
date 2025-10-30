@@ -110,6 +110,7 @@ export const getDeviconUrl = (techName: string): string => {
     'redux': { name: 'redux' },
     'sass': { name: 'sass' },
     'webpack': { name: 'webpack' },
+    'presentation api': { name: 'html5' },
 
     // UI/UX
     'ui/ux design': { name: 'figma' },
