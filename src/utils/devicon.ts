@@ -13,6 +13,7 @@ import storekitIcon from '@/assets/icon/storekit.svg';
 import uikitIcon from '@/assets/icon/uikit.svg';
 import xIcon from '@/assets/icon/x.svg';
 import sendGrid from '@/assets/icon/sendgrid.svg';
+import gemini from '@/assets/icon/gemini.svg';
 
 
 /**
@@ -39,6 +40,8 @@ export const getDeviconUrl = (techName: string): string => {
     'x': xIcon,
     'twitter': xIcon,
     'sendgrid': sendGrid,
+    'gemini api': gemini,
+    'gemini': gemini,
   };
 
   const normalizedName = techName.toLowerCase().trim();
@@ -85,8 +88,10 @@ export const getDeviconUrl = (techName: string): string => {
     // Infrastructure / Cloud
     'firebase': { name: 'firebase' },
     'firestore': { name: 'firebase' },
+    'realtime db': { name: 'firebase' },
     'functions': { name: 'firebase' },
     'authentication': { name: 'firebase' },
+    'storage': { name: 'firebase' },
     'supabase': { name: 'supabase' },
     'docker': { name: 'docker' },
     'kubernetes': { name: 'kubernetes' },
