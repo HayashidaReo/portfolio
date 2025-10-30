@@ -1,11 +1,44 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
+// 定数定義
+const USER_NAVIGATION_RESET_DELAY = 1000; // ユーザーナビゲーションフラグリセット時間(ms)
+const SYSTEM_URL_UPDATE_RESET_DELAY = 100; // システムURL更新フラグリセット時間(ms)
+
 export interface UseSectionUrlOptions {
   /** セクションIDの配列 */
   sectionIds: string[];
   /** 現在のアクティブセクション */
   activeSection: string;
 }
+
+/**
+ * URLハッシュを更新するヘルパー関数
+ */
+const updateUrlHash = (sectionId: string, sectionIds: string[]): void => {
+  if (sectionId === sectionIds[0]) {
+    window.history.pushState(null, '', window.location.pathname);
+  } else {
+    window.history.pushState(null, '', `#${sectionId}`);
+  }
+};
+
+/**
+ * スクロール動作の種類
+ */
+type ScrollBehavior = 'smooth' | 'auto';
+
+/**
+ * セクションにスクロールするヘルパー関数
+ */
+const scrollToSection = (sectionId: string, behavior: ScrollBehavior = 'smooth'): boolean => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior, block: 'start' });
+    return true;
+  }
+  console.warn(`[useSectionUrl] Section element not found: ${sectionId}`);
+  return false;
+};
 
 /**
  * セクションURLの管理とハッシュナビゲーションを担当するカスタムフック
@@ -32,6 +65,15 @@ export const useSectionUrl = (options: UseSectionUrlOptions) => {
 
   /**
    * ユーザーが意図的にセクションに移動（ナビゲーションクリック）
+   * 
+   * @param sectionId - 移動先のセクションID
+   * @returns void
+   * 
+   * @example
+   * ```typescript
+   * const { navigateToSection } = useSectionUrl({ sectionIds, activeSection });
+   * navigateToSection('about'); // aboutセクションにスムーズスクロール
+   * ```
    */
   const navigateToSection = useCallback((sectionId: string) => {
     if (!sectionIds.includes(sectionId)) return;
@@ -39,22 +81,15 @@ export const useSectionUrl = (options: UseSectionUrlOptions) => {
     setIsUserInitiated(true);
     
     // URLハッシュを更新
-    if (sectionId === sectionIds[0]) {
-      window.history.pushState(null, '', window.location.pathname);
-    } else {
-      window.history.pushState(null, '', `#${sectionId}`);
-    }
+    updateUrlHash(sectionId, sectionIds);
 
     // セクションにスムーズスクロール
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    scrollToSection(sectionId, 'smooth');
 
     // 遅延してフラグをリセット
     setTimeout(() => {
       setIsUserInitiated(false);
-    }, 1000);
+    }, USER_NAVIGATION_RESET_DELAY);
   }, [sectionIds]);
 
   /**
@@ -81,7 +116,7 @@ export const useSectionUrl = (options: UseSectionUrlOptions) => {
         // 少し後にフラグをリセット
         setTimeout(() => {
           isSystemUrlUpdateRef.current = false;
-        }, 100);
+        }, SYSTEM_URL_UPDATE_RESET_DELAY);
       }
     }
     
@@ -101,10 +136,7 @@ export const useSectionUrl = (options: UseSectionUrlOptions) => {
       const targetSection = hash || sectionIdsRef.current[0] || '';
 
       if (targetSection && sectionIdsRef.current.includes(targetSection)) {
-        const element = document.getElementById(targetSection);
-        if (element) {
-          element.scrollIntoView({ behavior: 'auto', block: 'start' });
-        }
+        scrollToSection(targetSection, 'auto');
       }
     };
 
