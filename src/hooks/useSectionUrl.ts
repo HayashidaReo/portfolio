@@ -61,6 +61,8 @@ export const useSectionUrl = (options: UseSectionUrlOptions) => {
   const isUserInitiatedRef = useRef(false);
   const sectionIdsRef = useRef(sectionIds);
   const previousActiveSectionRef = useRef<string>('');
+  const userNavigationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const systemUrlUpdateTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // refs を最新の値で同期
   useEffect(() => {
@@ -91,9 +93,15 @@ export const useSectionUrl = (options: UseSectionUrlOptions) => {
     // セクションにスムーズスクロール
     scrollToSection(sectionId, 'smooth');
 
+    // 既存のタイムアウトをクリア
+    if (userNavigationTimeoutRef.current) {
+      clearTimeout(userNavigationTimeoutRef.current);
+    }
+
     // 遅延してフラグをリセット
-    setTimeout(() => {
+    userNavigationTimeoutRef.current = setTimeout(() => {
       setIsUserInitiated(false);
+      userNavigationTimeoutRef.current = null;
     }, USER_NAVIGATION_RESET_DELAY);
   }, [sectionIds]);
 
@@ -118,9 +126,15 @@ export const useSectionUrl = (options: UseSectionUrlOptions) => {
           window.history.replaceState(null, '', window.location.pathname);
         }
         
+        // 既存のタイムアウトをクリア
+        if (systemUrlUpdateTimeoutRef.current) {
+          clearTimeout(systemUrlUpdateTimeoutRef.current);
+        }
+
         // 少し後にフラグをリセット
-        setTimeout(() => {
+        systemUrlUpdateTimeoutRef.current = setTimeout(() => {
           isSystemUrlUpdateRef.current = false;
+          systemUrlUpdateTimeoutRef.current = null;
         }, SYSTEM_URL_UPDATE_RESET_DELAY);
       }
     }
@@ -160,6 +174,22 @@ export const useSectionUrl = (options: UseSectionUrlOptions) => {
       window.removeEventListener('hashchange', handleHashChange);
     };
   }, []); // 空の依存配列で一度だけ実行
+
+  // コンポーネントアンマウント時のクリーンアップ
+  useEffect(() => {
+    return () => {
+      // ユーザーナビゲーションタイムアウトをクリア
+      if (userNavigationTimeoutRef.current) {
+        clearTimeout(userNavigationTimeoutRef.current);
+        userNavigationTimeoutRef.current = null;
+      }
+      // システムURL更新タイムアウトをクリア
+      if (systemUrlUpdateTimeoutRef.current) {
+        clearTimeout(systemUrlUpdateTimeoutRef.current);
+        systemUrlUpdateTimeoutRef.current = null;
+      }
+    };
+  }, []);
 
   return {
     navigateToSection,
