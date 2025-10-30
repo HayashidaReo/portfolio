@@ -7,7 +7,7 @@ interface NavigationBarProps {
   items: NavigationItem[];
   /** 現在アクティブなセクションのID */
   activeSection?: string;
-  /** ナビゲーション項目クリック時のハンドラー */
+  /** ナビゲーション項目クリック時のハンドラー（セクションナビゲーション用） */
   onItemClick: (targetId: string) => void;
 }
 
