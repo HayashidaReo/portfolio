@@ -8,11 +8,11 @@ import studyNote2GraphImage from '@/assets/project/studyNote2_graph.png';
 export const projects: Project[] = [
     {
     id: 'nikken-next',
-    title: '日本拳法試合管理システム',
+    title: '日本拳法 大会運営支援システム',
     period: '2025年10月後半 - 現在',
     summary:
-      '自身のスキルと実績を伝えるために構築したポートフォリオサイト。Atomic Designに基づいたコンポーネント設計を行い、shadcn/uiとTailwind CSSでUIを構築。AIを積極的に活用し、ドキュメント整備から開発まで効率的に進めました。',
-    techStack: ['React', 'TypeScript', 'Next.js', 'Authentication', 'Firestore', 'Functions', 'SendGrid', 'Tailwind CSS', 'shadcn/ui', 'Zustand', 'Presentation API'],
+      '日本拳法の大会運営をDX化する、リアルタイム・スコアリングWebアプリケーションです。現在絶賛開発中です。選手登録、試合組み合わせ、リアルタイム得点板機能まで、運営業務を一気通貫でサポートします。',
+    techStack: ['React', 'TypeScript', 'Next.js', 'Authentication', 'Firestore', 'Functions', 'Presentation API', 'SendGrid', 'Tailwind CSS', 'shadcn/ui', 'Zustand'],
     // projectUrl: '',
     detailedContentFile: 'nikken-next.md',
   },
