@@ -1,15 +1,9 @@
 import React from 'react';
 import { NavigationBar, MobileNavigation } from '@/components/molecules';
-import { useSmoothScroll, useActiveSection } from '@/hooks';
+import { useActiveSection, useSectionUrl } from '@/hooks';
 import { NAVIGATION_ITEMS } from '@/constants';
 
 export const Header: React.FC = () => {
-  const { scrollToElement } = useSmoothScroll({
-    duration: 800,
-    easing: 'ease-in-out',
-    offset: 4, // ヘッダーの高さを考慮したオフセット
-  });
-
   // 全ナビゲーション項目のIDを抽出
   const sectionIds = NAVIGATION_ITEMS.map((item) => item.targetId);
   
@@ -20,8 +14,15 @@ export const Header: React.FC = () => {
     throttleMs: 16, // 60FPSでスムーズな更新
   });
 
+  // セクションURL管理（URLハッシュとの同期）
+  const { navigateToSection } = useSectionUrl({
+    sectionIds,
+    activeSection,
+  });
+
   const handleNavigationClick = (targetId: string) => {
-    scrollToElement(targetId);
+    // URL管理機能を使用（URLハッシュ更新 + スムーズスクロール）
+    navigateToSection(targetId);
   };
   return (
     <>
@@ -31,7 +32,7 @@ export const Header: React.FC = () => {
             {/* ロゴエリア */}
             <div className="flex-shrink-0">
               <button
-                onClick={() => scrollToElement('about')}
+                onClick={() => navigateToSection('about')}
                 className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors duration-200"
                 aria-label="ページトップへ戻る"
               >
