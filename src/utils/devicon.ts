@@ -15,6 +15,7 @@ import xIcon from '@/assets/icon/x.svg';
 import sendGrid from '@/assets/icon/sendGrid.svg';
 import gemini from '@/assets/icon/gemini.svg';
 import dexieJs from '@/assets/icon/dexiejs.svg';
+import antigravity from '@/assets/icon/antigravity.svg';
 
 
 /**
@@ -44,6 +45,7 @@ export const getDeviconUrl = (techName: string): string => {
     'gemini api': gemini,
     'gemini': gemini,
     'dexie.js': dexieJs,
+    'antigravity': antigravity,
   };
 
   const normalizedName = techName.toLowerCase().trim();
