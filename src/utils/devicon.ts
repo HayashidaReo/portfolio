@@ -14,7 +14,7 @@ import uikitIcon from '@/assets/icon/uikit.svg';
 import xIcon from '@/assets/icon/x.svg';
 import sendGrid from '@/assets/icon/sendGrid.svg';
 import gemini from '@/assets/icon/gemini.svg';
-import dexieJs from '@/assets/icon/dexiejs.svg';
+import dexieJs from '@/assets/icon/dexieJs.svg';
 import antigravity from '@/assets/icon/antigravity.svg';
 
 
