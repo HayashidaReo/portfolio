@@ -32,7 +32,9 @@ export const NotFoundCard: React.FC<NotFoundCardProps> = ({
     if (onBack) {
       onBack();
     } else {
-      navigate(-1);
+      // entityNameに基づいて適切なセクションに戻る
+      const targetSection = entityName === 'プロジェクト' ? '/#works' : entityName === '経歴' ? '/#career' : '/';
+      navigate(targetSection);
     }
   };
 

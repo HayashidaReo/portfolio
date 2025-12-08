@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Card,
   CardHeader,
@@ -48,6 +48,13 @@ export const ProjectCard = React.memo<ProjectCardProps>(({
   featured,
   className,
 }) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/works/${id}`, {
+      state: { fromProjectId: id, fromSection: 'works' }
+    });
+  };
   const cardContent = (
     <Card
       className={cn(
@@ -141,9 +148,9 @@ export const ProjectCard = React.memo<ProjectCardProps>(({
   );
 
   return (
-    <Link to={`/works/${id}`} className="block">
+    <div onClick={handleCardClick} className="block">
       {cardContent}
-    </Link>
+    </div>
   );
 });
 

@@ -12,19 +12,21 @@ export const WorksSection: React.FC = () => {
 
         <div className="space-y-0">
           {projects.map((project) => (
-            <TimelineItem key={project.id}>
-              <ProjectCard
-                id={project.id}
-                title={project.title}
-                period={project.period}
-                description={project.summary}
-                techStack={project.techStack}
-                icon={project.icon}
-                githubUrl={project.githubUrl}
-                projectUrl={project.projectUrl}
-                featured={project.featured}
-              />
-            </TimelineItem>
+            <div key={project.id} id={`project-${project.id}`}>
+              <TimelineItem>
+                <ProjectCard
+                  id={project.id}
+                  title={project.title}
+                  period={project.period}
+                  description={project.summary}
+                  techStack={project.techStack}
+                  icon={project.icon}
+                  githubUrl={project.githubUrl}
+                  projectUrl={project.projectUrl}
+                  featured={project.featured}
+                />
+              </TimelineItem>
+            </div>
           ))}
         </div>
       </div>

@@ -3,6 +3,7 @@
 
 export { useActiveSection } from './useActiveSection';
 export { useMarkdownLoader } from './useMarkdownLoader';
+export { useScrollToItem } from './useScrollToItem';
 export { useScrollToTop } from './useScrollToTop';
 export { useSectionUrl } from './useSectionUrl';
 export { useSmoothScroll } from './useSmoothScroll';

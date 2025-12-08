@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { projects } from '@/data/projects';
 import {
   Tooltip,
@@ -19,7 +19,19 @@ import { ExternalLink, Calendar, ArrowLeft } from 'lucide-react';
 export const ProjectDetailPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const project = projects.find((p) => p.id === projectId);
+
+  // 戻る処理（項目位置へのスクロール付き）
+  const handleBack = () => {
+    const state = location.state as { fromProjectId?: string; fromSection?: string } | null;
+    const targetSection = state?.fromSection || 'works';
+    const targetProjectId = state?.fromProjectId;
+
+    navigate(`/#${targetSection}`, { 
+      state: { scrollToProject: targetProjectId }
+    });
+  };
 
   // Markdownファイルの読み込み
   const { content: markdownContent, isLoading } = useMarkdownLoader({
@@ -94,7 +106,7 @@ export const ProjectDetailPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
       {/* Header */}
       <DetailPageHeader
-        onBack={() => navigate(-1)}
+        onBack={handleBack}
         rightContent={renderProjectLinks()}
       />
 
@@ -174,7 +186,7 @@ export const ProjectDetailPage: React.FC = () => {
             <Button
               variant="outline"
               size="lg"
-              onClick={() => navigate(-1)}
+              onClick={handleBack}
               className="shadow-md hover:shadow-lg transition-all"
             >
               <ArrowLeft className="h-4 w-4" />
