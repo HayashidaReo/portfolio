@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, FeaturedRibbon } from '@/components/atoms';
 import { TechStackList } from '@/components/molecules';
 import { cn } from '@/lib/utils';
@@ -31,6 +31,15 @@ export const CareerCard = React.memo<CareerCardProps>(({
   featured,
   className,
 }) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    if (hasDetail && id) {
+      navigate(`/careers/${id}`, {
+        state: { fromCareerId: id, fromSection: 'career' }
+      });
+    }
+  };
   const cardContent = (
     <Card
       className={cn(
@@ -68,7 +77,7 @@ export const CareerCard = React.memo<CareerCardProps>(({
   );
 
   if (hasDetail && id) {
-    return <Link to={`/careers/${id}`} className="block">{cardContent}</Link>;
+    return <div onClick={handleCardClick} className="block">{cardContent}</div>;
   }
 
   return cardContent;

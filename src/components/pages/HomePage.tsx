@@ -7,8 +7,12 @@ import { WorksSection } from '@/components/organisms/sections/WorksSection';
 import { CareerSection } from '@/components/organisms/sections/CareerSection';
 import { SocialSection } from '@/components/organisms/sections/SocialSection';
 import { ContactSection } from '@/components/organisms/sections/ContactSection';
+import { useScrollToItem } from '@/hooks';
 
 export const HomePage: React.FC = () => {
+  // 詳細画面から戻る際の項目スクロール処理
+  useScrollToItem();
+
   return (
     <PageLayout>
       <Header />

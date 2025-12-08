@@ -4,18 +4,25 @@
  */
 import type { Project } from '@/types';
 import studyNote2GraphImage from '@/assets/project/studyNote2_graph.png';
+import matchubUsecase1Image from '@/assets/project/matchub_usecase1.png';
+import matchubUsecase2Image from '@/assets/project/matchub_usecase2.png';
 
 export const projects: Project[] = [
-    {
-    id: 'nikken-next',
-    title: '日本拳法 大会運営支援システム',
+  {
+    id: 'matchub',
+    title: '『まっちぶ』日本拳法大会運営支援システム',
     period: '2025年10月後半 - 現在',
     summary:
-      '日本拳法の大会運営をDX化する、リアルタイム・スコアリングWebアプリケーションです。現在絶賛開発中です。選手登録、試合組み合わせ、リアルタイム得点板機能まで、運営業務を一気通貫でサポートします。',
-    techStack: ['React', 'TypeScript', 'Next.js', 'Authentication', 'Firestore', 'Functions', 'Presentation API', 'SendGrid', 'Tailwind CSS', 'shadcn/ui', 'Zustand'],
-    // projectUrl: '',
-    detailedContentFile: 'nikken-next.md',
+      '日本拳法の大会を「ネット不要」で運営可能にする、オフラインファーストな大会運営プラットフォームです。Next.jsとElectronを融合し、得点板から対戦管理までを完備。オフライン稼働とリアルタイム同期を両立し、場所を選ばず運営を支援します。',
+    techStack: ['React', 'TypeScript', 'Next.js', 'Electron', 'Authentication', 'Firestore', 'Functions', 'Dexie.js', 'TanStack Query', 'Zustand', 'Tailwind CSS', 'shadcn/ui', 'Presentation API', 'GitHub Actions', 'Vercel'],
+    projectUrl: 'https://nikken-next.vercel.app/about',
+    githubUrl: 'https://github.com/HayashidaReo/nikken-next',
+    detailedContentFile: 'matchub.md',
     featured: true,
+    images: {
+      matchubUsecase1: matchubUsecase1Image,
+      matchubUsecase2: matchubUsecase2Image,
+    },
   },
   {
     id: 'portfolio-website',
@@ -41,7 +48,7 @@ export const projects: Project[] = [
   {
     id: 'link-app',
     title: 'Link App',
-    period: '2024年5月 - 2024年7月',
+    period: '2025年5月 - 2025年7月',
     summary:
       '子供たちの関係性をネットワークグラフで可視化するWebアプリ。Flutter WebとFirebaseを採用し、リアルタイムでのデータ同期を実現。組織ごとのアカウント発行や権限管理が可能な管理者機能も実装しました。',
     techStack: ['Flutter', 'Dart', 'Authentication', 'Firestore', 'Functions', 'Riverpod', 'GoRouter', 'Freezed'],

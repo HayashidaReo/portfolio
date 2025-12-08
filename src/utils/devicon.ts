@@ -14,6 +14,8 @@ import uikitIcon from '@/assets/icon/uikit.svg';
 import xIcon from '@/assets/icon/x.svg';
 import sendGrid from '@/assets/icon/sendGrid.svg';
 import gemini from '@/assets/icon/gemini.svg';
+import dexieJs from '@/assets/icon/dexieJs.svg';
+import antigravity from '@/assets/icon/antigravity.svg';
 
 
 /**
@@ -42,6 +44,8 @@ export const getDeviconUrl = (techName: string): string => {
     'sendgrid': sendGrid,
     'gemini api': gemini,
     'gemini': gemini,
+    'dexie.js': dexieJs,
+    'antigravity': antigravity,
   };
 
   const normalizedName = techName.toLowerCase().trim();
@@ -71,6 +75,7 @@ export const getDeviconUrl = (techName: string): string => {
     'shadcn/ui': { name: 'react' },
     'next.js': { name: 'nextjs' },
     'zustand': { name: 'react' },
+    'tanstack query': { name: 'react' },
     'flutter': { name: 'flutter' },
     'django': { name: 'django' },
     'flask': { name: 'flask' },

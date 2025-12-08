@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { careers } from '@/data/careers';
 import { Button, Avatar } from '@/components/atoms';
 import { TechStackList, MarkdownRenderer, NotFoundCard } from '@/components/molecules';
@@ -10,7 +10,19 @@ import { ArrowLeft, Calendar } from 'lucide-react';
 export const CareerDetailPage: React.FC = () => {
   const { careerId } = useParams<{ careerId: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const career = careers.find((c) => c.id === careerId);
+
+  // 戻る処理（項目位置へのスクロール付き）
+  const handleBack = () => {
+    const state = location.state as { fromCareerId?: string; fromSection?: string } | null;
+    const targetSection = state?.fromSection || 'career';
+    const targetCareerId = state?.fromCareerId;
+
+    navigate(`/#${targetSection}`, { 
+      state: { scrollToCareer: targetCareerId }
+    });
+  };
 
   // Markdownファイルの読み込み
   const { content: markdownContent, isLoading } = useMarkdownLoader({
@@ -33,7 +45,7 @@ export const CareerDetailPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
       {/* Header */}
-      <DetailPageHeader onBack={() => navigate(-1)} />
+      <DetailPageHeader onBack={handleBack} />
 
       {/* Hero Section */}
       <div className="border-b bg-gradient-to-b from-muted/30 to-background">
@@ -92,7 +104,7 @@ export const CareerDetailPage: React.FC = () => {
             <Button
               variant="outline"
               size="lg"
-              onClick={() => navigate(-1)}
+              onClick={handleBack}
               className="shadow-md hover:shadow-lg transition-all"
             >
               <ArrowLeft className="h-4 w-4" />
