@@ -4,6 +4,8 @@
  */
 import type { Project } from '@/types';
 import studyNote2GraphImage from '@/assets/project/studyNote2_graph.png';
+import matchubUsecase1Image from '@/assets/project/matchub_usecase1.png';
+import matchubUsecase2Image from '@/assets/project/matchub_usecase2.png';
 
 export const projects: Project[] = [
   {
@@ -17,6 +19,10 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/HayashidaReo/nikken-next',
     detailedContentFile: 'matchub.md',
     featured: true,
+    images: {
+      matchubUsecase1: matchubUsecase1Image,
+      matchubUsecase2: matchubUsecase2Image,
+    },
   },
   {
     id: 'portfolio-website',
