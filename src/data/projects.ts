@@ -6,15 +6,15 @@ import type { Project } from '@/types';
 import studyNote2GraphImage from '@/assets/project/studyNote2_graph.png';
 
 export const projects: Project[] = [
-    {
-    id: 'nikken-next',
+  {
+    id: 'matchub',
     title: '日本拳法 大会運営支援システム',
     period: '2025年10月後半 - 現在',
     summary:
       '日本拳法の大会運営をDX化する、リアルタイム・スコアリングWebアプリケーションです。現在絶賛開発中です。選手登録、試合組み合わせ、リアルタイム得点板機能まで、運営業務を一気通貫でサポートします。',
     techStack: ['React', 'TypeScript', 'Next.js', 'Authentication', 'Firestore', 'Functions', 'Presentation API', 'SendGrid', 'Tailwind CSS', 'shadcn/ui', 'Zustand'],
     // projectUrl: '',
-    detailedContentFile: 'nikken-next.md',
+    detailedContentFile: 'matchub.md',
     featured: true,
   },
   {
