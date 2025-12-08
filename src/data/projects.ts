@@ -41,7 +41,7 @@ export const projects: Project[] = [
   {
     id: 'link-app',
     title: 'Link App',
-    period: '2024年5月 - 2024年7月',
+    period: '2025年5月 - 2025年7月',
     summary:
       '子供たちの関係性をネットワークグラフで可視化するWebアプリ。Flutter WebとFirebaseを採用し、リアルタイムでのデータ同期を実現。組織ごとのアカウント発行や権限管理が可能な管理者機能も実装しました。',
     techStack: ['Flutter', 'Dart', 'Authentication', 'Firestore', 'Functions', 'Riverpod', 'GoRouter', 'Freezed'],
